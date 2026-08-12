@@ -1,5 +1,17 @@
 # ValuEngine
 
+
+![Status](https://img.shields.io/badge/Status-Production--Ready-brightgreen)
+![Frontend](https://img.shields.io/badge/Frontend-React%2018-blue)
+![Build](https://img.shields.io/badge/Build-Vite-646CFF)
+![Backend](https://img.shields.io/badge/Backend-FastAPI-009688)
+![Language](https://img.shields.io/badge/Language-Python-3776AB)
+![Database](https://img.shields.io/badge/Database-PostgreSQL-336791)
+![Tests](https://img.shields.io/badge/Tests-25%2F25%20Passing-brightgreen)
+![Validation](https://img.shields.io/badge/Brain%20Validation-27%2F27%20Passing-brightgreen)
+
+> Institutional-style financial valuation and analytics platform.
+
 **Institutional financial modelling and transaction intelligence platform.**
 
 ValuEngine V2 is a Python-based financial modeling platform that automates Discounted Cash Flow (DCF), M&A Accretion/Dilution, and Leveraged Buyout (LBO) analysis. It is designed to evaluate transactions with strict adherence to fundamental accounting identities, offering a defensible environment for testing scenarios, synergies, and deal structures.
