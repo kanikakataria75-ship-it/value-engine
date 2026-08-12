@@ -1,7 +1,7 @@
 # ValuEngine
 
 
-![Status](https://img.shields.io/badge/Status-Production--Ready-brightgreen)
+![Status](https://img.shields.io/badge/Status-Active%20Development-orange)
 ![Frontend](https://img.shields.io/badge/Frontend-React%2018-blue)
 ![Build](https://img.shields.io/badge/Build-Vite-646CFF)
 ![Backend](https://img.shields.io/badge/Backend-FastAPI-009688)
