@@ -104,3 +104,14 @@ The suite includes the original financial-engine reconciliation tests and FastAP
 - **LBO Working Capital:** Working capital changes are modelled as a static percentage of incremental revenue; dynamic historical NWC days are not currently extrapolated.
 - **M&A Taxes:** Synergies are assumed to be taxed immediately at the blended corporate rate. Net Operating Loss (NOL) carryforwards and Section 382 limitations are not modelled.
 - **Data Availability:** Live API fetching is subject to provider rate limits. If data is unavailable, the system defaults to verified internal DEMO data to prevent crashing, explicitly flagged by the Provenance Engine.
+
+- <img width="1670" height="1310" alt="Screenshot 2026-08-12 142040" src="https://github.com/user-attachments/assets/73d516a2-dc32-4352-b7d1-d6a159e4f545" />
+
+
+
+
+
+
+<img width="1640" height="1291" alt="Screenshot 2026-08-12 142100" src="https://github.com/user-attachments/assets/7e0514b9-5e4c-4309-8a89-ea90a610dd34" />
+
+
