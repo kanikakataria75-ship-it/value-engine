@@ -1,0 +1,20 @@
+{
+  "company": "AAPL",
+  "description": "Real-company golden dataset for ValuEngine validation",
+  "currency": "USD",
+
+  "financials": {
+    "revenue": 391035000000,
+    "ebitda": 137352000000,
+    "da": 1140000000,
+    "ebit": 123216000000,
+    "net_income": 93736000000,
+    "operating_cash_flow": 118264000000,
+    "capex": 9450000000,
+    "total_debt": 106685000000,
+    "cash_and_equivalents": 29944000000,
+    "book_equity": 66403000000,
+    "shares_outstanding": 15000000000,
+    "current_price": 225.00
+  }
+}

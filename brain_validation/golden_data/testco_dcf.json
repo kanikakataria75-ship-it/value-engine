@@ -1,0 +1,27 @@
+{
+  "company": "TESTCO",
+  "description": "Controlled synthetic company for DCF engine validation",
+  "currency": "USD",
+
+  "financials": {
+    "revenue": 100.0,
+    "revenue_growth": 0.10,
+    "ebitda_margin": 0.25,
+    "da": 5.0,
+    "tax_rate": 0.25,
+    "capex": 5.0,
+    "delta_nwc": 2.0
+  },
+
+  "valuation": {
+    "wacc": 0.10,
+    "terminal_growth": 0.03,
+    "forecast_years": 5
+  },
+
+  "capital_structure": {
+    "cash": 20.0,
+    "debt": 30.0,
+    "shares_outstanding": 10.0
+  }
+}

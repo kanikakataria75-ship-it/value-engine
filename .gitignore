@@ -1,0 +1,31 @@
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+ENV/
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+
+# Excel & Temporary Output Reports
+valuengine_*.xlsx
+*.tmp
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
