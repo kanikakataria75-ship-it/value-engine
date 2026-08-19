@@ -97,50 +97,53 @@ ValuEngine embeds a suite of 8 quantitative engines written in native **R** with
 
 ```mermaid
 flowchart TB
-    subgraph Frontend ["Frontend Terminal (React 18 + TypeScript + Vite)"]
-        UI[App Shell & Navigation]
-        Pages[DCF | M&A | LBO | Comps | Risk Lab | Audit | Reports]
-        CopilotUI[Sliding AI Copilot Drawer]
-        Theme[Dark / Light Theme Provider]
+
+    subgraph Frontend["Frontend — React 18 + TypeScript + Vite"]
+        UI["App Shell and Navigation"]
+        Pages["DCF / M&A / LBO / Trading Comps / Risk Lab / Audit / Reports"]
+        Copilot["ValuAI Financial Copilot"]
+        Theme["Theme Provider — Light / Dark / Yellow Dark / Purple"]
+        
+        UI --> Pages
+        UI --> Copilot
+        UI --> Theme
     end
 
-    subgraph Backend ["Backend API Layer (FastAPI)"]
-        API[REST Endpoints /api/...]
-        CopilotService[AI Provider & Context Builder]
-        ValuationService[Valuation Dispatcher]
+    subgraph Backend["Backend — FastAPI"]
+        API["REST API Layer"]
+        Services["Valuation Services"]
+        Risk["Risk Analytics"]
+        AI["AI Copilot Orchestrator"]
     end
 
-    subgraph Engines ["Financial Brain & Math Engines"]
-        DCF[dcf_engine.py]
-        MNA[ma_engine.py]
-        LBO[lbo_engine.py]
-        COMPS[comps_engine.py]
-        HEALTH[model_health.py]
-        EXCEL[excel_generator.py]
+    subgraph Data["Data Layer"]
+        Local["389-Stock Local Dataset"]
+        Live["Live Market API"]
+        Cache["Application Cache"]
     end
 
-    subgraph RAnalytics ["R Quantitative Risk Lab"]
-        RBridge[r_risk_engine.py / r_integration.py]
-        RScripts["R Scripts (Monte Carlo, Merton, Copula, VaR/CVaR, EVT, Regime, Factor)"]
-        PyFallback[Vectorized NumPy/SciPy Fallback Solver]
+    subgraph AIProviders["AI Providers"]
+        Gemini["Gemini API"]
+        Groq["Groq API"]
     end
 
-    subgraph Storage ["Data Layer & Local Financial Store"]
-        SQLite[Local SQLite Cache (WAL Mode)]
-        Ingestor[Bulk Ingestion Pipeline]
-        Providers[Yahoo Finance / Alpha Vantage]
-    end
+    Pages --> API
+    Copilot --> AI
+    API --> Services
+    API --> Risk
 
-    UI --> API
-    CopilotUI --> CopilotService
-    API --> ValuationService
-    ValuationService --> Engines
-    ValuationService --> RBridge
-    RBridge --> RScripts
-    RScripts -.->|Fallback if R missing| PyFallback
-    ValuationService --> SQLite
-    Ingestor --> Providers --> SQLite
-    Engines --> EXCEL --> UI
+    Services --> Local
+    Services --> Live
+    Services --> Cache
+    Risk --> Local
+    Risk --> Live
+
+    AI --> Services
+    AI --> Risk
+    AI --> Gemini
+    AI --> Groq
+
+    Gemini -. fallback .-> Groq
 ```
 
 ---
