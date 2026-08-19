@@ -3,7 +3,7 @@ import { money, pct } from './ui'
 
 describe('financial display formatters', () => {
   it('formats an available financial value without fabricating missing data', () => {
-    expect(money(3_420_000_000_000)).toContain('$3.4T')
+    expect(money(3_420_000_000_000)).toBe('$3.42T')
     expect(money(undefined)).toBe('UNAVAILABLE')
   })
 

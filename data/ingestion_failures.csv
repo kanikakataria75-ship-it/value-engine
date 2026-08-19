@@ -1,0 +1,14 @@
+ticker,company_name,error_type,reason,provider,attempted_at
+MMC,"Marsh & McLennan Companies, Inc.",VALIDATION_ERROR,current_price must be strictly positive. Got: None,YahooFinance,2026-08-18T15:36:12.545159+00:00
+K,Kellanova,VALIDATION_ERROR,current_price must be strictly positive. Got: None,YahooFinance,2026-08-18T15:41:18.834104+00:00
+EA,Electronic Arts Inc.,VALIDATION_ERROR,historical_prices must contain at least 200 daily records for Risk Lab. Got: 6,YahooFinance,2026-08-18T15:42:31.957666+00:00
+IPG,"The Interpublic Group of Companies, Inc.",VALIDATION_ERROR,current_price must be strictly positive. Got: None,YahooFinance,2026-08-18T15:42:54.692771+00:00
+LTIM.NSE,LTIMindtree Limited,VALIDATION_ERROR,current_price must be strictly positive. Got: None,YahooFinance,2026-08-18T15:50:00.806191+00:00
+NESTLEIND.NSE,Nestle India Limited,VALIDATION_ERROR,revenue must be strictly positive for standard valuation. Got: None,YahooFinance,2026-08-18T15:51:37.313847+00:00
+MCDOWELL-N.NSE,United Spirits Limited,VALIDATION_ERROR,current_price must be strictly positive. Got: None,YahooFinance,2026-08-18T15:52:35.919377+00:00
+TATAMOTORS.NSE,Tata Motors Limited,VALIDATION_ERROR,current_price must be strictly positive. Got: None,YahooFinance,2026-08-18T15:53:06.891015+00:00
+ZOMATO.NSE,Zomato Limited,VALIDATION_ERROR,current_price must be strictly positive. Got: None,YahooFinance,2026-08-18T15:53:47.301075+00:00
+VEDANTFASH.NSE,Vedant Fashions Limited,VALIDATION_ERROR,current_price must be strictly positive. Got: None,YahooFinance,2026-08-18T15:54:01.021394+00:00
+GMRINFRA.NSE,GMR Airports Infrastructure Limited,VALIDATION_ERROR,current_price must be strictly positive. Got: None,YahooFinance,2026-08-18T15:57:25.234771+00:00
+GUJGASLTD.NSE,Gujarat Gas Limited,VALIDATION_ERROR,historical_prices must contain at least 200 daily records for Risk Lab. Got: 22,YahooFinance,2026-08-18T15:59:23.794076+00:00
+MACROTECH.NSE,Macrotech Developers Limited (Lodha),VALIDATION_ERROR,current_price must be strictly positive. Got: None,YahooFinance,2026-08-18T16:01:03.723277+00:00

@@ -4,8 +4,9 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
-from backend.schemas.models import AnalyticsRequest, CompanyRequest, DcfRequest, ExportRequest, LboRequest, MnaRequest
+from backend.schemas.models import AnalyticsRequest, CompanyRequest, CopilotRequest, DcfRequest, ExportRequest, LboRequest, MnaRequest
 from backend.services import valuation_service as service
+from backend.services.ai_provider import copilot_orchestrator
 
 app = FastAPI(
     title="ValuEngine API",
@@ -34,8 +35,30 @@ def api_health():
     }
 
 
+@app.get("/api/companies/search")
+def search_companies(q: str = "", mode: str = "local", limit: int = 15):
+    results = service.search_companies(q, mode=mode, limit=limit)
+    return {
+        "status": "VALID",
+        "data": {"results": results, "count": len(results)},
+        "warnings": [],
+        "errors": [],
+        "provenance": {"mode": mode},
+    }
+
+
 @app.get("/api/company/available")
-def available_companies():
+def available_companies(mode: str = "local"):
+    if mode == "local":
+        count = service._data_loader.store.get_company_count()
+        sample = [c["ticker"] for c in service._data_loader.store.search_companies("", limit=10)]
+        return {
+            "status": "LOCAL",
+            "data": {"tickers": sample, "total_count": count},
+            "warnings": [],
+            "errors": [],
+            "provenance": {"source": "LOCAL_DB", "notice": f"Local database contains {count} companies"},
+        }
     provider = service._data_loader.provider
     has_key = bool(provider.api_key)
     cb_active = provider.is_circuit_breaker_active()
@@ -50,17 +73,17 @@ def available_companies():
 
 
 @app.get("/api/company/{ticker}")
-def get_company(ticker: str):
-    data = service.company(ticker)
+def get_company(ticker: str, mode: str = "local"):
+    data = service.company(ticker, mode=mode)
     if not data:
-        return service.unavailable(ticker)
-    prov_type = data.get("_provenance") or data.get("provenance", {}).get("source_type") or "DEMO"
-    if prov_type not in {"LIVE", "CACHED", "RATE_LIMITED", "DEMO"}:
-        prov_type = "DEMO"
+        return service.unavailable(ticker, mode=mode)
+    prov_type = data.get("_provenance") or data.get("provenance", {}).get("source_type") or ("LOCAL" if mode == "local" else "DEMO")
+    if prov_type not in {"LIVE", "LOCAL", "CACHED", "RATE_LIMITED", "DEMO"}:
+        prov_type = "LOCAL" if mode == "local" else "DEMO"
     return {
         "status": prov_type,
         "data": service.json_safe(data),
-        "warnings": [] if prov_type in {"LIVE", "CACHED"} else [data.get("provenance", {}).get("notice", "Alpha Vantage unavailable.")],
+        "warnings": [] if prov_type in {"LIVE", "LOCAL", "CACHED"} else [data.get("provenance", {}).get("notice", "Alpha Vantage unavailable.")],
         "errors": [],
         "provenance": data.get("provenance", {}),
     }
@@ -87,13 +110,13 @@ def run_lbo(payload: LboRequest):
 
 
 @app.get("/api/comps/trading/{ticker}")
-def get_trading_comps(ticker: str):
-    return service.trading_comps(ticker)
+def get_trading_comps(ticker: str, mode: str = "local"):
+    return service.trading_comps(ticker, mode=mode)
 
 
 @app.get("/api/comps/transactions/{ticker}")
-def get_transaction_comps(ticker: str):
-    return service.transaction_comps(ticker)
+def get_transaction_comps(ticker: str, mode: str = "local"):
+    return service.transaction_comps(ticker, mode=mode)
 
 
 @app.post("/api/analytics/monte-carlo")
@@ -106,19 +129,83 @@ def risk(payload: DcfRequest):
     return service.risk(payload)
 
 
+@app.get("/api/risk/var/{ticker}")
+def risk_var(ticker: str, mode: str = "local"):
+    return service.risk_var(ticker, mode=mode)
+
+
+@app.get("/api/risk/cvar/{ticker}")
+def risk_cvar(ticker: str, mode: str = "local"):
+    return service.risk_var(ticker, mode=mode)
+
+
+@app.get("/api/risk/merton/{ticker}")
+def risk_merton(ticker: str, mode: str = "local"):
+    return service.risk_merton(ticker, mode=mode)
+
+
+@app.get("/api/risk/regime/{ticker}")
+def risk_regime(ticker: str, mode: str = "local"):
+    return service.risk_regime(ticker, mode=mode)
+
+
+@app.get("/api/risk/fama-french/{ticker}")
+def risk_fama_french(ticker: str, mode: str = "local"):
+    return service.risk_factor_model(ticker, mode=mode)
+
+
+@app.get("/api/risk/evt/{ticker}")
+def risk_evt(ticker: str, mode: str = "local"):
+    return service.risk_evt(ticker, mode=mode)
+
+
+@app.get("/api/risk/copula/{acquirer}/{target}")
+def risk_copula(acquirer: str, target: str, mode: str = "local"):
+    return service.risk_copula(acquirer, target, mode=mode)
+
+
+@app.get("/api/risk/valuation-confidence/{ticker}")
+def valuation_confidence(ticker: str, mode: str = "local"):
+    return service.valuation_confidence(ticker, mode=mode)
+
+
+@app.post("/api/risk/monte-carlo/{ticker}")
+def risk_monte_carlo_post(ticker: str, payload: AnalyticsRequest):
+    payload.ticker = ticker
+    return service.analytics(payload)
+
+
+@app.post("/api/risk/sensitivity/{ticker}")
+def risk_sensitivity_post(ticker: str, payload: DcfRequest):
+    payload.ticker = ticker
+    return service.dcf_sensitivity(payload)
+
+
+@app.get("/api/risk/monte-carlo/{ticker}")
+def risk_monte_carlo_get(ticker: str, mode: str = "local"):
+    payload = AnalyticsRequest(ticker=ticker, mode=mode)
+    return service.analytics(payload)
+
+
+@app.get("/api/risk/sensitivity/{ticker}")
+def risk_sensitivity_get(ticker: str, mode: str = "local"):
+    payload = DcfRequest(ticker=ticker, mode=mode)
+    return service.dcf_sensitivity(payload)
+
+
 @app.get("/api/model-health/{ticker}")
-def model_health(ticker: str, acquirer_ticker: str = "MSFT"):
-    return service.health(ticker, acquirer_ticker)
+def model_health(ticker: str, acquirer_ticker: str = "MSFT", mode: str = "local"):
+    return service.health(ticker, acquirer_ticker, mode=mode)
 
 
 @app.get("/api/data-quality/{ticker}")
-def data_quality(ticker: str):
-    return service.data_quality(ticker)
+def data_quality(ticker: str, mode: str = "local"):
+    return service.data_quality(ticker, mode=mode)
 
 
 @app.post("/api/reports/excel")
 def export_excel(payload: ExportRequest):
-    path = service.export_excel(payload.target_ticker, payload.acquirer_ticker)
+    path = service.export_excel(payload.target_ticker, payload.acquirer_ticker, mode=payload.mode)
     if path is None:
         raise HTTPException(status_code=404, detail="Company data unavailable; Excel export was not generated.")
     return FileResponse(
@@ -126,3 +213,9 @@ def export_excel(payload: ExportRequest):
         filename=f"ValuEngine_{payload.target_ticker.upper()}_Report.xlsx",
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     )
+
+
+@app.post("/api/ai/copilot")
+def run_copilot(payload: CopilotRequest):
+    print("COPILOT_ROUTE_HIT: POST /api/ai/copilot received request.")
+    return copilot_orchestrator.process_request(payload)

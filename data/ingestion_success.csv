@@ -1,0 +1,391 @@
+ticker,company_name,exchange,country,currency,sector,industry,price_records,provider,ingested_at
+AAPL,Apple Inc.,NMS,USA,USD,Technology,Consumer Electronics,250,YahooFinance,2026-08-18T15:28:17.375502+00:00
+AAPL,Apple Inc.,NMS,USA,USD,Technology,Consumer Electronics,250,YahooFinance,2026-08-18T15:28:34.005195+00:00
+MSFT,Microsoft Corporation,NMS,USA,USD,Technology,Software - Infrastructure,250,YahooFinance,2026-08-18T15:28:39.622967+00:00
+NVDA,NVIDIA Corporation,NMS,USA,USD,Technology,Semiconductors,250,YahooFinance,2026-08-18T15:28:44.179007+00:00
+AMZN,"Amazon.com, Inc.",NMS,USA,USD,Consumer Cyclical,Internet Retail,250,YahooFinance,2026-08-18T15:28:49.545140+00:00
+GOOGL,Alphabet Inc.,NMS,USA,USD,Communication Services,Internet Content & Information,250,YahooFinance,2026-08-18T15:28:54.330085+00:00
+HDFCBANK.NSE,HDFC BANK LTD,NSI,India,INR,Financial Services,Banks - Regional,250,YahooFinance,2026-08-18T15:28:59.160348+00:00
+ICICIBANK.NSE,ICICI BANK LTD.,NSI,India,INR,Financial Services,Banks - Regional,250,YahooFinance,2026-08-18T15:29:04.166541+00:00
+TCS.NSE,TATA CONSULTANCY SERV LT,NSI,India,INR,Technology,Information Technology Services,250,YahooFinance,2026-08-18T15:29:08.965396+00:00
+INFY.NSE,INFOSYS LIMITED,NSI,India,INR,Technology,Information Technology Services,250,YahooFinance,2026-08-18T15:29:13.930227+00:00
+RELIANCE.NSE,RELIANCE INDUSTRIES LTD,NSI,India,INR,Energy,Oil & Gas Refining & Marketing,250,YahooFinance,2026-08-18T15:29:18.471394+00:00
+AVGO,Broadcom Inc.,NMS,USA,USD,Technology,Semiconductors,250,YahooFinance,2026-08-18T15:31:56.245764+00:00
+ORCL,Oracle Corporation,NYQ,USA,USD,Technology,Software - Infrastructure,250,YahooFinance,2026-08-18T15:32:00.994523+00:00
+CRM,"Salesforce, Inc.",NYQ,USA,USD,Technology,Software - Application,250,YahooFinance,2026-08-18T15:32:05.963967+00:00
+CSCO,"Cisco Systems, Inc.",NMS,USA,USD,Technology,Communication Equipment,250,YahooFinance,2026-08-18T15:32:10.380430+00:00
+ACN,Accenture plc,NYQ,USA,USD,Technology,Information Technology Services,250,YahooFinance,2026-08-18T15:32:14.764737+00:00
+ADBE,Adobe Inc.,NMS,USA,USD,Technology,Software - Application,250,YahooFinance,2026-08-18T15:32:19.174680+00:00
+TXN,Texas Instruments Incorporated,NMS,USA,USD,Technology,Semiconductors,250,YahooFinance,2026-08-18T15:32:23.808096+00:00
+QCOM,QUALCOMM Incorporated,NMS,USA,USD,Technology,Semiconductors,250,YahooFinance,2026-08-18T15:32:28.088691+00:00
+AMD,"Advanced Micro Devices, Inc.",NMS,USA,USD,Technology,Semiconductors,250,YahooFinance,2026-08-18T15:32:32.666847+00:00
+INTC,Intel Corporation,NMS,USA,USD,Technology,Semiconductors,250,YahooFinance,2026-08-18T15:32:36.988068+00:00
+IBM,International Business Machines,NYQ,USA,USD,Technology,Information Technology Services,250,YahooFinance,2026-08-18T15:32:41.646448+00:00
+AMAT,"Applied Materials, Inc.",NMS,USA,USD,Technology,Semiconductor Equipment & Materials,250,YahooFinance,2026-08-18T15:32:46.247852+00:00
+NOW,"ServiceNow, Inc.",NYQ,USA,USD,Technology,Software - Application,250,YahooFinance,2026-08-18T15:32:50.478525+00:00
+INTU,Intuit Inc.,NMS,USA,USD,Technology,Software - Application,250,YahooFinance,2026-08-18T15:32:54.660346+00:00
+LRCX,Lam Research Corporation,NMS,USA,USD,Technology,Semiconductor Equipment & Materials,250,YahooFinance,2026-08-18T15:32:59.011862+00:00
+ADI,"Analog Devices, Inc.",NMS,USA,USD,Technology,Semiconductors,250,YahooFinance,2026-08-18T15:33:04.048432+00:00
+MU,"Micron Technology, Inc.",NMS,USA,USD,Technology,Semiconductors,250,YahooFinance,2026-08-18T15:33:08.592978+00:00
+KLAC,KLA Corporation,NMS,USA,USD,Technology,Semiconductor Equipment & Materials,250,YahooFinance,2026-08-18T15:33:12.978720+00:00
+SNPS,"Synopsys, Inc.",NMS,USA,USD,Technology,Software - Infrastructure,250,YahooFinance,2026-08-18T15:33:17.752065+00:00
+CDNS,"Cadence Design Systems, Inc.",NMS,USA,USD,Technology,Software - Application,250,YahooFinance,2026-08-18T15:33:22.242820+00:00
+PANW,"Palo Alto Networks, Inc.",NMS,USA,USD,Technology,Software - Infrastructure,250,YahooFinance,2026-08-18T15:33:26.866375+00:00
+CRWD,"CrowdStrike Holdings, Inc.",NMS,USA,USD,Technology,Software - Infrastructure,250,YahooFinance,2026-08-18T15:33:31.431587+00:00
+FTNT,"Fortinet, Inc.",NMS,USA,USD,Technology,Software - Infrastructure,250,YahooFinance,2026-08-18T15:33:35.895641+00:00
+WDAY,"Workday, Inc.",NMS,USA,USD,Technology,Software - Application,250,YahooFinance,2026-08-18T15:33:40.287944+00:00
+TEAM,Atlassian Corporation,NMS,USA,USD,Technology,Software - Application,250,YahooFinance,2026-08-18T15:33:44.667260+00:00
+DDOG,"Datadog, Inc.",NMS,USA,USD,Technology,Software - Application,250,YahooFinance,2026-08-18T15:33:48.865275+00:00
+ZS,"Zscaler, Inc.",NMS,USA,USD,Technology,Software - Infrastructure,250,YahooFinance,2026-08-18T15:33:53.144883+00:00
+NET,"Cloudflare, Inc.",NYQ,USA,USD,Technology,Software - Infrastructure,250,YahooFinance,2026-08-18T15:33:57.761647+00:00
+ANET,"Arista Networks, Inc.",NYQ,USA,USD,Technology,Computer Hardware,250,YahooFinance,2026-08-18T15:34:02.270896+00:00
+MCHP,Microchip Technology Incorporat,NMS,USA,USD,Technology,Semiconductors,250,YahooFinance,2026-08-18T15:34:06.822441+00:00
+ON,ON Semiconductor Corporation,NMS,USA,USD,Technology,Semiconductors,250,YahooFinance,2026-08-18T15:34:11.163196+00:00
+APH,Amphenol Corporation,NYQ,USA,USD,Technology,Electronic Components,250,YahooFinance,2026-08-18T15:34:16.357690+00:00
+JPM,JP Morgan Chase & Co.,NYQ,USA,USD,Financial Services,Banks - Diversified,250,YahooFinance,2026-08-18T15:34:20.734057+00:00
+BAC,Bank of America Corporation,NYQ,USA,USD,Financial Services,Banks - Diversified,250,YahooFinance,2026-08-18T15:34:24.969259+00:00
+WFC,Wells Fargo & Company,NYQ,USA,USD,Financial Services,Banks - Diversified,250,YahooFinance,2026-08-18T15:34:29.844704+00:00
+C,"Citigroup, Inc.",NYQ,USA,USD,Financial Services,Banks - Diversified,250,YahooFinance,2026-08-18T15:34:34.141774+00:00
+GS,"Goldman Sachs Group, Inc. (The)",NYQ,USA,USD,Financial Services,Capital Markets,250,YahooFinance,2026-08-18T15:34:38.400934+00:00
+MS,Morgan Stanley,NYQ,USA,USD,Financial Services,Capital Markets,250,YahooFinance,2026-08-18T15:34:42.941889+00:00
+SCHW,Charles Schwab Corporation (The,NYQ,USA,USD,Financial Services,Capital Markets,250,YahooFinance,2026-08-18T15:34:47.380654+00:00
+BLK,"BlackRock, Inc.",NYQ,USA,USD,Financial Services,Asset Management,250,YahooFinance,2026-08-18T15:34:51.776308+00:00
+AXP,American Express Company,NYQ,USA,USD,Financial Services,Credit Services,250,YahooFinance,2026-08-18T15:34:56.453315+00:00
+V,Visa Inc.,NYQ,USA,USD,Financial Services,Credit Services,250,YahooFinance,2026-08-18T15:35:00.732755+00:00
+MA,Mastercard Incorporated,NYQ,USA,USD,Financial Services,Credit Services,250,YahooFinance,2026-08-18T15:35:05.205811+00:00
+PYPL,"PayPal Holdings, Inc.",NMS,USA,USD,Financial Services,Credit Services,250,YahooFinance,2026-08-18T15:35:10.018613+00:00
+SPGI,S&P Global Inc.,NYQ,USA,USD,Financial Services,Financial Data & Stock Exchanges,250,YahooFinance,2026-08-18T15:35:14.847318+00:00
+MCO,Moody's Corporation,NYQ,USA,USD,Financial Services,Financial Data & Stock Exchanges,250,YahooFinance,2026-08-18T15:35:19.138485+00:00
+CME,CME Group Inc.,NMS,USA,USD,Financial Services,Financial Data & Stock Exchanges,250,YahooFinance,2026-08-18T15:35:24.024340+00:00
+ICE,Intercontinental Exchange Inc.,NYQ,USA,USD,Financial Services,Financial Data & Stock Exchanges,250,YahooFinance,2026-08-18T15:35:28.782470+00:00
+CB,Chubb Limited,NYQ,USA,USD,Financial Services,Insurance - Property & Casualty,250,YahooFinance,2026-08-18T15:35:32.990809+00:00
+PGR,Progressive Corporation (The),NYQ,USA,USD,Financial Services,Insurance - Property & Casualty,250,YahooFinance,2026-08-18T15:35:37.594999+00:00
+TRV,"The Travelers Companies, Inc.",NYQ,USA,USD,Financial Services,Insurance - Property & Casualty,250,YahooFinance,2026-08-18T15:35:41.767438+00:00
+ALL,Allstate Corporation (The),NYQ,USA,USD,Financial Services,Insurance - Property & Casualty,250,YahooFinance,2026-08-18T15:35:46.138529+00:00
+AIG,"American International Group, I",NYQ,USA,USD,Financial Services,Insurance - Diversified,250,YahooFinance,2026-08-18T15:35:50.650543+00:00
+MET,"MetLife, Inc.",NYQ,USA,USD,Financial Services,Insurance - Life,250,YahooFinance,2026-08-18T15:35:55.198735+00:00
+PRU,"Prudential Financial, Inc.",NYQ,USA,USD,Financial Services,Insurance - Life,250,YahooFinance,2026-08-18T15:35:59.759923+00:00
+AFL,AFLAC Incorporated,NYQ,USA,USD,Financial Services,Insurance - Life,250,YahooFinance,2026-08-18T15:36:03.977996+00:00
+AON,Aon plc,NYQ,USA,USD,Financial Services,Insurance Brokers,250,YahooFinance,2026-08-18T15:36:16.832851+00:00
+AJG,Arthur J. Gallagher & Co.,NYQ,USA,USD,Financial Services,Insurance Brokers,250,YahooFinance,2026-08-18T15:36:21.147984+00:00
+PNC,"PNC Financial Services Group, I",NYQ,USA,USD,Financial Services,Banks - Regional,250,YahooFinance,2026-08-18T15:36:25.849636+00:00
+USB,U.S. Bancorp,NYQ,USA,USD,Financial Services,Banks - Regional,250,YahooFinance,2026-08-18T15:36:30.354287+00:00
+TFC,Truist Financial Corporation,NYQ,USA,USD,Financial Services,Banks - Regional,250,YahooFinance,2026-08-18T15:36:34.940407+00:00
+LLY,Eli Lilly and Company,NYQ,USA,USD,Healthcare,Drug Manufacturers - General,250,YahooFinance,2026-08-18T15:36:39.495990+00:00
+UNH,UnitedHealth Group Incorporated,NYQ,USA,USD,Healthcare,Healthcare Plans,250,YahooFinance,2026-08-18T15:36:44.580939+00:00
+JNJ,Johnson & Johnson,NYQ,USA,USD,Healthcare,Drug Manufacturers - General,250,YahooFinance,2026-08-18T15:36:48.902194+00:00
+ABBV,AbbVie Inc.,NYQ,USA,USD,Healthcare,Drug Manufacturers - General,250,YahooFinance,2026-08-18T15:36:53.234418+00:00
+MRK,"Merck & Company, Inc.",NYQ,USA,USD,Healthcare,Drug Manufacturers - General,250,YahooFinance,2026-08-18T15:36:58.383802+00:00
+TMO,Thermo Fisher Scientific Inc,NYQ,USA,USD,Healthcare,Diagnostics & Research,250,YahooFinance,2026-08-18T15:37:02.597698+00:00
+ABT,Abbott Laboratories,NYQ,USA,USD,Healthcare,Medical Devices,250,YahooFinance,2026-08-18T15:37:07.526071+00:00
+DHR,Danaher Corporation,NYQ,USA,USD,Healthcare,Diagnostics & Research,250,YahooFinance,2026-08-18T15:37:11.695269+00:00
+PFE,"Pfizer, Inc.",NYQ,USA,USD,Healthcare,Drug Manufacturers - General,250,YahooFinance,2026-08-18T15:37:16.238963+00:00
+AMGN,Amgen Inc.,NMS,USA,USD,Healthcare,Drug Manufacturers - General,250,YahooFinance,2026-08-18T15:37:20.600466+00:00
+BMY,Bristol-Myers Squibb Company,NYQ,USA,USD,Healthcare,Drug Manufacturers - General,250,YahooFinance,2026-08-18T15:37:25.138599+00:00
+ISRG,"Intuitive Surgical, Inc.",NMS,USA,USD,Healthcare,Medical Instruments & Supplies,250,YahooFinance,2026-08-18T15:37:29.853569+00:00
+MDT,Medtronic plc.,NYQ,USA,USD,Healthcare,Medical Devices,250,YahooFinance,2026-08-18T15:37:34.332356+00:00
+SYK,Stryker Corporation,NYQ,USA,USD,Healthcare,Medical Devices,250,YahooFinance,2026-08-18T15:37:38.584849+00:00
+BSX,Boston Scientific Corporation,NYQ,USA,USD,Healthcare,Medical Devices,250,YahooFinance,2026-08-18T15:37:42.823443+00:00
+GILD,"Gilead Sciences, Inc.",NMS,USA,USD,Healthcare,Drug Manufacturers - General,250,YahooFinance,2026-08-18T15:37:47.487361+00:00
+VRTX,Vertex Pharmaceuticals Incorpor,NMS,USA,USD,Healthcare,Biotechnology,250,YahooFinance,2026-08-18T15:37:52.114546+00:00
+REGN,"Regeneron Pharmaceuticals, Inc.",NMS,USA,USD,Healthcare,Biotechnology,250,YahooFinance,2026-08-18T15:37:56.556436+00:00
+ZTS,Zoetis Inc.,NYQ,USA,USD,Healthcare,Drug Manufacturers - Specialty & Generic,250,YahooFinance,2026-08-18T15:38:01.037293+00:00
+BDX,"Becton, Dickinson and Company",NYQ,USA,USD,Healthcare,Medical Instruments & Supplies,250,YahooFinance,2026-08-18T15:38:05.637682+00:00
+EW,Edwards Lifesciences Corporatio,NYQ,USA,USD,Healthcare,Medical Devices,250,YahooFinance,2026-08-18T15:38:10.041900+00:00
+ELV,"Elevance Health, Inc.",NYQ,USA,USD,Healthcare,Healthcare Plans,250,YahooFinance,2026-08-18T15:38:14.701041+00:00
+CVS,CVS Health Corporation,NYQ,USA,USD,Healthcare,Healthcare Plans,250,YahooFinance,2026-08-18T15:38:18.871498+00:00
+CI,The Cigna Group,NYQ,USA,USD,Healthcare,Healthcare Plans,250,YahooFinance,2026-08-18T15:38:23.400036+00:00
+MCK,McKesson Corporation,NYQ,USA,USD,Healthcare,Medical Distribution,250,YahooFinance,2026-08-18T15:38:27.909846+00:00
+TSLA,"Tesla, Inc.",NMS,USA,USD,Consumer Cyclical,Auto Manufacturers,250,YahooFinance,2026-08-18T15:38:32.418810+00:00
+HD,"Home Depot, Inc. (The)",NYQ,USA,USD,Consumer Cyclical,Home Improvement Retail,250,YahooFinance,2026-08-18T15:38:37.266674+00:00
+MCD,McDonald's Corporation,NYQ,USA,USD,Consumer Cyclical,Restaurants,250,YahooFinance,2026-08-18T15:38:41.526590+00:00
+NKE,"Nike, Inc.",NYQ,USA,USD,Consumer Cyclical,Footwear & Accessories,250,YahooFinance,2026-08-18T15:38:46.241124+00:00
+LOW,"Lowe's Companies, Inc.",NYQ,USA,USD,Consumer Cyclical,Home Improvement Retail,250,YahooFinance,2026-08-18T15:38:51.390285+00:00
+SBUX,Starbucks Corporation,NMS,USA,USD,Consumer Cyclical,Restaurants,250,YahooFinance,2026-08-18T15:38:55.876882+00:00
+TJX,"TJX Companies, Inc. (The)",NYQ,USA,USD,Consumer Cyclical,Apparel Retail,250,YahooFinance,2026-08-18T15:39:00.541578+00:00
+BKNG,Booking Holdings Inc. Common St,NMS,USA,USD,Consumer Cyclical,Travel Services,250,YahooFinance,2026-08-18T15:39:05.048261+00:00
+CMG,"Chipotle Mexican Grill, Inc.",NYQ,USA,USD,Consumer Cyclical,Restaurants,250,YahooFinance,2026-08-18T15:39:09.413882+00:00
+MAR,Marriott International,NMS,USA,USD,Consumer Cyclical,Lodging,250,YahooFinance,2026-08-18T15:39:14.354292+00:00
+HLT,Hilton Worldwide Holdings Inc.,NYQ,USA,USD,Consumer Cyclical,Lodging,250,YahooFinance,2026-08-18T15:39:18.599782+00:00
+ORLY,"O'Reilly Automotive, Inc.",NMS,USA,USD,Consumer Cyclical,Auto Parts,250,YahooFinance,2026-08-18T15:39:23.226751+00:00
+AZO,"AutoZone, Inc.",NYQ,USA,USD,Consumer Cyclical,Auto Parts,250,YahooFinance,2026-08-18T15:39:27.450834+00:00
+ROST,"Ross Stores, Inc.",NMS,USA,USD,Consumer Cyclical,Apparel Retail,250,YahooFinance,2026-08-18T15:39:31.580505+00:00
+YUM,"Yum! Brands, Inc.",NYQ,USA,USD,Consumer Cyclical,Restaurants,250,YahooFinance,2026-08-18T15:39:36.155100+00:00
+DRI,"Darden Restaurants, Inc.",NYQ,USA,USD,Consumer Cyclical,Restaurants,250,YahooFinance,2026-08-18T15:39:40.805587+00:00
+EBAY,eBay Inc.,NMS,USA,USD,Consumer Cyclical,Internet Retail,250,YahooFinance,2026-08-18T15:39:45.193321+00:00
+ETSY,"Etsy, Inc.",NYQ,USA,USD,Consumer Cyclical,Internet Retail,250,YahooFinance,2026-08-18T15:39:49.860346+00:00
+LVS,Las Vegas Sands Corp.,NYQ,USA,USD,Consumer Cyclical,Resorts & Casinos,250,YahooFinance,2026-08-18T15:39:54.022345+00:00
+MGM,MGM Resorts International,NYQ,USA,USD,Consumer Cyclical,Resorts & Casinos,250,YahooFinance,2026-08-18T15:39:58.541509+00:00
+F,Ford Motor Company,NYQ,USA,USD,Consumer Cyclical,Auto Manufacturers,250,YahooFinance,2026-08-18T15:40:03.183181+00:00
+GM,General Motors Company,NYQ,USA,USD,Consumer Cyclical,Auto Manufacturers,250,YahooFinance,2026-08-18T15:40:07.738681+00:00
+ABNB,"Airbnb, Inc.",NMS,USA,USD,Consumer Cyclical,Travel Services,250,YahooFinance,2026-08-18T15:40:12.469663+00:00
+UBER,"Uber Technologies, Inc.",NYQ,USA,USD,Technology,Software - Application,250,YahooFinance,2026-08-18T15:40:16.832280+00:00
+PG,Procter & Gamble Company (The),NYQ,USA,USD,Consumer Defensive,Household & Personal Products,250,YahooFinance,2026-08-18T15:40:21.114857+00:00
+COST,Costco Wholesale Corporation,NMS,USA,USD,Consumer Defensive,Discount Stores,250,YahooFinance,2026-08-18T15:40:25.736686+00:00
+WMT,Walmart Inc.,NMS,USA,USD,Consumer Defensive,Discount Stores,250,YahooFinance,2026-08-18T15:40:30.135981+00:00
+KO,Coca-Cola Company (The),NYQ,USA,USD,Consumer Defensive,Beverages - Non-Alcoholic,250,YahooFinance,2026-08-18T15:40:35.182360+00:00
+PEP,"Pepsico, Inc.",NMS,USA,USD,Consumer Defensive,Beverages - Non-Alcoholic,250,YahooFinance,2026-08-18T15:40:39.568730+00:00
+PM,Philip Morris International Inc,NYQ,USA,USD,Consumer Defensive,Tobacco,250,YahooFinance,2026-08-18T15:40:44.000936+00:00
+MO,"Altria Group, Inc.",NYQ,USA,USD,Consumer Defensive,Tobacco,250,YahooFinance,2026-08-18T15:40:49.498000+00:00
+MDLZ,"Mondelez International, Inc.",NMS,USA,USD,Consumer Defensive,Confectioners,250,YahooFinance,2026-08-18T15:40:54.042682+00:00
+CL,Colgate-Palmolive Company,NYQ,USA,USD,Consumer Defensive,Household & Personal Products,250,YahooFinance,2026-08-18T15:40:59.783927+00:00
+KMB,Kimberly-Clark Corporation,NMS,USA,USD,Consumer Defensive,Household & Personal Products,250,YahooFinance,2026-08-18T15:41:04.650324+00:00
+GIS,"General Mills, Inc.",NYQ,USA,USD,Consumer Defensive,Packaged Foods,250,YahooFinance,2026-08-18T15:41:09.178370+00:00
+KHC,The Kraft Heinz Company,NMS,USA,USD,Consumer Defensive,Packaged Foods,250,YahooFinance,2026-08-18T15:41:22.921367+00:00
+HSY,The Hershey Company,NYQ,USA,USD,Consumer Defensive,Confectioners,250,YahooFinance,2026-08-18T15:41:27.510979+00:00
+STZ,"Constellation Brands, Inc.",NYQ,USA,USD,Consumer Defensive,Beverages - Brewers,250,YahooFinance,2026-08-18T15:41:31.770777+00:00
+EL,"Estee Lauder Companies, Inc. (T",NYQ,USA,USD,Consumer Defensive,Household & Personal Products,250,YahooFinance,2026-08-18T15:41:36.333062+00:00
+ADM,Archer-Daniels-Midland Company,NYQ,USA,USD,Consumer Defensive,Farm Products,250,YahooFinance,2026-08-18T15:41:40.858739+00:00
+TGT,Target Corporation,NYQ,USA,USD,Consumer Defensive,Discount Stores,250,YahooFinance,2026-08-18T15:41:45.652346+00:00
+GOOG,Alphabet Inc.,NMS,USA,USD,Communication Services,Internet Content & Information,250,YahooFinance,2026-08-18T15:41:49.975744+00:00
+META,"Meta Platforms, Inc.",NMS,USA,USD,Communication Services,Internet Content & Information,250,YahooFinance,2026-08-18T15:41:54.718831+00:00
+NFLX,"Netflix, Inc.",NMS,USA,USD,Communication Services,Entertainment,250,YahooFinance,2026-08-18T15:41:59.004468+00:00
+DIS,Walt Disney Company (The),NYQ,USA,USD,Communication Services,Entertainment,250,YahooFinance,2026-08-18T15:42:04.016152+00:00
+CMCSA,Comcast Corporation,NMS,USA,USD,Communication Services,Telecom Services,250,YahooFinance,2026-08-18T15:42:08.818914+00:00
+VZ,Verizon Communications Inc.,NYQ,USA,USD,Communication Services,Telecom Services,250,YahooFinance,2026-08-18T15:42:13.141111+00:00
+T,AT&T Inc.,NYQ,USA,USD,Communication Services,Telecom Services,250,YahooFinance,2026-08-18T15:42:18.121242+00:00
+TMUS,"T-Mobile US, Inc.",NMS,USA,USD,Communication Services,Telecom Services,250,YahooFinance,2026-08-18T15:42:22.786272+00:00
+CHTR,"Charter Communications, Inc.",NMS,USA,USD,Communication Services,Telecom Services,250,YahooFinance,2026-08-18T15:42:27.494166+00:00
+TTWO,"Take-Two Interactive Software, ",NMS,USA,USD,Communication Services,Electronic Gaming & Multimedia,250,YahooFinance,2026-08-18T15:42:36.275034+00:00
+WBD,"Warner Bros. Discovery, Inc. - ",NMS,USA,USD,Communication Services,Entertainment,250,YahooFinance,2026-08-18T15:42:40.475908+00:00
+OMC,Omnicom Group Inc.,NYQ,USA,USD,Communication Services,Advertising Agencies,250,YahooFinance,2026-08-18T15:42:44.698289+00:00
+SPOT,Spotify Technology S.A.,NYQ,USA,USD,Communication Services,Internet Content & Information,250,YahooFinance,2026-08-18T15:42:58.753857+00:00
+CAT,"Caterpillar, Inc.",NYQ,USA,USD,Industrials,Farm & Heavy Construction Machinery,250,YahooFinance,2026-08-18T15:43:04.196310+00:00
+DE,Deere & Company,NYQ,USA,USD,Industrials,Farm & Heavy Construction Machinery,250,YahooFinance,2026-08-18T15:43:08.656658+00:00
+UNP,Union Pacific Corporation,NYQ,USA,USD,Industrials,Railroads,250,YahooFinance,2026-08-18T15:43:12.870414+00:00
+HON,Honeywell International Inc.,NMS,USA,USD,Industrials,Conglomerates,250,YahooFinance,2026-08-18T15:43:17.696877+00:00
+GE,GE Aerospace,NYQ,USA,USD,Industrials,Aerospace & Defense,250,YahooFinance,2026-08-18T15:43:22.376166+00:00
+RTX,RTX Corporation,NYQ,USA,USD,Industrials,Aerospace & Defense,250,YahooFinance,2026-08-18T15:43:27.518408+00:00
+BA,Boeing Company (The),NYQ,USA,USD,Industrials,Aerospace & Defense,250,YahooFinance,2026-08-18T15:43:31.861811+00:00
+LMT,Lockheed Martin Corporation,NYQ,USA,USD,Industrials,Aerospace & Defense,250,YahooFinance,2026-08-18T15:43:36.467214+00:00
+NOC,Northrop Grumman Corporation,NYQ,USA,USD,Industrials,Aerospace & Defense,250,YahooFinance,2026-08-18T15:43:41.231921+00:00
+GD,General Dynamics Corporation,NYQ,USA,USD,Industrials,Aerospace & Defense,250,YahooFinance,2026-08-18T15:43:45.735420+00:00
+TDG,Transdigm Group Incorporated,NYQ,USA,USD,Industrials,Aerospace & Defense,250,YahooFinance,2026-08-18T15:43:49.910197+00:00
+ETN,"Eaton Corporation, PLC",NYQ,USA,USD,Industrials,Specialty Industrial Machinery,250,YahooFinance,2026-08-18T15:43:54.551327+00:00
+ITW,Illinois Tool Works Inc.,NYQ,USA,USD,Industrials,Specialty Industrial Machinery,250,YahooFinance,2026-08-18T15:43:59.017976+00:00
+EMR,Emerson Electric Company,NYQ,USA,USD,Industrials,Specialty Industrial Machinery,250,YahooFinance,2026-08-18T15:44:03.743407+00:00
+PH,Parker-Hannifin Corporation,NYQ,USA,USD,Industrials,Specialty Industrial Machinery,250,YahooFinance,2026-08-18T15:44:08.288474+00:00
+CSX,CSX Corporation,NMS,USA,USD,Industrials,Railroads,250,YahooFinance,2026-08-18T15:44:13.109381+00:00
+NSC,Norfolk Southern Corporation,NYQ,USA,USD,Industrials,Railroads,250,YahooFinance,2026-08-18T15:44:17.902468+00:00
+UPS,"United Parcel Service, Inc.",NYQ,USA,USD,Industrials,Integrated Freight & Logistics,250,YahooFinance,2026-08-18T15:44:22.074030+00:00
+FDX,FedEx Corporation,NYQ,USA,USD,Industrials,Integrated Freight & Logistics,250,YahooFinance,2026-08-18T15:44:27.196676+00:00
+WM,"Waste Management, Inc.",NYQ,USA,USD,Industrials,Waste Management,250,YahooFinance,2026-08-18T15:44:31.765185+00:00
+RSG,"Republic Services, Inc.",NYQ,USA,USD,Industrials,Waste Management,250,YahooFinance,2026-08-18T15:44:36.455746+00:00
+CTAS,Cintas Corporation,NMS,USA,USD,Industrials,Specialty Business Services,250,YahooFinance,2026-08-18T15:44:40.723457+00:00
+XOM,ExxonMobil Holdings Corporation,NYQ,USA,USD,Energy,Oil & Gas Integrated,250,YahooFinance,2026-08-18T15:44:45.259628+00:00
+CVX,Chevron Corporation,NYQ,USA,USD,Energy,Oil & Gas Integrated,250,YahooFinance,2026-08-18T15:44:49.830862+00:00
+COP,ConocoPhillips,NYQ,USA,USD,Energy,Oil & Gas E&P,250,YahooFinance,2026-08-18T15:44:54.077485+00:00
+EOG,"EOG Resources, Inc.",NYQ,USA,USD,Energy,Oil & Gas E&P,250,YahooFinance,2026-08-18T15:44:58.694536+00:00
+SLB,SLB Limited,NYQ,USA,USD,Energy,Oil & Gas Equipment & Services,250,YahooFinance,2026-08-18T15:45:03.465100+00:00
+MPC,Marathon Petroleum Corporation,NYQ,USA,USD,Energy,Oil & Gas Refining & Marketing,250,YahooFinance,2026-08-18T15:45:07.695027+00:00
+PSX,Phillips 66,NYQ,USA,USD,Energy,Oil & Gas Refining & Marketing,250,YahooFinance,2026-08-18T15:45:12.286133+00:00
+VLO,Valero Energy Corporation,NYQ,USA,USD,Energy,Oil & Gas Refining & Marketing,250,YahooFinance,2026-08-18T15:45:16.843116+00:00
+OXY,Occidental Petroleum Corporatio,NYQ,USA,USD,Energy,Oil & Gas E&P,250,YahooFinance,2026-08-18T15:45:21.246642+00:00
+WMB,"Williams Companies, Inc. (The)",NYQ,USA,USD,Energy,Oil & Gas Midstream,250,YahooFinance,2026-08-18T15:45:25.830715+00:00
+KMI,"Kinder Morgan, Inc.",NYQ,USA,USD,Energy,Oil & Gas Midstream,250,YahooFinance,2026-08-18T15:45:30.097663+00:00
+HAL,Halliburton Company,NYQ,USA,USD,Energy,Oil & Gas Equipment & Services,250,YahooFinance,2026-08-18T15:45:34.713859+00:00
+LIN,Linde plc,NMS,USA,USD,Basic Materials,Specialty Chemicals,250,YahooFinance,2026-08-18T15:45:39.176379+00:00
+APD,"Air Products and Chemicals, Inc",NYQ,USA,USD,Basic Materials,Specialty Chemicals,250,YahooFinance,2026-08-18T15:45:43.866618+00:00
+SHW,Sherwin-Williams Company (The),NYQ,USA,USD,Basic Materials,Specialty Chemicals,250,YahooFinance,2026-08-18T15:45:48.323015+00:00
+FCX,"Freeport-McMoRan, Inc.",NYQ,USA,USD,Basic Materials,Copper,250,YahooFinance,2026-08-18T15:45:52.850403+00:00
+ECL,Ecolab Inc.,NYQ,USA,USD,Basic Materials,Specialty Chemicals,250,YahooFinance,2026-08-18T15:45:57.233048+00:00
+NEM,Newmont Corporation,NYQ,USA,USD,Basic Materials,Gold,250,YahooFinance,2026-08-18T15:46:02.080113+00:00
+DOW,Dow Inc.,NYQ,USA,USD,Basic Materials,Chemicals,250,YahooFinance,2026-08-18T15:46:06.815508+00:00
+NUE,Nucor Corporation,NYQ,USA,USD,Basic Materials,Steel,250,YahooFinance,2026-08-18T15:46:10.963906+00:00
+CTVA,"Corteva, Inc.",NYQ,USA,USD,Basic Materials,Agricultural Inputs,250,YahooFinance,2026-08-18T15:46:15.136789+00:00
+PPG,"PPG Industries, Inc.",NYQ,USA,USD,Basic Materials,Specialty Chemicals,250,YahooFinance,2026-08-18T15:46:19.632834+00:00
+NEE,"NextEra Energy, Inc.",NYQ,USA,USD,Utilities,Utilities - Regulated Electric,250,YahooFinance,2026-08-18T15:46:24.173605+00:00
+SO,Southern Company (The),NYQ,USA,USD,Utilities,Utilities - Regulated Electric,250,YahooFinance,2026-08-18T15:46:28.697155+00:00
+DUK,Duke Energy Corporation (Holdin,NYQ,USA,USD,Utilities,Utilities - Regulated Electric,250,YahooFinance,2026-08-18T15:46:33.260212+00:00
+CEG,Constellation Energy Corporatio,NMS,USA,USD,Utilities,Utilities - Independent Power Producers,250,YahooFinance,2026-08-18T15:46:37.578904+00:00
+SRE,DBA Sempra,NYQ,USA,USD,Utilities,Utilities - Diversified,250,YahooFinance,2026-08-18T15:46:41.875557+00:00
+AEP,American Electric Power Company,NMS,USA,USD,Utilities,Utilities - Regulated Electric,250,YahooFinance,2026-08-18T15:46:46.358343+00:00
+D,"Dominion Energy, Inc.",NYQ,USA,USD,Utilities,Utilities - Regulated Electric,250,YahooFinance,2026-08-18T15:46:51.258685+00:00
+PEG,Public Service Enterprise Group,NYQ,USA,USD,Utilities,Utilities - Regulated Electric,250,YahooFinance,2026-08-18T15:46:55.436783+00:00
+EXC,Exelon Corporation,NMS,USA,USD,Utilities,Utilities - Regulated Electric,250,YahooFinance,2026-08-18T15:47:00.451284+00:00
+XEL,Xcel Energy Inc.,NMS,USA,USD,Utilities,Utilities - Regulated Electric,250,YahooFinance,2026-08-18T15:47:05.576980+00:00
+PLD,"Prologis, Inc.",NYQ,USA,USD,Real Estate,REIT - Industrial,250,YahooFinance,2026-08-18T15:47:09.869084+00:00
+AMT,American Tower Corporation (REI,NYQ,USA,USD,Real Estate,REIT - Specialty,250,YahooFinance,2026-08-18T15:47:14.328887+00:00
+EQIX,"Equinix, Inc.",NMS,USA,USD,Real Estate,REIT - Specialty,250,YahooFinance,2026-08-18T15:47:18.744675+00:00
+CCI,Crown Castle Inc.,NYQ,USA,USD,Real Estate,REIT - Specialty,250,YahooFinance,2026-08-18T15:47:22.927239+00:00
+PSA,Public Storage,NYQ,USA,USD,Real Estate,REIT - Industrial,250,YahooFinance,2026-08-18T15:47:27.166509+00:00
+O,Realty Income Corporation,NYQ,USA,USD,Real Estate,REIT - Retail,250,YahooFinance,2026-08-18T15:47:32.231908+00:00
+SPG,"Simon Property Group, Inc.",NYQ,USA,USD,Real Estate,REIT - Retail,250,YahooFinance,2026-08-18T15:47:37.013556+00:00
+DLR,"Digital Realty Trust, Inc.",NYQ,USA,USD,Real Estate,REIT - Specialty,250,YahooFinance,2026-08-18T15:47:41.708366+00:00
+SBIN.NSE,STATE BANK OF INDIA,NSI,India,INR,Financial Services,Banks - Regional,250,YahooFinance,2026-08-18T15:47:45.915243+00:00
+KOTAKBANK.NSE,KOTAK MAHINDRA BANK LTD,NSI,India,INR,Financial Services,Banks - Regional,250,YahooFinance,2026-08-18T15:47:50.021167+00:00
+AXISBANK.NSE,AXIS BANK LIMITED,NSI,India,INR,Financial Services,Banks - Regional,250,YahooFinance,2026-08-18T15:47:54.276503+00:00
+BAJFINANCE.NSE,BAJAJ FINANCE LIMITED,NSI,India,INR,Financial Services,Credit Services,250,YahooFinance,2026-08-18T15:47:58.383403+00:00
+BAJAJFINSV.NSE,BAJAJ FINSERV LTD.,NSI,India,INR,Financial Services,Financial Conglomerates,250,YahooFinance,2026-08-18T15:48:02.964519+00:00
+INDUSINDBK.NSE,INDUSIND BANK LIMITED,NSI,India,INR,Financial Services,Banks - Regional,250,YahooFinance,2026-08-18T15:48:07.405867+00:00
+BANKBARODA.NSE,BANK OF BARODA,NSI,India,INR,Financial Services,Banks - Regional,250,YahooFinance,2026-08-18T15:48:12.121091+00:00
+PNB.NSE,PUNJAB NATIONAL BANK,NSI,India,INR,Financial Services,Banks - Regional,250,YahooFinance,2026-08-18T15:48:17.155020+00:00
+CANBK.NSE,CANARA BANK,NSI,India,INR,Financial Services,Banks - Regional,250,YahooFinance,2026-08-18T15:48:21.313364+00:00
+UNIONBANK.NSE,UNION BANK OF INDIA,NSI,India,INR,Financial Services,Banks - Regional,250,YahooFinance,2026-08-18T15:48:25.146599+00:00
+IDFCFIRSTB.NSE,IDFC FIRST BANK LIMITED,NSI,India,INR,Financial Services,Banks - Regional,250,YahooFinance,2026-08-18T15:48:29.908910+00:00
+FEDERALBNK.NSE,FEDERAL BANK LTD,NSI,India,INR,Financial Services,Banks - Regional,250,YahooFinance,2026-08-18T15:48:34.276882+00:00
+AUBANK.NSE,AU SMALL FINANCE BANK LTD,NSI,India,INR,Financial Services,Banks - Regional,250,YahooFinance,2026-08-18T15:48:38.234494+00:00
+SHRIRAMFIN.NSE,SHRIRAM FINANCE LIMITED,NSI,India,INR,Financial Services,Credit Services,250,YahooFinance,2026-08-18T15:48:42.204473+00:00
+CHOLAFIN.NSE,CHOLAMANDALAM IN & FIN CO,NSI,India,INR,Financial Services,Credit Services,250,YahooFinance,2026-08-18T15:48:46.772493+00:00
+MUTHOOTFIN.NSE,MUTHOOT FINANCE LIMITED,NSI,India,INR,Financial Services,Credit Services,250,YahooFinance,2026-08-18T15:48:51.008190+00:00
+MANAPPURAM.NSE,MANAPPURAM FINANCE LTD,NSI,India,INR,Financial Services,Credit Services,250,YahooFinance,2026-08-18T15:48:55.383260+00:00
+PFC.NSE,POWER FIN CORP LTD.,NSI,India,INR,Financial Services,Credit Services,250,YahooFinance,2026-08-18T15:48:59.488268+00:00
+RECLTD.NSE,REC LIMITED,NSI,India,INR,Financial Services,Credit Services,250,YahooFinance,2026-08-18T15:49:04.066080+00:00
+HDFCLIFE.NSE,HDFC LIFE INS CO LTD,NSI,India,INR,Financial Services,Insurance - Life,250,YahooFinance,2026-08-18T15:49:08.970154+00:00
+SBILIFE.NSE,SBI LIFE INSURANCE CO LTD,NSI,India,INR,Financial Services,Insurance - Life,250,YahooFinance,2026-08-18T15:49:13.208925+00:00
+ICICIPRULI.NSE,ICICI PRU LIFE INS CO LTD,NSI,India,INR,Financial Services,Insurance - Life,250,YahooFinance,2026-08-18T15:49:17.375458+00:00
+ICICIGI.NSE,ICICI LOMBARD GIC LIMITED,NSI,India,INR,Financial Services,Insurance - Diversified,250,YahooFinance,2026-08-18T15:49:21.493238+00:00
+SBICARD.NSE,SBI CARDS & PAY SER LTD,NSI,India,INR,Financial Services,Credit Services,250,YahooFinance,2026-08-18T15:49:25.569492+00:00
+HDFCAMC.NSE,HDFC AMC LIMITED,NSI,India,INR,Financial Services,Asset Management,250,YahooFinance,2026-08-18T15:49:29.450248+00:00
+BSE.NSE,BSE LIMITED,NSI,India,INR,Financial Services,Financial Data & Stock Exchanges,250,YahooFinance,2026-08-18T15:49:33.691457+00:00
+CDSL.NSE,CENTRAL DEPO SER (I) LTD,NSI,India,INR,Financial Services,Capital Markets,250,YahooFinance,2026-08-18T15:49:37.577237+00:00
+JIOFIN.NSE,JIO FIN SERVICES LTD,NSI,India,INR,Financial Services,Asset Management,250,YahooFinance,2026-08-18T15:49:41.761062+00:00
+HCLTECH.NSE,HCL TECHNOLOGIES LTD,NSI,India,INR,Technology,Information Technology Services,250,YahooFinance,2026-08-18T15:49:45.956770+00:00
+WIPRO.NSE,WIPRO LTD,NSI,India,INR,Technology,Information Technology Services,250,YahooFinance,2026-08-18T15:49:50.338538+00:00
+TECHM.NSE,TECH MAHINDRA LIMITED,NSI,India,INR,Technology,Information Technology Services,250,YahooFinance,2026-08-18T15:50:04.798418+00:00
+PERSISTENT.NSE,PERSISTENT SYSTEMS LTD,NSI,India,INR,Technology,Information Technology Services,250,YahooFinance,2026-08-18T15:50:08.968365+00:00
+COFORGE.NSE,COFORGE LIMITED,NSI,India,INR,Technology,Information Technology Services,250,YahooFinance,2026-08-18T15:50:13.373066+00:00
+MPHASIS.NSE,MPHASIS LIMITED,NSI,India,INR,Technology,Information Technology Services,250,YahooFinance,2026-08-18T15:50:17.677361+00:00
+LTTS.NSE,L&T TECHNOLOGY SER. LTD.,NSI,India,INR,Technology,Information Technology Services,250,YahooFinance,2026-08-18T15:50:21.571678+00:00
+TATAELXSI.NSE,TATA ELXSI LIMITED,NSI,India,INR,Technology,Software - Application,250,YahooFinance,2026-08-18T15:50:25.422777+00:00
+KPITTECH.NSE,KPIT TECHNOLOGIES LIMITED,NSI,India,INR,Technology,Software - Infrastructure,250,YahooFinance,2026-08-18T15:50:29.416185+00:00
+OFSS.NSE,ORACLE FIN SERV SOFT LTD.,NSI,India,INR,Technology,Software - Infrastructure,250,YahooFinance,2026-08-18T15:50:33.498637+00:00
+CYIENT.NSE,CYIENT LIMITED,NSI,India,INR,Industrials,Conglomerates,250,YahooFinance,2026-08-18T15:50:37.315204+00:00
+ZENSARTECH.NSE,ZENSAR TECHNOLOGIES  LTD,NSI,India,INR,Technology,Information Technology Services,250,YahooFinance,2026-08-18T15:50:41.815750+00:00
+BSOFT.NSE,BIRLASOFT LIMITED,NSI,India,INR,Technology,Information Technology Services,250,YahooFinance,2026-08-18T15:50:46.042467+00:00
+SONATSOFTW.NSE,SONATA SOFTWARE LTD,NSI,India,INR,Technology,Information Technology Services,250,YahooFinance,2026-08-18T15:50:50.352100+00:00
+HAPPSTMNDS.NSE,HAPPIEST MINDS TECHNO LTD,NSI,India,INR,Technology,Information Technology Services,250,YahooFinance,2026-08-18T15:50:54.644297+00:00
+INTELLECT.NSE,INTELLECT DESIGN ARENA,NSI,India,INR,Technology,Software - Application,250,YahooFinance,2026-08-18T15:50:59.060086+00:00
+MASTEK.NSE,MASTEK LTD,NSI,India,INR,Technology,Information Technology Services,250,YahooFinance,2026-08-18T15:51:03.324718+00:00
+ROUTE.NSE,ROUTE MOBILE LIMITED,NSI,India,INR,Communication Services,Telecom Services,250,YahooFinance,2026-08-18T15:51:07.800996+00:00
+TANLA.NSE,TANLA PLATFORMS LIMITED,NSI,India,INR,Technology,Software - Application,250,YahooFinance,2026-08-18T15:51:11.763869+00:00
+NAUKRI.NSE,INFO EDGE (I) LTD,NSI,India,INR,Communication Services,Internet Content & Information,250,YahooFinance,2026-08-18T15:51:15.777151+00:00
+AFFLE.NSE,AFFLE 3I LIMITED,NSI,India,INR,Communication Services,Advertising Agencies,250,YahooFinance,2026-08-18T15:51:20.054128+00:00
+LATENTVIEW.NSE,LATENT VIEW ANALYTICS LTD,NSI,India,INR,Industrials,Consulting Services,250,YahooFinance,2026-08-18T15:51:24.499294+00:00
+HINDUNILVR.NSE,HINDUSTAN UNILEVER LTD.,NSI,India,INR,Consumer Defensive,Household & Personal Products,250,YahooFinance,2026-08-18T15:51:28.603412+00:00
+ITC.NSE,ITC LTD,NSI,India,INR,Consumer Defensive,Tobacco,250,YahooFinance,2026-08-18T15:51:32.888374+00:00
+BRITANNIA.NSE,BRITANNIA INDUSTRIES LTD,NSI,India,INR,Consumer Defensive,Packaged Foods,250,YahooFinance,2026-08-18T15:51:41.277338+00:00
+TATACONSUM.NSE,TATA CONSUMER PRODUCT LTD,NSI,India,INR,Consumer Defensive,Packaged Foods,250,YahooFinance,2026-08-18T15:51:45.489836+00:00
+GODREJCP.NSE,GODREJ CONSUMER PRODUCTS,NSI,India,INR,Consumer Defensive,Household & Personal Products,250,YahooFinance,2026-08-18T15:51:49.594505+00:00
+DABUR.NSE,DABUR INDIA LTD,NSI,India,INR,Consumer Defensive,Household & Personal Products,250,YahooFinance,2026-08-18T15:51:53.536696+00:00
+MARICO.NSE,MARICO LIMITED,NSI,India,INR,Consumer Defensive,Household & Personal Products,250,YahooFinance,2026-08-18T15:51:57.945112+00:00
+COLPAL.NSE,COLGATE PALMOLIVE LTD.,NSI,India,INR,Consumer Defensive,Household & Personal Products,250,YahooFinance,2026-08-18T15:52:02.178133+00:00
+VBL.NSE,VARUN BEVERAGES LIMITED,NSI,India,INR,Consumer Defensive,Beverages - Non-Alcoholic,250,YahooFinance,2026-08-18T15:52:07.054308+00:00
+PGHH.NSE,P&G HYGIENE & HEALTH CARE,NSI,India,INR,Consumer Defensive,Household & Personal Products,250,YahooFinance,2026-08-18T15:52:11.751385+00:00
+EMAMILTD.NSE,EMAMI LIMITED,NSI,India,INR,Consumer Defensive,Household & Personal Products,250,YahooFinance,2026-08-18T15:52:15.716514+00:00
+JYOTHYLAB.NSE,JYOTHY LABS LIMITED,NSI,India,INR,Consumer Defensive,Household & Personal Products,250,YahooFinance,2026-08-18T15:52:19.924593+00:00
+RADICO.NSE,RADICO KHAITAN LTD,NSI,India,INR,Consumer Defensive,Beverages - Wineries & Distilleries,250,YahooFinance,2026-08-18T15:52:24.257002+00:00
+UBL.NSE,UNITED BREWERIES LTD,NSI,India,INR,Consumer Defensive,Beverages - Brewers,250,YahooFinance,2026-08-18T15:52:28.160536+00:00
+BIKAJI.NSE,BIKAJI FOODS INTERN LTD,NSI,India,INR,Consumer Defensive,Packaged Foods,250,YahooFinance,2026-08-18T15:52:39.986400+00:00
+AWL.NSE,AWL AGRI BUSINESS LIMITED,NSI,India,INR,Consumer Defensive,Packaged Foods,250,YahooFinance,2026-08-18T15:52:44.285672+00:00
+PATANJALI.NSE,PATANJALI FOODS LIMITED,NSI,India,INR,Consumer Defensive,Packaged Foods,250,YahooFinance,2026-08-18T15:52:48.326785+00:00
+BALRAMCHIN.NSE,BALRAMPUR CHINI MILLS LTD,NSI,India,INR,Consumer Defensive,Confectioners,250,YahooFinance,2026-08-18T15:52:52.558935+00:00
+MARUTI.NSE,MARUTI SUZUKI INDIA LTD.,NSI,India,INR,Consumer Cyclical,Auto Manufacturers,250,YahooFinance,2026-08-18T15:52:57.311805+00:00
+M&M.NSE,MAHINDRA & MAHINDRA LTD,NSI,India,INR,Consumer Cyclical,Auto Manufacturers,250,YahooFinance,2026-08-18T15:53:11.105778+00:00
+BAJAJ-AUTO.NSE,BAJAJ AUTO LIMITED,NSI,India,INR,Consumer Cyclical,Auto Manufacturers,250,YahooFinance,2026-08-18T15:53:15.614213+00:00
+EICHERMOT.NSE,EICHER MOTORS LTD,NSI,India,INR,Consumer Cyclical,Auto Manufacturers,250,YahooFinance,2026-08-18T15:53:19.572117+00:00
+HEROMOTOCO.NSE,HERO MOTOCORP LIMITED,NSI,India,INR,Consumer Cyclical,Auto Manufacturers,250,YahooFinance,2026-08-18T15:53:23.552423+00:00
+TVSMOTOR.NSE,TVS MOTOR COMPANY  LTD,NSI,India,INR,Consumer Cyclical,Auto Manufacturers,250,YahooFinance,2026-08-18T15:53:27.620526+00:00
+TITAN.NSE,TITAN COMPANY LIMITED,NSI,India,INR,Consumer Cyclical,Luxury Goods,250,YahooFinance,2026-08-18T15:53:31.561058+00:00
+TRENT.NSE,TRENT LTD,NSI,India,INR,Consumer Cyclical,Apparel Retail,250,YahooFinance,2026-08-18T15:53:35.571261+00:00
+DMART.NSE,AVENUE SUPERMARTS LIMITED,NSI,India,INR,Consumer Defensive,Discount Stores,250,YahooFinance,2026-08-18T15:53:39.307193+00:00
+PAGEIND.NSE,PAGE INDUSTRIES LTD,NSI,India,INR,Consumer Cyclical,Apparel Manufacturing,249,YahooFinance,2026-08-18T15:53:50.991694+00:00
+BATAINDIA.NSE,BATA INDIA LTD,NSI,India,INR,Consumer Cyclical,Footwear & Accessories,250,YahooFinance,2026-08-18T15:54:05.328230+00:00
+RELAXO.NSE,RELAXO FOOT LTD.,NSI,India,INR,Consumer Cyclical,Footwear & Accessories,250,YahooFinance,2026-08-18T15:54:09.562118+00:00
+JUBLFOOD.NSE,JUBILANT FOODWORKS LTD,NSI,India,INR,Consumer Cyclical,Restaurants,250,YahooFinance,2026-08-18T15:54:13.582715+00:00
+DEVYANI.NSE,DEVYANI INTERNATIONAL LTD,NSI,India,INR,Consumer Cyclical,Restaurants,250,YahooFinance,2026-08-18T15:54:18.214476+00:00
+WESTLIFE.NSE,WESTLIFE FOODWORLD LTD,NSI,India,INR,Consumer Cyclical,Restaurants,250,YahooFinance,2026-08-18T15:54:22.596628+00:00
+KALYANKJIL.NSE,KALYAN JEWELLERS IND LTD,NSI,India,INR,Consumer Cyclical,Luxury Goods,250,YahooFinance,2026-08-18T15:54:26.501911+00:00
+VOLTAS.NSE,VOLTAS LTD,NSI,India,INR,Consumer Cyclical,"Furnishings, Fixtures & Appliances",250,YahooFinance,2026-08-18T15:54:30.356965+00:00
+HAVELLS.NSE,HAVELLS INDIA LIMITED,NSI,India,INR,Industrials,Electrical Equipment & Parts,250,YahooFinance,2026-08-18T15:54:34.584917+00:00
+CROMPTON.NSE,CROMPT GREA CON ELEC LTD,NSI,India,INR,Consumer Cyclical,"Furnishings, Fixtures & Appliances",250,YahooFinance,2026-08-18T15:54:38.530164+00:00
+SUNPHARMA.NSE,SUN PHARMACEUTICAL IND L,NSI,India,INR,Healthcare,Drug Manufacturers - Specialty & Generic,250,YahooFinance,2026-08-18T15:54:42.456229+00:00
+CIPLA.NSE,CIPLA LTD,NSI,India,INR,Healthcare,Drug Manufacturers - Specialty & Generic,250,YahooFinance,2026-08-18T15:54:46.565373+00:00
+DRREDDY.NSE,DR. REDDY S LABORATORIES,NSI,India,INR,Healthcare,Drug Manufacturers - Specialty & Generic,250,YahooFinance,2026-08-18T15:54:51.079700+00:00
+DIVISLAB.NSE,DIVI S LABORATORIES LTD,NSI,India,INR,Healthcare,Drug Manufacturers - Specialty & Generic,250,YahooFinance,2026-08-18T15:54:55.461758+00:00
+APOLLOHOSP.NSE,APOLLO HOSPITALS ENTER. L,NSI,India,INR,Healthcare,Medical Care Facilities,250,YahooFinance,2026-08-18T15:55:00.248591+00:00
+MAXHEALTH.NSE,MAX HEALTHCARE INS LTD,NSI,India,INR,Healthcare,Medical Care Facilities,250,YahooFinance,2026-08-18T15:55:04.127731+00:00
+FORTIS.NSE,FORTIS HEALTHCARE LTD,NSI,India,INR,Healthcare,Medical Care Facilities,250,YahooFinance,2026-08-18T15:55:08.719822+00:00
+MEDANTA.NSE,GLOBAL HEALTH LIMITED,NSI,India,INR,Healthcare,Medical Care Facilities,250,YahooFinance,2026-08-18T15:55:12.733404+00:00
+TORNTPHARM.NSE,TORRENT PHARMACEUTICALS L,NSI,India,INR,Healthcare,Drug Manufacturers - Specialty & Generic,250,YahooFinance,2026-08-18T15:55:16.765959+00:00
+LUPIN.NSE,LUPIN LIMITED,NSI,India,INR,Healthcare,Drug Manufacturers - Specialty & Generic,250,YahooFinance,2026-08-18T15:55:20.959878+00:00
+ZYDUSLIFE.NSE,ZYDUS LIFESCIENCES LTD,NSI,India,INR,Healthcare,Drug Manufacturers - Specialty & Generic,250,YahooFinance,2026-08-18T15:55:25.225684+00:00
+AUROPHARMA.NSE,AUROBINDO PHARMA LTD,NSI,India,INR,Healthcare,Drug Manufacturers - Specialty & Generic,250,YahooFinance,2026-08-18T15:55:29.094495+00:00
+ALKEM.NSE,ALKEM LABORATORIES LTD.,NSI,India,INR,Healthcare,Drug Manufacturers - Specialty & Generic,250,YahooFinance,2026-08-18T15:55:33.854966+00:00
+IPCALAB.NSE,IPCA LABORATORIES LTD,NSI,India,INR,Healthcare,Drug Manufacturers - Specialty & Generic,250,YahooFinance,2026-08-18T15:55:38.421598+00:00
+BIOCON.NSE,BIOCON LIMITED.,NSI,India,INR,Healthcare,Biotechnology,250,YahooFinance,2026-08-18T15:55:42.502124+00:00
+LALPATHLAB.NSE,DR. LAL PATH LABS LTD.,NSI,India,INR,Healthcare,Diagnostics & Research,250,YahooFinance,2026-08-18T15:55:46.805624+00:00
+METROPOLIS.NSE,METROPOLIS HEALTHCARE LTD,NSI,India,INR,Healthcare,Diagnostics & Research,250,YahooFinance,2026-08-18T15:55:51.120232+00:00
+SYNGENE.NSE,SYNGENE INTERNATIONAL LTD,NSI,India,INR,Healthcare,Diagnostics & Research,250,YahooFinance,2026-08-18T15:55:55.724005+00:00
+LT.NSE,LARSEN & TOUBRO LTD.,NSI,India,INR,Industrials,Engineering & Construction,250,YahooFinance,2026-08-18T15:56:00.124742+00:00
+SIEMENS.NSE,SIEMENS LTD,NSI,India,INR,Industrials,Specialty Industrial Machinery,250,YahooFinance,2026-08-18T15:56:04.395225+00:00
+ABB.NSE,ABB INDIA LIMITED,NSI,India,INR,Industrials,Specialty Industrial Machinery,250,YahooFinance,2026-08-18T15:56:08.383459+00:00
+BEL.NSE,BHARAT ELECTRONICS LTD,NSI,India,INR,Industrials,Aerospace & Defense,250,YahooFinance,2026-08-18T15:56:13.235125+00:00
+HAL.NSE,HINDUSTAN AERONAUTICS LTD,NSI,India,INR,Industrials,Aerospace & Defense,250,YahooFinance,2026-08-18T15:56:17.587262+00:00
+BHEL.NSE,BHEL,NSI,India,INR,Industrials,Specialty Industrial Machinery,250,YahooFinance,2026-08-18T15:56:22.920914+00:00
+CGPOWER.NSE,CG POWER AND IND SOL LTD,NSI,India,INR,Industrials,Electrical Equipment & Parts,250,YahooFinance,2026-08-18T15:56:27.008879+00:00
+POLYCAB.NSE,POLYCAB INDIA LIMITED,NSI,India,INR,Industrials,Electrical Equipment & Parts,250,YahooFinance,2026-08-18T15:56:31.519616+00:00
+KEI.NSE,KEI INDUSTRIES LTD.,NSI,India,INR,Industrials,Electrical Equipment & Parts,250,YahooFinance,2026-08-18T15:56:35.858580+00:00
+ASTRAL.NSE,ASTRAL LIMITED,NSI,India,INR,Industrials,Building Products & Equipment,250,YahooFinance,2026-08-18T15:56:39.982561+00:00
+SUPREMEIND.NSE,SUPREME INDUSTRIES LTD,NSI,India,INR,Industrials,Building Products & Equipment,250,YahooFinance,2026-08-18T15:56:44.160347+00:00
+CONCOR.NSE,CONTAINER CORP OF IND LTD,NSI,India,INR,Industrials,Railroads,250,YahooFinance,2026-08-18T15:56:48.365523+00:00
+INDIGO.NSE,INTERGLOBE AVIATION LTD,NSI,India,INR,Industrials,Airlines,250,YahooFinance,2026-08-18T15:56:52.398585+00:00
+IRCTC.NSE,INDIAN RAIL TOUR CORP LTD,NSI,India,INR,Consumer Cyclical,Travel Services,250,YahooFinance,2026-08-18T15:56:56.511446+00:00
+RVNL.NSE,RAIL VIKAS NIGAM LIMITED,NSI,India,INR,Industrials,Engineering & Construction,250,YahooFinance,2026-08-18T15:57:00.733315+00:00
+IRFC.NSE,INDIAN RAILWAY FIN CORP L,NSI,India,INR,Financial Services,Credit Services,250,YahooFinance,2026-08-18T15:57:05.014596+00:00
+ADANIPORTS.NSE,ADANI PORT & SEZ LTD,NSI,India,INR,Industrials,Marine Shipping,250,YahooFinance,2026-08-18T15:57:09.606640+00:00
+JSWINFRA.NSE,JSW INFRASTRUCTURE LTD,NSI,India,INR,Industrials,Marine Shipping,250,YahooFinance,2026-08-18T15:57:13.841285+00:00
+BHARATFORG.NSE,BHARAT FORGE LTD,NSI,India,INR,Consumer Cyclical,Auto Parts,250,YahooFinance,2026-08-18T15:57:17.854274+00:00
+TATASTEEL.NSE,TATA STEEL LIMITED,NSI,India,INR,Basic Materials,Steel,250,YahooFinance,2026-08-18T15:57:29.481853+00:00
+JSWSTEEL.NSE,JSW STEEL LIMITED,NSI,India,INR,Basic Materials,Steel,250,YahooFinance,2026-08-18T15:57:33.464044+00:00
+HINDALCO.NSE,HINDALCO  INDUSTRIES  LTD,NSI,India,INR,Basic Materials,Aluminum,250,YahooFinance,2026-08-18T15:57:37.651467+00:00
+VEDL.NSE,VEDANTA LIMITED,NSI,India,INR,Basic Materials,Other Industrial Metals & Mining,250,YahooFinance,2026-08-18T15:57:41.983172+00:00
+COALINDIA.NSE,COAL INDIA LTD,NSI,India,INR,Energy,Thermal Coal,250,YahooFinance,2026-08-18T15:57:46.416438+00:00
+NMDC.NSE,NMDC LTD.,NSI,India,INR,Basic Materials,Steel,250,YahooFinance,2026-08-18T15:57:50.738699+00:00
+SAIL.NSE,STEEL AUTHORITY OF INDIA,NSI,India,INR,Basic Materials,Steel,250,YahooFinance,2026-08-18T15:57:54.822646+00:00
+JINDALSTEL.NSE,JINDAL STEEL LIMITED,NSI,India,INR,Basic Materials,Steel,250,YahooFinance,2026-08-18T15:57:59.429668+00:00
+NATIONALUM.NSE,NATIONAL ALUMINIUM CO LTD,NSI,India,INR,Basic Materials,Aluminum,250,YahooFinance,2026-08-18T15:58:03.591178+00:00
+ULTRACEMCO.NSE,ULTRATECH CEMENT LIMITED,NSI,India,INR,Basic Materials,Building Materials,250,YahooFinance,2026-08-18T15:58:07.809891+00:00
+AMBUJACEM.NSE,AMBUJA CEMENTS LTD,NSI,India,INR,Basic Materials,Building Materials,250,YahooFinance,2026-08-18T15:58:12.377833+00:00
+ACC.NSE,ACC LIMITED,NSI,India,INR,Basic Materials,Building Materials,250,YahooFinance,2026-08-18T15:58:16.648315+00:00
+SHREECEM.NSE,SHREE CEMENT LIMITED,NSI,India,INR,Basic Materials,Building Materials,250,YahooFinance,2026-08-18T15:58:20.758737+00:00
+GRASIM.NSE,GRASIM INDUSTRIES LTD,NSI,India,INR,Basic Materials,Building Materials,250,YahooFinance,2026-08-18T15:58:24.859046+00:00
+PIDILITIND.NSE,PIDILITE INDUSTRIES LTD,NSI,India,INR,Basic Materials,Specialty Chemicals,250,YahooFinance,2026-08-18T15:58:28.806314+00:00
+SRF.NSE,SRF LTD,NSI,India,INR,Industrials,Conglomerates,250,YahooFinance,2026-08-18T15:58:32.758009+00:00
+DEEPAKNTR.NSE,DEEPAK NITRITE LTD,NSI,India,INR,Basic Materials,Chemicals,250,YahooFinance,2026-08-18T15:58:37.084289+00:00
+TATACHEM.NSE,TATA CHEMICALS LTD,NSI,India,INR,Basic Materials,Chemicals,250,YahooFinance,2026-08-18T15:58:41.557040+00:00
+ONGC.NSE,OIL AND NATURAL GAS CORP.,NSI,India,INR,Energy,Oil & Gas Integrated,250,YahooFinance,2026-08-18T15:58:45.864135+00:00
+IOC.NSE,INDIAN OIL CORP LTD,NSI,India,INR,Energy,Oil & Gas Refining & Marketing,250,YahooFinance,2026-08-18T15:58:50.149458+00:00
+BPCL.NSE,BHARAT PETROLEUM CORP  LT,NSI,India,INR,Energy,Oil & Gas Refining & Marketing,250,YahooFinance,2026-08-18T15:58:54.506731+00:00
+HINDPETRO.NSE,HINDUSTAN PETROLEUM CORP,NSI,India,INR,Energy,Oil & Gas Refining & Marketing,250,YahooFinance,2026-08-18T15:58:58.482848+00:00
+GAIL.NSE,GAIL (INDIA) LTD,NSI,India,INR,Utilities,Utilities - Regulated Gas,250,YahooFinance,2026-08-18T15:59:02.696263+00:00
+PETRONET.NSE,PETRONET LNG LIMITED,NSI,India,INR,Energy,Oil & Gas Refining & Marketing,250,YahooFinance,2026-08-18T15:59:06.823347+00:00
+OIL.NSE,OIL INDIA LTD,NSI,India,INR,Energy,Oil & Gas Integrated,250,YahooFinance,2026-08-18T15:59:11.022871+00:00
+IGL.NSE,INDRAPRASTHA GAS LTD,NSI,India,INR,Utilities,Utilities - Regulated Gas,250,YahooFinance,2026-08-18T15:59:15.406610+00:00
+MGL.NSE,MAHANAGAR GAS LTD.,NSI,India,INR,Utilities,Utilities - Regulated Gas,250,YahooFinance,2026-08-18T15:59:19.823631+00:00
+MRPL.NSE,MRPL,NSI,India,INR,Energy,Oil & Gas Refining & Marketing,250,YahooFinance,2026-08-18T15:59:27.757592+00:00
+NTPC.NSE,NTPC LTD,NSI,India,INR,Utilities,Utilities - Regulated Electric,250,YahooFinance,2026-08-18T15:59:32.055465+00:00
+POWERGRID.NSE,POWER GRID CORP. LTD.,NSI,India,INR,Utilities,Utilities - Regulated Electric,250,YahooFinance,2026-08-18T15:59:36.472154+00:00
+TATAPOWER.NSE,TATA POWER CO LTD,NSI,India,INR,Utilities,Utilities - Independent Power Producers,250,YahooFinance,2026-08-18T15:59:40.899427+00:00
+ADANIGREEN.NSE,ADANI GREEN ENERGY LTD,NSI,India,INR,Utilities,Utilities - Renewable,250,YahooFinance,2026-08-18T15:59:45.085813+00:00
+ADANIPOWER.NSE,ADANI POWER LTD,NSI,India,INR,Utilities,Utilities - Independent Power Producers,250,YahooFinance,2026-08-18T15:59:49.495512+00:00
+JSWENERGY.NSE,JSW ENERGY LIMITED,NSI,India,INR,Utilities,Utilities - Independent Power Producers,250,YahooFinance,2026-08-18T15:59:53.824382+00:00
+TORNTPOWER.NSE,TORRENT POWER LTD,NSI,India,INR,Utilities,Utilities - Independent Power Producers,250,YahooFinance,2026-08-18T15:59:57.806803+00:00
+NHPC.NSE,NHPC LTD,NSI,India,INR,Utilities,Utilities - Renewable,250,YahooFinance,2026-08-18T16:00:02.531353+00:00
+SJVN.NSE,SJVN LTD,NSI,India,INR,Utilities,Utilities - Renewable,250,YahooFinance,2026-08-18T16:00:06.994603+00:00
+SUZLON.NSE,SUZLON ENERGY LIMITED,NSI,India,INR,Industrials,Specialty Industrial Machinery,250,YahooFinance,2026-08-18T16:00:11.494715+00:00
+CESC.NSE,CESC LTD,NSI,India,INR,Utilities,Utilities - Regulated Electric,250,YahooFinance,2026-08-18T16:00:15.597648+00:00
+NLCINDIA.NSE,NLC INDIA LIMITED,NSI,India,INR,Utilities,Utilities - Regulated Electric,250,YahooFinance,2026-08-18T16:00:20.292215+00:00
+BHARTIARTL.NSE,BHARTI AIRTEL LIMITED,NSI,India,INR,Communication Services,Telecom Services,250,YahooFinance,2026-08-18T16:00:24.497612+00:00
+IDEA.NSE,VODAFONE IDEA LIMITED,NSI,India,INR,Communication Services,Telecom Services,250,YahooFinance,2026-08-18T16:00:28.601194+00:00
+INDUSTOWER.NSE,INDUS TOWERS LIMITED,NSI,India,INR,Communication Services,Telecom Services,250,YahooFinance,2026-08-18T16:00:32.623195+00:00
+TATACOMM.NSE,TATA COMMUNICATIONS LTD,NSI,India,INR,Communication Services,Telecom Services,250,YahooFinance,2026-08-18T16:00:36.810263+00:00
+ZEEL.NSE,ZEE ENTERTAINMENT ENT LTD,NSI,India,INR,Communication Services,Broadcasting,250,YahooFinance,2026-08-18T16:00:40.958825+00:00
+SUNTV.NSE,SUN TV NETWORK LIMITED,NSI,India,INR,Communication Services,Broadcasting,250,YahooFinance,2026-08-18T16:00:45.295137+00:00
+DLF.NSE,DLF LIMITED,NSI,India,INR,Real Estate,Real Estate - Development,250,YahooFinance,2026-08-18T16:00:49.709806+00:00
+GODREJPROP.NSE,GODREJ PROPERTIES LTD,NSI,India,INR,Real Estate,Real Estate - Development,250,YahooFinance,2026-08-18T16:00:53.692088+00:00
+OBEROIRLTY.NSE,OBEROI REALTY LIMITED,NSI,India,INR,Real Estate,Real Estate - Development,250,YahooFinance,2026-08-18T16:01:07.906462+00:00
+PHOENIXLTD.NSE,THE PHOENIX MILLS LTD,NSI,India,INR,Real Estate,Real Estate - Diversified,249,YahooFinance,2026-08-18T16:01:12.018604+00:00
+PRESTIGE.NSE,PRESTIGE ESTATE LTD,NSI,India,INR,Real Estate,Real Estate - Diversified,250,YahooFinance,2026-08-18T16:01:16.405885+00:00
+BRIGADE.NSE,BRIGADE ENTER. LTD,NSI,India,INR,Real Estate,Real Estate - Development,250,YahooFinance,2026-08-18T16:01:20.851999+00:00
+SOBHA.NSE,SOBHA LIMITED,NSI,India,INR,Real Estate,Real Estate - Development,250,YahooFinance,2026-08-18T16:01:24.865764+00:00

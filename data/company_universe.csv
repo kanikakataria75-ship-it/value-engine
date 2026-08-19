@@ -1,0 +1,403 @@
+ticker,company_name,exchange,country,currency,sector,industry,priority
+AAPL,Apple Inc.,NASDAQ,USA,USD,Information Technology,Consumer Electronics,Tier 1
+MSFT,Microsoft Corporation,NASDAQ,USA,USD,Information Technology,Systems Software,Tier 1
+NVDA,NVIDIA Corporation,NASDAQ,USA,USD,Information Technology,Semiconductors,Tier 1
+AVGO,Broadcom Inc.,NASDAQ,USA,USD,Information Technology,Semiconductors,Tier 1
+ORCL,Oracle Corporation,NYSE,USA,USD,Information Technology,Application Software,Tier 1
+CRM,"Salesforce, Inc.",NYSE,USA,USD,Information Technology,Application Software,Tier 1
+CSCO,"Cisco Systems, Inc.",NASDAQ,USA,USD,Information Technology,Communications Equipment,Tier 1
+ACN,Accenture plc,NYSE,USA,USD,Information Technology,IT Consulting & Other Services,Tier 1
+ADBE,Adobe Inc.,NASDAQ,USA,USD,Information Technology,Application Software,Tier 1
+TXN,Texas Instruments Incorporated,NASDAQ,USA,USD,Information Technology,Semiconductors,Tier 1
+QCOM,QUALCOMM Incorporated,NASDAQ,USA,USD,Information Technology,Semiconductors,Tier 1
+AMD,"Advanced Micro Devices, Inc.",NASDAQ,USA,USD,Information Technology,Semiconductors,Tier 1
+INTC,Intel Corporation,NASDAQ,USA,USD,Information Technology,Semiconductors,Tier 1
+IBM,International Business Machines Corp,NYSE,USA,USD,Information Technology,IT Consulting & Other Services,Tier 1
+AMAT,"Applied Materials, Inc.",NASDAQ,USA,USD,Information Technology,Semiconductor Equipment,Tier 1
+NOW,"ServiceNow, Inc.",NYSE,USA,USD,Information Technology,Application Software,Tier 1
+INTU,Intuit Inc.,NASDAQ,USA,USD,Information Technology,Application Software,Tier 1
+LRCX,Lam Research Corporation,NASDAQ,USA,USD,Information Technology,Semiconductor Equipment,Tier 1
+ADI,"Analog Devices, Inc.",NASDAQ,USA,USD,Information Technology,Semiconductors,Tier 1
+MU,"Micron Technology, Inc.",NASDAQ,USA,USD,Information Technology,Semiconductors,Tier 1
+KLAC,KLA Corporation,NASDAQ,USA,USD,Information Technology,Semiconductor Equipment,Tier 1
+SNPS,"Synopsys, Inc.",NASDAQ,USA,USD,Information Technology,Application Software,Tier 1
+CDNS,"Cadence Design Systems, Inc.",NASDAQ,USA,USD,Information Technology,Application Software,Tier 1
+PANW,"Palo Alto Networks, Inc.",NASDAQ,USA,USD,Information Technology,Systems Software,Tier 1
+CRWD,"CrowdStrike Holdings, Inc.",NASDAQ,USA,USD,Information Technology,Systems Software,Tier 2
+FTNT,"Fortinet, Inc.",NASDAQ,USA,USD,Information Technology,Systems Software,Tier 2
+WDAY,"Workday, Inc.",NASDAQ,USA,USD,Information Technology,Application Software,Tier 2
+TEAM,Atlassian Corporation,NASDAQ,USA,USD,Information Technology,Application Software,Tier 2
+DDOG,"Datadog, Inc.",NASDAQ,USA,USD,Information Technology,Application Software,Tier 2
+ZS,"Zscaler, Inc.",NASDAQ,USA,USD,Information Technology,Systems Software,Tier 2
+NET,"Cloudflare, Inc.",NYSE,USA,USD,Information Technology,Systems Software,Tier 2
+ANET,"Arista Networks, Inc.",NYSE,USA,USD,Information Technology,Communications Equipment,Tier 1
+MCHP,Microchip Technology Incorporated,NASDAQ,USA,USD,Information Technology,Semiconductors,Tier 2
+ON,ON Semiconductor Corporation,NASDAQ,USA,USD,Information Technology,Semiconductors,Tier 2
+APH,Amphenol Corporation,NYSE,USA,USD,Information Technology,Electronic Components,Tier 1
+JPM,JPMorgan Chase & Co.,NYSE,USA,USD,Financials,Diversified Banks,Tier 1
+BAC,Bank of America Corporation,NYSE,USA,USD,Financials,Diversified Banks,Tier 1
+WFC,Wells Fargo & Company,NYSE,USA,USD,Financials,Diversified Banks,Tier 1
+C,Citigroup Inc.,NYSE,USA,USD,Financials,Diversified Banks,Tier 1
+GS,"The Goldman Sachs Group, Inc.",NYSE,USA,USD,Financials,Investment Banking & Brokerage,Tier 1
+MS,Morgan Stanley,NYSE,USA,USD,Financials,Investment Banking & Brokerage,Tier 1
+SCHW,The Charles Schwab Corporation,NYSE,USA,USD,Financials,Investment Banking & Brokerage,Tier 1
+BLK,"BlackRock, Inc.",NYSE,USA,USD,Financials,Asset Management & Custody Banks,Tier 1
+AXP,American Express Company,NYSE,USA,USD,Financials,Consumer Finance,Tier 1
+V,Visa Inc.,NYSE,USA,USD,Financials,Transaction & Payment Processing Services,Tier 1
+MA,Mastercard Incorporated,NYSE,USA,USD,Financials,Transaction & Payment Processing Services,Tier 1
+PYPL,"PayPal Holdings, Inc.",NASDAQ,USA,USD,Financials,Transaction & Payment Processing Services,Tier 1
+SPGI,S&P Global Inc.,NYSE,USA,USD,Financials,Financial Exchanges & Data,Tier 1
+MCO,Moody's Corporation,NYSE,USA,USD,Financials,Financial Exchanges & Data,Tier 1
+CME,CME Group Inc.,NASDAQ,USA,USD,Financials,Financial Exchanges & Data,Tier 1
+ICE,"Intercontinental Exchange, Inc.",NYSE,USA,USD,Financials,Financial Exchanges & Data,Tier 1
+CB,Chubb Limited,NYSE,USA,USD,Financials,Property & Casualty Insurance,Tier 1
+PGR,The Progressive Corporation,NYSE,USA,USD,Financials,Property & Casualty Insurance,Tier 1
+TRV,"The Travelers Companies, Inc.",NYSE,USA,USD,Financials,Property & Casualty Insurance,Tier 1
+ALL,The Allstate Corporation,NYSE,USA,USD,Financials,Property & Casualty Insurance,Tier 1
+AIG,"American International Group, Inc.",NYSE,USA,USD,Financials,Multi-line Insurance,Tier 2
+MET,"MetLife, Inc.",NYSE,USA,USD,Financials,Life & Health Insurance,Tier 1
+PRU,"Prudential Financial, Inc.",NYSE,USA,USD,Financials,Life & Health Insurance,Tier 1
+AFL,AFLAC Incorporated,NYSE,USA,USD,Financials,Life & Health Insurance,Tier 1
+MMC,"Marsh & McLennan Companies, Inc.",NYSE,USA,USD,Financials,Insurance Brokers,Tier 1
+AON,Aon plc,NYSE,USA,USD,Financials,Insurance Brokers,Tier 1
+AJG,Arthur J. Gallagher & Co.,NYSE,USA,USD,Financials,Insurance Brokers,Tier 2
+PNC,"The PNC Financial Services Group, Inc.",NYSE,USA,USD,Financials,Regional Banks,Tier 1
+USB,U.S. Bancorp,NYSE,USA,USD,Financials,Regional Banks,Tier 1
+TFC,Truist Financial Corporation,NYSE,USA,USD,Financials,Regional Banks,Tier 2
+LLY,Eli Lilly and Company,NYSE,USA,USD,Health Care,Pharmaceuticals,Tier 1
+UNH,UnitedHealth Group Incorporated,NYSE,USA,USD,Health Care,Managed Health Care,Tier 1
+JNJ,Johnson & Johnson,NYSE,USA,USD,Health Care,Pharmaceuticals,Tier 1
+ABBV,AbbVie Inc.,NYSE,USA,USD,Health Care,Biotechnology,Tier 1
+MRK,"Merck & Co., Inc.",NYSE,USA,USD,Health Care,Pharmaceuticals,Tier 1
+TMO,Thermo Fisher Scientific Inc.,NYSE,USA,USD,Health Care,Life Sciences Tools & Services,Tier 1
+ABT,Abbott Laboratories,NYSE,USA,USD,Health Care,Health Care Equipment,Tier 1
+DHR,Danaher Corporation,NYSE,USA,USD,Health Care,Life Sciences Tools & Services,Tier 1
+PFE,Pfizer Inc.,NYSE,USA,USD,Health Care,Pharmaceuticals,Tier 1
+AMGN,Amgen Inc.,NASDAQ,USA,USD,Health Care,Biotechnology,Tier 1
+BMY,Bristol-Myers Squibb Company,NYSE,USA,USD,Health Care,Pharmaceuticals,Tier 1
+ISRG,"Intuitive Surgical, Inc.",NASDAQ,USA,USD,Health Care,Health Care Equipment,Tier 1
+MDT,Medtronic plc,NYSE,USA,USD,Health Care,Health Care Equipment,Tier 1
+SYK,Stryker Corporation,NYSE,USA,USD,Health Care,Health Care Equipment,Tier 1
+BSX,Boston Scientific Corporation,NYSE,USA,USD,Health Care,Health Care Equipment,Tier 1
+GILD,"Gilead Sciences, Inc.",NASDAQ,USA,USD,Health Care,Biotechnology,Tier 1
+VRTX,Vertex Pharmaceuticals Incorporated,NASDAQ,USA,USD,Health Care,Biotechnology,Tier 1
+REGN,"Regeneron Pharmaceuticals, Inc.",NASDAQ,USA,USD,Health Care,Biotechnology,Tier 1
+ZTS,Zoetis Inc.,NYSE,USA,USD,Health Care,Pharmaceuticals,Tier 1
+BDX,"Becton, Dickinson and Company",NYSE,USA,USD,Health Care,Health Care Equipment,Tier 2
+EW,Edwards Lifesciences Corporation,NYSE,USA,USD,Health Care,Health Care Equipment,Tier 2
+ELV,"Elevance Health, Inc.",NYSE,USA,USD,Health Care,Managed Health Care,Tier 1
+CVS,CVS Health Corporation,NYSE,USA,USD,Health Care,Health Care Services,Tier 1
+CI,The Cigna Group,NYSE,USA,USD,Health Care,Managed Health Care,Tier 1
+MCK,McKesson Corporation,NYSE,USA,USD,Health Care,Health Care Distributors,Tier 1
+AMZN,"Amazon.com, Inc.",NASDAQ,USA,USD,Consumer Discretionary,Broadline Retail,Tier 1
+TSLA,"Tesla, Inc.",NASDAQ,USA,USD,Consumer Discretionary,Automobile Manufacturers,Tier 1
+HD,"The Home Depot, Inc.",NYSE,USA,USD,Consumer Discretionary,Home Improvement Retail,Tier 1
+MCD,McDonald's Corporation,NYSE,USA,USD,Consumer Discretionary,Restaurants,Tier 1
+NKE,"NIKE, Inc.",NYSE,USA,USD,Consumer Discretionary,Footwear,Tier 1
+LOW,"Lowe's Companies, Inc.",NYSE,USA,USD,Consumer Discretionary,Home Improvement Retail,Tier 1
+SBUX,Starbucks Corporation,NASDAQ,USA,USD,Consumer Discretionary,Restaurants,Tier 1
+TJX,"The TJX Companies, Inc.",NYSE,USA,USD,Consumer Discretionary,Apparel Retail,Tier 1
+BKNG,Booking Holdings Inc.,NASDAQ,USA,USD,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Tier 1
+CMG,"Chipototle Mexican Grill, Inc.",NYSE,USA,USD,Consumer Discretionary,Restaurants,Tier 1
+MAR,"Marriott International, Inc.",NASDAQ,USA,USD,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Tier 1
+HLT,Hilton Worldwide Holdings Inc.,NYSE,USA,USD,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Tier 1
+ORLY,"O'Reilly Automotive, Inc.",NASDAQ,USA,USD,Consumer Discretionary,Automotive Retail,Tier 1
+AZO,"AutoZone, Inc.",NYSE,USA,USD,Consumer Discretionary,Automotive Retail,Tier 1
+ROST,"Ross Stores, Inc.",NASDAQ,USA,USD,Consumer Discretionary,Apparel Retail,Tier 1
+YUM,"Yum! Brands, Inc.",NYSE,USA,USD,Consumer Discretionary,Restaurants,Tier 1
+DRI,"Darden Restaurants, Inc.",NYSE,USA,USD,Consumer Discretionary,Restaurants,Tier 2
+EBAY,eBay Inc.,NASDAQ,USA,USD,Consumer Discretionary,Broadline Retail,Tier 2
+ETSY,"Etsy, Inc.",NASDAQ,USA,USD,Consumer Discretionary,Broadline Retail,Tier 2
+LVS,Las Vegas Sands Corp.,NYSE,USA,USD,Consumer Discretionary,Casinos & Gaming,Tier 2
+MGM,MGM Resorts International,NYSE,USA,USD,Consumer Discretionary,Casinos & Gaming,Tier 2
+F,Ford Motor Company,NYSE,USA,USD,Consumer Discretionary,Automobile Manufacturers,Tier 1
+GM,General Motors Company,NYSE,USA,USD,Consumer Discretionary,Automobile Manufacturers,Tier 1
+ABNB,"Airbnb, Inc.",NASDAQ,USA,USD,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",Tier 1
+UBER,"Uber Technologies, Inc.",NYSE,USA,USD,Consumer Discretionary,Passenger Ground Transportation,Tier 1
+PG,The Procter & Gamble Company,NYSE,USA,USD,Consumer Staples,Household Products,Tier 1
+COST,Costco Wholesale Corporation,NASDAQ,USA,USD,Consumer Staples,Consumer Staples Merchandise Retail,Tier 1
+WMT,Walmart Inc.,NYSE,USA,USD,Consumer Staples,Consumer Staples Merchandise Retail,Tier 1
+KO,The Coca-Cola Company,NYSE,USA,USD,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Tier 1
+PEP,"PepsiCo, Inc.",NASDAQ,USA,USD,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,Tier 1
+PM,Philip Morris International Inc.,NYSE,USA,USD,Consumer Staples,Tobacco,Tier 1
+MO,"Altria Group, Inc.",NYSE,USA,USD,Consumer Staples,Tobacco,Tier 1
+MDLZ,"Mondelez International, Inc.",NASDAQ,USA,USD,Consumer Staples,Packaged Foods & Meats,Tier 1
+CL,Colgate-Palmolive Company,NYSE,USA,USD,Consumer Staples,Household Products,Tier 1
+KMB,Kimberly-Clark Corporation,NYSE,USA,USD,Consumer Staples,Household Products,Tier 1
+GIS,"General Mills, Inc.",NYSE,USA,USD,Consumer Staples,Packaged Foods & Meats,Tier 2
+K,Kellanova,NYSE,USA,USD,Consumer Staples,Packaged Foods & Meats,Tier 2
+KHC,The Kraft Heinz Company,NASDAQ,USA,USD,Consumer Staples,Packaged Foods & Meats,Tier 1
+HSY,The Hershey Company,NYSE,USA,USD,Consumer Staples,Packaged Foods & Meats,Tier 2
+STZ,"Constellation Brands, Inc.",NYSE,USA,USD,Consumer Staples,Distillers & Vintners,Tier 2
+EL,The Estée Lauder Companies Inc.,NYSE,USA,USD,Consumer Staples,Personal Care Products,Tier 2
+ADM,Archer-Daniels-Midland Company,NYSE,USA,USD,Consumer Staples,Agricultural Products & Services,Tier 2
+TGT,Target Corporation,NYSE,USA,USD,Consumer Staples,Consumer Staples Merchandise Retail,Tier 1
+GOOGL,Alphabet Inc. (Class A),NASDAQ,USA,USD,Communication Services,Interactive Media & Services,Tier 1
+GOOG,Alphabet Inc. (Class C),NASDAQ,USA,USD,Communication Services,Interactive Media & Services,Tier 1
+META,"Meta Platforms, Inc.",NASDAQ,USA,USD,Communication Services,Interactive Media & Services,Tier 1
+NFLX,"Netflix, Inc.",NASDAQ,USA,USD,Communication Services,Movies & Entertainment,Tier 1
+DIS,The Walt Disney Company,NYSE,USA,USD,Communication Services,Movies & Entertainment,Tier 1
+CMCSA,Comcast Corporation,NASDAQ,USA,USD,Communication Services,Cable & Satellite,Tier 1
+VZ,Verizon Communications Inc.,NYSE,USA,USD,Communication Services,Integrated Telecommunication Services,Tier 1
+T,AT&T Inc.,NYSE,USA,USD,Communication Services,Integrated Telecommunication Services,Tier 1
+TMUS,"T-Mobile US, Inc.",NASDAQ,USA,USD,Communication Services,Wireless Telecommunication Services,Tier 1
+CHTR,"Charter Communications, Inc.",NASDAQ,USA,USD,Communication Services,Cable & Satellite,Tier 2
+EA,Electronic Arts Inc.,NASDAQ,USA,USD,Communication Services,Interactive Home Entertainment,Tier 2
+TTWO,"Take-Two Interactive Software, Inc.",NASDAQ,USA,USD,Communication Services,Interactive Home Entertainment,Tier 2
+WBD,"Warner Bros. Discovery, Inc.",NASDAQ,USA,USD,Communication Services,Movies & Entertainment,Tier 2
+OMC,Omnicom Group Inc.,NYSE,USA,USD,Communication Services,Advertising,Tier 2
+IPG,"The Interpublic Group of Companies, Inc.",NYSE,USA,USD,Communication Services,Advertising,Tier 2
+SPOT,Spotify Technology S.A.,NYSE,USA,USD,Communication Services,Interactive Media & Services,Tier 1
+CAT,Caterpillar Inc.,NYSE,USA,USD,Industrials,Construction Machinery & Heavy Transportation Equipment,Tier 1
+DE,Deere & Company,NYSE,USA,USD,Industrials,Agricultural & Farm Machinery,Tier 1
+UNP,Union Pacific Corporation,NYSE,USA,USD,Industrials,Rail Transportation,Tier 1
+HON,Honeywell International Inc.,NASDAQ,USA,USD,Industrials,Industrial Conglomerates,Tier 1
+GE,General Electric Company,NYSE,USA,USD,Industrials,Aerospace & Defense,Tier 1
+RTX,RTX Corporation,NYSE,USA,USD,Industrials,Aerospace & Defense,Tier 1
+BA,The Boeing Company,NYSE,USA,USD,Industrials,Aerospace & Defense,Tier 1
+LMT,Lockheed Martin Corporation,NYSE,USA,USD,Industrials,Aerospace & Defense,Tier 1
+NOC,Northrop Grumman Corporation,NYSE,USA,USD,Industrials,Aerospace & Defense,Tier 1
+GD,General Dynamics Corporation,NYSE,USA,USD,Industrials,Aerospace & Defense,Tier 1
+TDG,TransDigm Group Incorporated,NYSE,USA,USD,Industrials,Aerospace & Defense,Tier 1
+ETN,Eaton Corporation plc,NYSE,USA,USD,Industrials,Electrical Components & Equipment,Tier 1
+ITW,Illinois Tool Works Inc.,NYSE,USA,USD,Industrials,Industrial Machinery & Supplies & Components,Tier 1
+EMR,Emerson Electric Co.,NYSE,USA,USD,Industrials,Electrical Components & Equipment,Tier 1
+PH,Parker-Hannifin Corporation,NYSE,USA,USD,Industrials,Industrial Machinery & Supplies & Components,Tier 1
+CSX,CSX Corporation,NASDAQ,USA,USD,Industrials,Rail Transportation,Tier 1
+NSC,Norfolk Southern Corporation,NYSE,USA,USD,Industrials,Rail Transportation,Tier 1
+UPS,"United Parcel Service, Inc.",NYSE,USA,USD,Industrials,Air Freight & Logistics,Tier 1
+FDX,FedEx Corporation,NYSE,USA,USD,Industrials,Air Freight & Logistics,Tier 1
+WM,"Waste Management, Inc.",NYSE,USA,USD,Industrials,Environmental & Facilities Services,Tier 1
+RSG,"Republic Services, Inc.",NYSE,USA,USD,Industrials,Environmental & Facilities Services,Tier 2
+CTAS,Cintas Corporation,NASDAQ,USA,USD,Industrials,Diversified Support Services,Tier 2
+XOM,Exxon Mobil Corporation,NYSE,USA,USD,Energy,Integrated Oil & Gas,Tier 1
+CVX,Chevron Corporation,NYSE,USA,USD,Energy,Integrated Oil & Gas,Tier 1
+COP,ConocoPhillips,NYSE,USA,USD,Energy,Oil & Gas Exploration & Production,Tier 1
+EOG,"EOG Resources, Inc.",NYSE,USA,USD,Energy,Oil & Gas Exploration & Production,Tier 1
+SLB,Schlumberger Limited,NYSE,USA,USD,Energy,Oil & Gas Equipment & Services,Tier 1
+MPC,Marathon Petroleum Corporation,NYSE,USA,USD,Energy,Oil & Gas Refining & Marketing,Tier 1
+PSX,Phillips 66,NYSE,USA,USD,Energy,Oil & Gas Refining & Marketing,Tier 1
+VLO,Valero Energy Corporation,NYSE,USA,USD,Energy,Oil & Gas Refining & Marketing,Tier 1
+OXY,Occidental Petroleum Corporation,NYSE,USA,USD,Energy,Oil & Gas Exploration & Production,Tier 1
+WMB,"The Williams Companies, Inc.",NYSE,USA,USD,Energy,Oil & Gas Storage & Transportation,Tier 2
+KMI,"Kinder Morgan, Inc.",NYSE,USA,USD,Energy,Oil & Gas Storage & Transportation,Tier 2
+HAL,Halliburton Company,NYSE,USA,USD,Energy,Oil & Gas Equipment & Services,Tier 2
+LIN,Linde plc,NASDAQ,USA,USD,Materials,Industrial Gases,Tier 1
+APD,"Air Products and Chemicals, Inc.",NYSE,USA,USD,Materials,Industrial Gases,Tier 1
+SHW,The Sherwin-Williams Company,NYSE,USA,USD,Materials,Specialty Chemicals,Tier 1
+FCX,Freeport-McMoRan Inc.,NYSE,USA,USD,Materials,Copper,Tier 1
+ECL,Ecolab Inc.,NYSE,USA,USD,Materials,Specialty Chemicals,Tier 1
+NEM,Newmont Corporation,NYSE,USA,USD,Materials,Gold,Tier 1
+DOW,Dow Inc.,NYSE,USA,USD,Materials,Commodity Chemicals,Tier 2
+NUE,Nucor Corporation,NYSE,USA,USD,Materials,Steel,Tier 1
+CTVA,"Corteva, Inc.",NYSE,USA,USD,Materials,Fertilizers & Agricultural Chemicals,Tier 2
+PPG,"PPG Industries, Inc.",NYSE,USA,USD,Materials,Specialty Chemicals,Tier 2
+NEE,"NextEra Energy, Inc.",NYSE,USA,USD,Utilities,Electric Utilities,Tier 1
+SO,The Southern Company,NYSE,USA,USD,Utilities,Electric Utilities,Tier 1
+DUK,Duke Energy Corporation,NYSE,USA,USD,Utilities,Electric Utilities,Tier 1
+CEG,Constellation Energy Corporation,NASDAQ,USA,USD,Utilities,Independent Power Producers & Energy Traders,Tier 1
+SRE,Sempra,NYSE,USA,USD,Utilities,Multi-Utilities,Tier 1
+AEP,"American Electric Power Company, Inc.",NASDAQ,USA,USD,Utilities,Electric Utilities,Tier 1
+D,"Dominion Energy, Inc.",NYSE,USA,USD,Utilities,Multi-Utilities,Tier 1
+PEG,Public Service Enterprise Group Incorporated,NYSE,USA,USD,Utilities,Electric Utilities,Tier 2
+EXC,Exelon Corporation,NASDAQ,USA,USD,Utilities,Electric Utilities,Tier 1
+XEL,Xcel Energy Inc.,NASDAQ,USA,USD,Utilities,Electric Utilities,Tier 2
+PLD,"Prologis, Inc.",NYSE,USA,USD,Real Estate,Industrial REITs,Tier 1
+AMT,American Tower Corporation,NYSE,USA,USD,Real Estate,Telecom Tower REITs,Tier 1
+EQIX,"Equinix, Inc.",NASDAQ,USA,USD,Real Estate,Data Center REITs,Tier 1
+CCI,Crown Castle Inc.,NYSE,USA,USD,Real Estate,Telecom Tower REITs,Tier 1
+PSA,Public Storage,NYSE,USA,USD,Real Estate,Self-Storage REITs,Tier 2
+O,Realty Income Corporation,NYSE,USA,USD,Real Estate,Retail REITs,Tier 1
+SPG,"Simon Property Group, Inc.",NYSE,USA,USD,Real Estate,Retail REITs,Tier 1
+DLR,"Digital Realty Trust, Inc.",NYSE,USA,USD,Real Estate,Data Center REITs,Tier 1
+HDFCBANK.NSE,HDFC Bank Limited,NSE,India,INR,Financials,Diversified Banks,Tier 1
+ICICIBANK.NSE,ICICI Bank Limited,NSE,India,INR,Financials,Diversified Banks,Tier 1
+SBIN.NSE,State Bank of India,NSE,India,INR,Financials,Public Sector Banks,Tier 1
+KOTAKBANK.NSE,Kotak Mahindra Bank Limited,NSE,India,INR,Financials,Diversified Banks,Tier 1
+AXISBANK.NSE,Axis Bank Limited,NSE,India,INR,Financials,Diversified Banks,Tier 1
+BAJFINANCE.NSE,Bajaj Finance Limited,NSE,India,INR,Financials,Consumer Finance,Tier 1
+BAJAJFINSV.NSE,Bajaj Finserv Limited,NSE,India,INR,Financials,Multi-line Insurance & Finance,Tier 1
+INDUSINDBK.NSE,IndusInd Bank Limited,NSE,India,INR,Financials,Diversified Banks,Tier 1
+BANKBARODA.NSE,Bank of Baroda,NSE,India,INR,Financials,Public Sector Banks,Tier 1
+PNB.NSE,Punjab National Bank,NSE,India,INR,Financials,Public Sector Banks,Tier 2
+CANBK.NSE,Canara Bank,NSE,India,INR,Financials,Public Sector Banks,Tier 2
+UNIONBANK.NSE,Union Bank of India,NSE,India,INR,Financials,Public Sector Banks,Tier 2
+IDFCFIRSTB.NSE,IDFC FIRST Bank Limited,NSE,India,INR,Financials,Diversified Banks,Tier 2
+FEDERALBNK.NSE,The Federal Bank Limited,NSE,India,INR,Financials,Diversified Banks,Tier 2
+AUBANK.NSE,AU Small Finance Bank Limited,NSE,India,INR,Financials,Small Finance Banks,Tier 2
+SHRIRAMFIN.NSE,Shriram Finance Limited,NSE,India,INR,Financials,Commercial Vehicle Finance,Tier 1
+CHOLAFIN.NSE,Cholamandalam Investment and Finance Company,NSE,India,INR,Financials,Vehicle Finance,Tier 1
+MUTHOOTFIN.NSE,Muthoot Finance Limited,NSE,India,INR,Financials,Gold Loan Finance,Tier 2
+MANAPPURAM.NSE,Manappuram Finance Limited,NSE,India,INR,Financials,Gold Loan Finance,Tier 2
+PFC.NSE,Power Finance Corporation Limited,NSE,India,INR,Financials,Infrastructure Finance,Tier 1
+RECLTD.NSE,REC Limited,NSE,India,INR,Financials,Infrastructure Finance,Tier 1
+HDFCLIFE.NSE,HDFC Life Insurance Company Limited,NSE,India,INR,Financials,Life Insurance,Tier 1
+SBILIFE.NSE,SBI Life Insurance Company Limited,NSE,India,INR,Financials,Life Insurance,Tier 1
+ICICIPRULI.NSE,ICICI Prudential Life Insurance Company,NSE,India,INR,Financials,Life Insurance,Tier 1
+ICICIGI.NSE,ICICI Lombard General Insurance Company,NSE,India,INR,Financials,General Insurance,Tier 1
+SBICARD.NSE,SBI Cards and Payment Services Limited,NSE,India,INR,Financials,Consumer Credit,Tier 2
+HDFCAMC.NSE,HDFC Asset Management Company Limited,NSE,India,INR,Financials,Asset Management,Tier 2
+BSE.NSE,BSE Limited,NSE,India,INR,Financials,Financial Exchanges,Tier 2
+CDSL.NSE,Central Depository Services (India) Limited,NSE,India,INR,Financials,Financial Depositories,Tier 2
+JIOFIN.NSE,Jio Financial Services Limited,NSE,India,INR,Financials,Diversified Financial Services,Tier 1
+TCS.NSE,Tata Consultancy Services Limited,NSE,India,INR,Information Technology,IT Consulting & Software,Tier 1
+INFY.NSE,Infosys Limited,NSE,India,INR,Information Technology,IT Consulting & Software,Tier 1
+HCLTECH.NSE,HCL Technologies Limited,NSE,India,INR,Information Technology,IT Consulting & Software,Tier 1
+WIPRO.NSE,Wipro Limited,NSE,India,INR,Information Technology,IT Consulting & Software,Tier 1
+LTIM.NSE,LTIMindtree Limited,NSE,India,INR,Information Technology,IT Consulting & Software,Tier 1
+TECHM.NSE,Tech Mahindra Limited,NSE,India,INR,Information Technology,IT Consulting & Software,Tier 1
+PERSISTENT.NSE,Persistent Systems Limited,NSE,India,INR,Information Technology,Software Product Engineering,Tier 1
+COFORGE.NSE,Coforge Limited,NSE,India,INR,Information Technology,IT Solutions,Tier 1
+MPHASIS.NSE,Mphasis Limited,NSE,India,INR,Information Technology,Cloud & Cognitive Services,Tier 2
+LTTS.NSE,L&T Technology Services Limited,NSE,India,INR,Information Technology,Engineering R&D Services,Tier 2
+TATAELXSI.NSE,Tata Elxsi Limited,NSE,India,INR,Information Technology,Design & Technology Services,Tier 2
+KPITTECH.NSE,KPIT Technologies Limited,NSE,India,INR,Information Technology,Automotive Software,Tier 2
+OFSS.NSE,Oracle Financial Services Software Limited,NSE,India,INR,Information Technology,Banking Application Software,Tier 2
+CYIENT.NSE,Cyient Limited,NSE,India,INR,Information Technology,Engineering & Tech Solutions,Tier 2
+ZENSARTECH.NSE,Zensar Technologies Limited,NSE,India,INR,Information Technology,Digital Solutions & Tech Services,Tier 2
+BSOFT.NSE,Birlasoft Limited,NSE,India,INR,Information Technology,Enterprise Digital Services,Tier 2
+SONATSOFTW.NSE,Sonata Software Limited,NSE,India,INR,Information Technology,IT Services,Tier 2
+HAPPSTMNDS.NSE,Happiest Minds Technologies Limited,NSE,India,INR,Information Technology,Digital Transformation Services,Tier 2
+INTELLECT.NSE,Intellect Design Arena Limited,NSE,India,INR,Information Technology,FinTech Enterprise Software,Tier 2
+MASTEK.NSE,Mastek Limited,NSE,India,INR,Information Technology,Digital Enterprise Solutions,Tier 2
+ROUTE.NSE,Route Mobile Limited,NSE,India,INR,Information Technology,Communications Platform as a Service,Tier 2
+TANLA.NSE,Tanla Platforms Limited,NSE,India,INR,Information Technology,CPaaS Solutions,Tier 2
+NAUKRI.NSE,Info Edge (India) Limited,NSE,India,INR,Information Technology,Internet Portals & Online Recruitment,Tier 1
+AFFLE.NSE,Affle (India) Limited,NSE,India,INR,Information Technology,Consumer Intelligence Platform,Tier 2
+LATENTVIEW.NSE,Latent View Analytics Limited,NSE,India,INR,Information Technology,Data Analytics Solutions,Tier 2
+HINDUNILVR.NSE,Hindustan Unilever Limited,NSE,India,INR,Consumer Staples,Household & Personal Products,Tier 1
+ITC.NSE,ITC Limited,NSE,India,INR,Consumer Staples,Diversified FMCG & Tobacco,Tier 1
+NESTLEIND.NSE,Nestle India Limited,NSE,India,INR,Consumer Staples,Packaged Foods & Dairy,Tier 1
+BRITANNIA.NSE,Britannia Industries Limited,NSE,India,INR,Consumer Staples,Bakery & Dairy Products,Tier 1
+TATACONSUM.NSE,Tata Consumer Products Limited,NSE,India,INR,Consumer Staples,"Tea, Coffee & Foods",Tier 1
+GODREJCP.NSE,Godrej Consumer Products Limited,NSE,India,INR,Consumer Staples,Personal & Household Care,Tier 1
+DABUR.NSE,Dabur India Limited,NSE,India,INR,Consumer Staples,Ayurvedic & Healthcare FMCG,Tier 1
+MARICO.NSE,Marico Limited,NSE,India,INR,Consumer Staples,Edible Oils & Hair Care,Tier 1
+COLPAL.NSE,Colgate-Palmolive (India) Limited,NSE,India,INR,Consumer Staples,Oral Care,Tier 1
+VBL.NSE,Varun Beverages Limited,NSE,India,INR,Consumer Staples,Soft Drinks & Beverages Franchises,Tier 1
+PGHH.NSE,Procter & Gamble Hygiene and Health Care,NSE,India,INR,Consumer Staples,Feminine & Health Care,Tier 2
+EMAMILTD.NSE,Emami Limited,NSE,India,INR,Consumer Staples,Personal & Healthcare FMCG,Tier 2
+JYOTHYLAB.NSE,Jyothy Labs Limited,NSE,India,INR,Consumer Staples,Fabric & Dish Care,Tier 2
+RADICO.NSE,Radico Khaitan Limited,NSE,India,INR,Consumer Staples,Distilleries & Beverages,Tier 2
+UBL.NSE,United Breweries Limited,NSE,India,INR,Consumer Staples,Brewing & Alcoholic Beverages,Tier 2
+MCDOWELL-N.NSE,United Spirits Limited,NSE,India,INR,Consumer Staples,Distilleries & Alcoholic Beverages,Tier 1
+BIKAJI.NSE,Bikaji Foods International Limited,NSE,India,INR,Consumer Staples,Ethnic Snacks & Sweets,Tier 2
+AWL.NSE,Adani Wilmar Limited,NSE,India,INR,Consumer Staples,Edible Oils & Food FMCG,Tier 2
+PATANJALI.NSE,Patanjali Foods Limited,NSE,India,INR,Consumer Staples,Edible Oils & Food Products,Tier 2
+BALRAMCHIN.NSE,Balrampur Chini Mills Limited,NSE,India,INR,Consumer Staples,Sugar & Biofuels,Tier 2
+MARUTI.NSE,Maruti Suzuki India Limited,NSE,India,INR,Consumer Discretionary,Passenger Vehicles,Tier 1
+TATAMOTORS.NSE,Tata Motors Limited,NSE,India,INR,Consumer Discretionary,Commercial & Passenger Vehicles,Tier 1
+M&M.NSE,Mahindra & Mahindra Limited,NSE,India,INR,Consumer Discretionary,Automobiles & Farm Equipment,Tier 1
+BAJAJ-AUTO.NSE,Bajaj Auto Limited,NSE,India,INR,Consumer Discretionary,Two & Three Wheelers,Tier 1
+EICHERMOT.NSE,Eicher Motors Limited,NSE,India,INR,Consumer Discretionary,Motorcycles & Commercial Vehicles,Tier 1
+HEROMOTOCO.NSE,Hero MotoCorp Limited,NSE,India,INR,Consumer Discretionary,Two Wheelers,Tier 1
+TVSMOTOR.NSE,TVS Motor Company Limited,NSE,India,INR,Consumer Discretionary,Two & Three Wheelers,Tier 1
+TITAN.NSE,Titan Company Limited,NSE,India,INR,Consumer Discretionary,Jewellery & Watches,Tier 1
+TRENT.NSE,Trent Limited,NSE,India,INR,Consumer Discretionary,Apparel & Lifestyle Retail,Tier 1
+DMART.NSE,Avenue Supermarts Limited,NSE,India,INR,Consumer Discretionary,Hypermarkets & Supermarkets,Tier 1
+ZOMATO.NSE,Zomato Limited,NSE,India,INR,Consumer Discretionary,Online Food Delivery & Quick Commerce,Tier 1
+PAGEIND.NSE,Page Industries Limited,NSE,India,INR,Consumer Discretionary,Apparel & Innerwear,Tier 2
+VEDANTFASH.NSE,Vedant Fashions Limited,NSE,India,INR,Consumer Discretionary,Ethnic Wear Retail,Tier 2
+BATAINDIA.NSE,Bata India Limited,NSE,India,INR,Consumer Discretionary,Footwear,Tier 2
+RELAXO.NSE,Relaxo Footwears Limited,NSE,India,INR,Consumer Discretionary,Footwear,Tier 2
+JUBLFOOD.NSE,Jubilant FoodWorks Limited,NSE,India,INR,Consumer Discretionary,Quick Service Restaurants,Tier 2
+DEVYANI.NSE,Devyani International Limited,NSE,India,INR,Consumer Discretionary,Quick Service Restaurants,Tier 2
+WESTLIFE.NSE,Westlife Foodworld Limited,NSE,India,INR,Consumer Discretionary,Quick Service Restaurants,Tier 2
+KALYANKJIL.NSE,Kalyan Jewellers India Limited,NSE,India,INR,Consumer Discretionary,Jewellery Retail,Tier 2
+VOLTAS.NSE,Voltas Limited,NSE,India,INR,Consumer Discretionary,Air Conditioners & Cooling Products,Tier 2
+HAVELLS.NSE,Havells India Limited,NSE,India,INR,Consumer Discretionary,Consumer Electricals,Tier 1
+CROMPTON.NSE,Crompton Greaves Consumer Electricals,NSE,India,INR,Consumer Discretionary,Consumer Electrical Appliances,Tier 2
+SUNPHARMA.NSE,Sun Pharmaceutical Industries Limited,NSE,India,INR,Health Care,Pharmaceuticals,Tier 1
+CIPLA.NSE,Cipla Limited,NSE,India,INR,Health Care,Pharmaceuticals & Generics,Tier 1
+DRREDDY.NSE,Dr. Reddy's Laboratories Limited,NSE,India,INR,Health Care,Pharmaceuticals & Generics,Tier 1
+DIVISLAB.NSE,Divi's Laboratories Limited,NSE,India,INR,Health Care,Active Pharmaceutical Ingredients (APIs),Tier 1
+APOLLOHOSP.NSE,Apollo Hospitals Enterprise Limited,NSE,India,INR,Health Care,Healthcare Facilities & Pharmacy,Tier 1
+MAXHEALTH.NSE,Max Healthcare Institute Limited,NSE,India,INR,Health Care,Multi-speciality Hospitals,Tier 1
+FORTIS.NSE,Fortis Healthcare Limited,NSE,India,INR,Health Care,Healthcare Delivery,Tier 2
+MEDANTA.NSE,Global Health Limited,NSE,India,INR,Health Care,Multi-speciality Tertiary Care,Tier 2
+TORNTPHARM.NSE,Torrent Pharmaceuticals Limited,NSE,India,INR,Health Care,Pharmaceutical Formulations,Tier 1
+LUPIN.NSE,Lupin Limited,NSE,India,INR,Health Care,Pharmaceuticals,Tier 1
+ZYDUSLIFE.NSE,Zydus Lifesciences Limited,NSE,India,INR,Health Care,Formulations & Diagnostics,Tier 1
+AUROPHARMA.NSE,Aurobindo Pharma Limited,NSE,India,INR,Health Care,Generic Pharmaceuticals & APIs,Tier 1
+ALKEM.NSE,Alkem Laboratories Limited,NSE,India,INR,Health Care,Pharmaceuticals,Tier 2
+IPCALAB.NSE,IPCA Laboratories Limited,NSE,India,INR,Health Care,Formulations & APIs,Tier 2
+BIOCON.NSE,Biocon Limited,NSE,India,INR,Health Care,Biotechnology & Biosimilars,Tier 2
+LALPATHLAB.NSE,Dr. Lal PathLabs Limited,NSE,India,INR,Health Care,Diagnostic & Pathological Labs,Tier 2
+METROPOLIS.NSE,Metropolis Healthcare Limited,NSE,India,INR,Health Care,Diagnostic Centres,Tier 2
+SYNGENE.NSE,Syngene International Limited,NSE,India,INR,Health Care,Contract Research Services (CRO),Tier 2
+LT.NSE,Larsen & Toubro Limited,NSE,India,INR,Industrials,Construction & Engineering EPC,Tier 1
+SIEMENS.NSE,Siemens Limited,NSE,India,INR,Industrials,Industrial Automation & Power,Tier 1
+ABB.NSE,ABB India Limited,NSE,India,INR,Industrials,"Robotics, Motion & Industrial Automation",Tier 1
+BEL.NSE,Bharat Electronics Limited,NSE,India,INR,Industrials,Defense Electronics,Tier 1
+HAL.NSE,Hindustan Aeronautics Limited,NSE,India,INR,Industrials,Aerospace & Defense,Tier 1
+BHEL.NSE,Bharat Heavy Electricals Limited,NSE,India,INR,Industrials,Heavy Electrical Equipment,Tier 2
+CGPOWER.NSE,CG Power and Industrial Solutions Limited,NSE,India,INR,Industrials,Power Systems & Motors,Tier 1
+POLYCAB.NSE,Polycab India Limited,NSE,India,INR,Industrials,Wires & Cables,Tier 1
+KEI.NSE,KEI Industries Limited,NSE,India,INR,Industrials,Cables & EPC Projects,Tier 2
+ASTRAL.NSE,Astral Limited,NSE,India,INR,Industrials,Pipes & Building Materials,Tier 2
+SUPREMEIND.NSE,The Supreme Industries Limited,NSE,India,INR,Industrials,Plastic Piping & Products,Tier 2
+CONCOR.NSE,Container Corporation of India Limited,NSE,India,INR,Industrials,Rail Logistics & Container Freight,Tier 2
+INDIGO.NSE,InterGlobe Aviation Limited,NSE,India,INR,Industrials,Passenger Airlines,Tier 1
+IRCTC.NSE,Indian Railway Catering and Tourism Corp,NSE,India,INR,Industrials,Railway Ticketing & Tourism,Tier 2
+RVNL.NSE,Rail Vikas Nigam Limited,NSE,India,INR,Industrials,Railway Infrastructure Construction,Tier 2
+IRFC.NSE,Indian Railway Finance Corporation,NSE,India,INR,Industrials,Railway Leasing & Financing,Tier 1
+ADANIPORTS.NSE,Adani Ports and Special Economic Zone,NSE,India,INR,Industrials,Port Operations & Marine Terminals,Tier 1
+JSWINFRA.NSE,JSW Infrastructure Limited,NSE,India,INR,Industrials,Port Terminals & Logistics,Tier 2
+BHARATFORG.NSE,Bharat Forge Limited,NSE,India,INR,Industrials,Industrial Forgings & Auto Components,Tier 1
+GMRINFRA.NSE,GMR Airports Infrastructure Limited,NSE,India,INR,Industrials,Airport Development & Management,Tier 2
+TATASTEEL.NSE,Tata Steel Limited,NSE,India,INR,Materials,Steel Manufacturing,Tier 1
+JSWSTEEL.NSE,JSW Steel Limited,NSE,India,INR,Materials,Integrated Steel Production,Tier 1
+HINDALCO.NSE,Hindalco Industries Limited,NSE,India,INR,Materials,Aluminium & Copper Production,Tier 1
+VEDL.NSE,Vedanta Limited,NSE,India,INR,Materials,Diversified Metals & Mining,Tier 1
+COALINDIA.NSE,Coal India Limited,NSE,India,INR,Materials,Coal Mining,Tier 1
+NMDC.NSE,NMDC Limited,NSE,India,INR,Materials,Iron Ore Mining,Tier 1
+SAIL.NSE,Steel Authority of India Limited,NSE,India,INR,Materials,Steel Production,Tier 2
+JINDALSTEL.NSE,Jindal Steel & Power Limited,NSE,India,INR,Materials,Steel & Power Infrastructure,Tier 1
+NATIONALUM.NSE,National Aluminium Company Limited,NSE,India,INR,Materials,Alumina & Aluminium,Tier 2
+ULTRACEMCO.NSE,UltraTech Cement Limited,NSE,India,INR,Materials,Cement & Building Materials,Tier 1
+AMBUJACEM.NSE,Ambuja Cements Limited,NSE,India,INR,Materials,Cement,Tier 1
+ACC.NSE,ACC Limited,NSE,India,INR,Materials,Cement,Tier 2
+SHREECEM.NSE,Shree Cement Limited,NSE,India,INR,Materials,Cement,Tier 1
+GRASIM.NSE,Grasim Industries Limited,NSE,India,INR,Materials,Viscose Staple Fibre & Chemicals,Tier 1
+PIDILITIND.NSE,Pidilite Industries Limited,NSE,India,INR,Materials,Adhesives & Specialty Chemicals,Tier 1
+SRF.NSE,SRF Limited,NSE,India,INR,Materials,Fluorochemicals & Technical Textiles,Tier 1
+DEEPAKNTR.NSE,Deepak Nitrite Limited,NSE,India,INR,Materials,Basic & Fine Chemicals,Tier 2
+TATACHEM.NSE,Tata Chemicals Limited,NSE,India,INR,Materials,Soda Ash & Specialty Chemicals,Tier 2
+RELIANCE.NSE,Reliance Industries Limited,NSE,India,INR,Energy,"Oil Refining, Petrochemicals & Telecom",Tier 1
+ONGC.NSE,Oil and Natural Gas Corporation Limited,NSE,India,INR,Energy,Oil & Gas Exploration & Production,Tier 1
+IOC.NSE,Indian Oil Corporation Limited,NSE,India,INR,Energy,Downstream Petroleum Refining,Tier 1
+BPCL.NSE,Bharat Petroleum Corporation Limited,NSE,India,INR,Energy,Downstream Petroleum Refining,Tier 1
+HINDPETRO.NSE,Hindustan Petroleum Corporation Limited,NSE,India,INR,Energy,Petroleum Refining & Marketing,Tier 2
+GAIL.NSE,GAIL (India) Limited,NSE,India,INR,Energy,Natural Gas Transmission & Marketing,Tier 1
+PETRONET.NSE,Petronet LNG Limited,NSE,India,INR,Energy,LNG Import & Regasification,Tier 2
+OIL.NSE,Oil India Limited,NSE,India,INR,Energy,Crude Oil & Natural Gas Exploration,Tier 2
+IGL.NSE,Indraprastha Gas Limited,NSE,India,INR,Energy,City Gas Distribution,Tier 2
+MGL.NSE,Mahanagar Gas Limited,NSE,India,INR,Energy,City Gas Distribution,Tier 2
+GUJGASLTD.NSE,Gujarat Gas Limited,NSE,India,INR,Energy,City Gas Distribution,Tier 2
+MRPL.NSE,Mangalore Refinery and Petrochemicals,NSE,India,INR,Energy,Petroleum Refining,Tier 2
+NTPC.NSE,NTPC Limited,NSE,India,INR,Utilities,Thermal & Renewable Power Generation,Tier 1
+POWERGRID.NSE,Power Grid Corporation of India Limited,NSE,India,INR,Utilities,Electric Power Transmission,Tier 1
+TATAPOWER.NSE,The Tata Power Company Limited,NSE,India,INR,Utilities,Integrated Power Generation & Dist,Tier 1
+ADANIGREEN.NSE,Adani Green Energy Limited,NSE,India,INR,Utilities,Renewable Power Generation,Tier 1
+ADANIPOWER.NSE,Adani Power Limited,NSE,India,INR,Utilities,Thermal Power Generation,Tier 1
+JSWENERGY.NSE,JSW Energy Limited,NSE,India,INR,Utilities,Power Generation & Renewable Assets,Tier 1
+TORNTPOWER.NSE,Torrent Power Limited,NSE,India,INR,Utilities,Integrated Power Generation & Dist,Tier 2
+NHPC.NSE,NHPC Limited,NSE,India,INR,Utilities,Hydroelectric Power Generation,Tier 2
+SJVN.NSE,SJVN Limited,NSE,India,INR,Utilities,Hydro & Solar Power Generation,Tier 2
+SUZLON.NSE,Suzlon Energy Limited,NSE,India,INR,Utilities,Wind Turbine Generator Manufacturing,Tier 2
+CESC.NSE,CESC Limited,NSE,India,INR,Utilities,Power Generation & Distribution,Tier 2
+NLCINDIA.NSE,NLC India Limited,NSE,India,INR,Utilities,Lignite Mining & Power Generation,Tier 2
+BHARTIARTL.NSE,Bharti Airtel Limited,NSE,India,INR,Communication Services,Wireless & Broadband Telecom Services,Tier 1
+IDEA.NSE,Vodafone Idea Limited,NSE,India,INR,Communication Services,Wireless Telecommunication Services,Tier 2
+INDUSTOWER.NSE,Indus Towers Limited,NSE,India,INR,Communication Services,Telecom Tower Infrastructure,Tier 1
+TATACOMM.NSE,Tata Communications Limited,NSE,India,INR,Communication Services,Global Digital Ecosystem & Telecom,Tier 2
+ZEEL.NSE,Zee Entertainment Enterprises Limited,NSE,India,INR,Communication Services,Media & Broadcasting,Tier 2
+SUNTV.NSE,Sun TV Network Limited,NSE,India,INR,Communication Services,Television Broadcasting,Tier 2
+DLF.NSE,DLF Limited,NSE,India,INR,Real Estate,Real Estate Development,Tier 1
+GODREJPROP.NSE,Godrej Properties Limited,NSE,India,INR,Real Estate,Residential Real Estate Development,Tier 1
+MACROTECH.NSE,Macrotech Developers Limited (Lodha),NSE,India,INR,Real Estate,Residential & Commercial Development,Tier 1
+OBEROIRLTY.NSE,Oberoi Realty Limited,NSE,India,INR,Real Estate,Premium Real Estate Development,Tier 2
+PHOENIXLTD.NSE,The Phoenix Mills Limited,NSE,India,INR,Real Estate,Retail Malls & Commercial Real Estate,Tier 1
+PRESTIGE.NSE,Prestige Estates Projects Limited,NSE,India,INR,Real Estate,Diversified Real Estate Development,Tier 2
+BRIGADE.NSE,Brigade Enterprises Limited,NSE,India,INR,Real Estate,Residential & Commercial Projects,Tier 2
+SOBHA.NSE,Sobha Limited,NSE,India,INR,Real Estate,Residential Real Estate Development,Tier 2

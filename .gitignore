@@ -29,3 +29,11 @@ valuengine_*.xlsx
 .idea/
 .DS_Store
 Thumbs.db
+
+# Databases & Cache
+*.db
+*.db-shm
+*.db-wal
+*.tsbuildinfo
+scratch/
+

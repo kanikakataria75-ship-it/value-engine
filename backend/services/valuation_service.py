@@ -23,23 +23,49 @@ from mna_lbo_engine.modules.risk_engine import run_dcf_monte_carlo, run_stress_t
 from mna_lbo_engine.modules.data_loader import FinancialDataLoader
 from mna_lbo_engine.modules.alpha_vantage_provider import AlphaVantageError, AlphaVantageRateLimited
 
+from mna_lbo_engine.modules import r_risk_engine
+
 
 _data_loader = FinancialDataLoader()
 
 
-def company(ticker: str) -> dict[str, Any] | None:
+def company(ticker: str, mode: str = "local") -> dict[str, Any] | None:
     symbol = ticker.strip().upper()
+    if not symbol:
+        return None
+
+    is_rate_limited = False
+    fallback_reason = "Alpha Vantage unavailable."
+
     try:
-        live_result = _data_loader.fetch_company_financials(symbol)
-        quality_issues = run_data_quality_checks(live_result)
-        if any(issue["severity"] == "HARD ERROR" for issue in quality_issues):
-            raise AlphaVantageError("Alpha Vantage data did not pass the existing data-quality gate.")
-        live_result["data_quality_issues"] = quality_issues
-        return live_result
+        try:
+            result = _data_loader.fetch_company_financials(symbol, data_mode=mode)
+        except TypeError:
+            result = _data_loader.fetch_company_financials(symbol)
+
+        if result is not None:
+            quality_issues = run_data_quality_checks(result)
+            if any(issue["severity"] == "HARD ERROR" for issue in quality_issues):
+                raise AlphaVantageError("Alpha Vantage data did not pass the existing data-quality gate.")
+            result["data_quality_issues"] = quality_issues
+            if mode == "local":
+                prov = result.setdefault("provenance", {})
+                prov.setdefault("source", "LOCAL_DB")
+                prov.setdefault("source_type", "LOCAL_DB")
+                prov.setdefault("provenance", "LIVE")
+                prov.setdefault("source_name", "ValuEngine Local Store (389 Companies)")
+                prov.setdefault("notice", "Offline Institutional SQLite Dataset · Zero Latency")
+                result["_provenance"] = "LIVE"
+            return result
+        elif mode == "local":
+            return None
     except AlphaVantageRateLimited as exc:
         fallback_reason = str(exc)
         is_rate_limited = True
     except AlphaVantageError as exc:
+        fallback_reason = str(exc)
+        is_rate_limited = False
+    except Exception as exc:
         fallback_reason = str(exc)
         is_rate_limited = False
 
@@ -100,20 +126,30 @@ def envelope(result: dict[str, Any], financials: dict[str, Any] | None = None) -
     }
 
 
-def unavailable(ticker: str) -> dict[str, Any]:
+def unavailable(ticker: str, mode: str = "local", message: str | None = None) -> dict[str, Any]:
+    if message is None:
+        if mode == "local":
+            message = f"Ticker not available in Local Dataset ({ticker.upper()})"
+        else:
+            message = f"No live or demonstration data is available for {ticker.upper()}."
     return {
         "status": "UNAVAILABLE",
         "data": {},
         "warnings": [],
-        "errors": [f"No live or demonstration data is available for {ticker.upper()}."],
-        "provenance": {"source": "NONE", "notice": "Alpha Vantage unavailable"},
+        "errors": [message],
+        "provenance": {"source": "LOCAL_DB" if mode == "local" else "NONE", "notice": message},
     }
 
 
-def dcf(payload) -> dict[str, Any]:
-    financials = company(payload.ticker)
+def search_companies(query: str, mode: str = "local", limit: int = 15) -> list[dict[str, Any]]:
+    return _data_loader.store.search_companies(query, limit=limit)
+
+
+def dcf(payload, mode: str | None = None) -> dict[str, Any]:
+    m = mode or getattr(payload, "mode", "local")
+    financials = company(payload.ticker, mode=m)
     if not financials:
-        return unavailable(payload.ticker)
+        return unavailable(payload.ticker, mode=m)
     result = run_dcf(
         financials,
         payload.revenue_growth_rate,
@@ -127,10 +163,11 @@ def dcf(payload) -> dict[str, Any]:
     return envelope(result, financials)
 
 
-def dcf_sensitivity(payload) -> dict[str, Any]:
-    financials = company(payload.ticker)
+def dcf_sensitivity(payload, mode: str | None = None) -> dict[str, Any]:
+    m = mode or getattr(payload, "mode", "local")
+    financials = company(payload.ticker, mode=m)
     if not financials:
-        return unavailable(payload.ticker)
+        return unavailable(payload.ticker, mode=m)
     wacc_values = [payload.wacc - 0.01, payload.wacc - 0.005, payload.wacc, payload.wacc + 0.005, payload.wacc + 0.01]
     growth_values = [payload.terminal_growth_rate - 0.01, payload.terminal_growth_rate - 0.005, payload.terminal_growth_rate, payload.terminal_growth_rate + 0.005, payload.terminal_growth_rate + 0.01]
     wacc_terminal = []
@@ -165,12 +202,13 @@ def dcf_sensitivity(payload) -> dict[str, Any]:
     }
 
 
-def mna(payload) -> dict[str, Any]:
-    target, acquirer = company(payload.target_ticker), company(payload.acquirer_ticker)
+def mna(payload, mode: str | None = None) -> dict[str, Any]:
+    m = mode or getattr(payload, "mode", "local")
+    target, acquirer = company(payload.target_ticker, mode=m), company(payload.acquirer_ticker, mode=m)
     if not target:
-        return unavailable(payload.target_ticker)
+        return unavailable(payload.target_ticker, mode=m)
     if not acquirer:
-        return unavailable(payload.acquirer_ticker)
+        return unavailable(payload.acquirer_ticker, mode=m)
     result = run_ma_model(
         acquirer,
         target,
@@ -187,10 +225,11 @@ def mna(payload) -> dict[str, Any]:
     return envelope(result, target)
 
 
-def lbo(payload) -> dict[str, Any]:
-    financials = company(payload.ticker)
+def lbo(payload, mode: str | None = None) -> dict[str, Any]:
+    m = mode or getattr(payload, "mode", "local")
+    financials = company(payload.ticker, mode=m)
     if not financials:
-        return unavailable(payload.ticker)
+        return unavailable(payload.ticker, mode=m)
     result = run_lbo_model(
         financials,
         payload.entry_multiple,
@@ -207,43 +246,50 @@ def lbo(payload) -> dict[str, Any]:
     return envelope(result, financials)
 
 
-def trading_comps(ticker: str) -> dict[str, Any]:
-    target = company(ticker)
+def trading_comps(ticker: str, mode: str = "local") -> dict[str, Any]:
+    target = company(ticker, mode=mode)
     if not target:
-        return unavailable(ticker)
-    peers = [company(t) for t in PRESET_FINANCIALS if t != ticker.upper()]
+        return unavailable(ticker, mode=mode)
+
+    if mode == "local":
+        target_sector = target.get("sector")
+        peer_rows = _data_loader.store.get_peers(ticker, sector=target_sector, limit=12)
+        if not peer_rows:
+            return {
+                "status": "UNAVAILABLE",
+                "data": {},
+                "warnings": ["Trading Comps unavailable: insufficient local peers in this sector."],
+                "errors": ["No comparable peers found in local dataset."],
+                "provenance": target.get("provenance", {}),
+            }
+        return envelope(run_trading_comps(target, peer_rows), target)
+
+    # Live / Preset peers
+    peers = [company(t, mode="live") for t in PRESET_FINANCIALS if t != ticker.upper()]
     return envelope(run_trading_comps(target, [p for p in peers if p]), target)
 
 
-def transaction_comps(ticker: str) -> dict[str, Any]:
-    target = company(ticker)
+def transaction_comps(ticker: str, mode: str = "local") -> dict[str, Any]:
+    target = company(ticker, mode=mode)
     if not target:
-        return unavailable(ticker)
+        return unavailable(ticker, mode=mode)
     return envelope(run_transaction_comps(target, []), target)
 
 
-def analytics(payload) -> dict[str, Any]:
-    financials = company(payload.ticker)
+def analytics(payload, mode: str | None = None) -> dict[str, Any]:
+    m = mode or getattr(payload, "mode", "local")
+    financials = company(payload.ticker, mode=m)
     if not financials:
-        return unavailable(payload.ticker)
-    result = run_dcf_monte_carlo(
-        run_dcf,
-        financials,
-        payload.revenue_growth_rate,
-        payload.ebitda_margin,
-        payload.wacc,
-        payload.terminal_growth_rate,
-        payload.tax_rate,
-        payload.mid_year_convention,
-        payload.iterations,
-    )
+        return unavailable(payload.ticker, mode=m)
+    result = r_risk_engine.run_monte_carlo(financials, payload)
     return envelope(result, financials)
 
 
-def risk(payload) -> dict[str, Any]:
-    financials = company(payload.ticker)
+def risk(payload, mode: str | None = None) -> dict[str, Any]:
+    m = mode or getattr(payload, "mode", "local")
+    financials = company(payload.ticker, mode=m)
     if not financials:
-        return unavailable(payload.ticker)
+        return unavailable(payload.ticker, mode=m)
     result = run_stress_test(
         run_lbo_model,
         financials,
@@ -266,12 +312,71 @@ def risk(payload) -> dict[str, Any]:
     }
 
 
-def health(ticker: str, acquirer_ticker: str = "MSFT") -> dict[str, Any]:
-    target, acquirer = company(ticker), company(acquirer_ticker)
+def risk_var(ticker: str, mode: str = "local") -> dict[str, Any]:
+    financials = company(ticker, mode=mode)
+    if not financials:
+        return unavailable(ticker, mode=mode)
+    result = r_risk_engine.run_var_cvar(financials)
+    return envelope(result, financials)
+
+
+def risk_merton(ticker: str, mode: str = "local") -> dict[str, Any]:
+    financials = company(ticker, mode=mode)
+    if not financials:
+        return unavailable(ticker, mode=mode)
+    result = r_risk_engine.run_merton(financials)
+    return envelope(result, financials)
+
+
+def risk_regime(ticker: str, mode: str = "local") -> dict[str, Any]:
+    financials = company(ticker, mode=mode)
+    if not financials:
+        return unavailable(ticker, mode=mode)
+    result = r_risk_engine.run_regime(financials)
+    return envelope(result, financials)
+
+
+def risk_factor_model(ticker: str, mode: str = "local") -> dict[str, Any]:
+    financials = company(ticker, mode=mode)
+    if not financials:
+        return unavailable(ticker, mode=mode)
+    result = r_risk_engine.run_factor_model(financials)
+    return envelope(result, financials)
+
+
+def risk_evt(ticker: str, mode: str = "local") -> dict[str, Any]:
+    financials = company(ticker, mode=mode)
+    if not financials:
+        return unavailable(ticker, mode=mode)
+    result = r_risk_engine.run_tail_risk(financials)
+    return envelope(result, financials)
+
+
+def risk_copula(acquirer_ticker: str, target_ticker: str, mode: str = "local") -> dict[str, Any]:
+    acq = company(acquirer_ticker, mode=mode)
+    tgt = company(target_ticker, mode=mode)
+    if not acq:
+        return unavailable(acquirer_ticker, mode=mode)
+    if not tgt:
+        return unavailable(target_ticker, mode=mode)
+    result = r_risk_engine.run_copula(acq, tgt)
+    return envelope(result, acq)
+
+
+def valuation_confidence(ticker: str, mode: str = "local") -> dict[str, Any]:
+    financials = company(ticker, mode=mode)
+    if not financials:
+        return unavailable(ticker, mode=mode)
+    result = r_risk_engine.calculate_confidence(financials)
+    return envelope(result, financials)
+
+
+def health(ticker: str, acquirer_ticker: str = "MSFT", mode: str = "local") -> dict[str, Any]:
+    target, acquirer = company(ticker, mode=mode), company(acquirer_ticker, mode=mode)
     if not target:
-        return unavailable(ticker)
+        return unavailable(ticker, mode=mode)
     if not acquirer:
-        return unavailable(acquirer_ticker)
+        return unavailable(acquirer_ticker, mode=mode)
     dcf_result = run_dcf(target, 0.07, 0.25, 0.085, 0.025, 5, 0.21, False)
     ma_result = run_ma_model(acquirer, target, 0.25, 0.5, 0.5, 0.08, 0, 0.20, 0, 0, 0.21)
     lbo_result = run_lbo_model(target, 10.0, 0.4, 0.2, 0.08, 0.10, 11.0, 0.07, 0.25, 5, 0.21)
@@ -302,10 +407,10 @@ def health(ticker: str, acquirer_ticker: str = "MSFT") -> dict[str, Any]:
     }
 
 
-def data_quality(ticker: str) -> dict[str, Any]:
-    target = company(ticker)
+def data_quality(ticker: str, mode: str = "local") -> dict[str, Any]:
+    target = company(ticker, mode=mode)
     if not target:
-        return unavailable(ticker)
+        return unavailable(ticker, mode=mode)
     issues = run_data_quality_checks(target)
     return {
         "status": "VALID",
@@ -316,8 +421,8 @@ def data_quality(ticker: str) -> dict[str, Any]:
     }
 
 
-def export_excel(target_ticker: str, acquirer_ticker: str) -> Path | None:
-    target, acquirer = company(target_ticker), company(acquirer_ticker)
+def export_excel(target_ticker: str, acquirer_ticker: str, mode: str = "local") -> Path | None:
+    target, acquirer = company(target_ticker, mode=mode), company(acquirer_ticker, mode=mode)
     if not target or not acquirer:
         return None
     dcf_result = run_dcf(target, 0.07, 0.25, 0.085, 0.025)

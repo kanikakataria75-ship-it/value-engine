@@ -4,7 +4,7 @@ from typing import Any, Literal
 from pydantic import BaseModel, Field
 
 
-Status = Literal["VALID", "REVIEW_REQUIRED", "INVALID", "UNAVAILABLE", "DEMO", "LIVE", "CACHED", "RATE_LIMITED", "LOADING", "ERROR"]
+Status = Literal["VALID", "REVIEW_REQUIRED", "INVALID", "UNAVAILABLE", "DEMO", "LIVE", "CACHED", "RATE_LIMITED", "LOCAL", "LOADING", "ERROR"]
 
 
 class ApiEnvelope(BaseModel):
@@ -17,6 +17,7 @@ class ApiEnvelope(BaseModel):
 
 class CompanyRequest(BaseModel):
     ticker: str = Field(min_length=1, max_length=12)
+    mode: str = Field(default="local")
 
 
 class DcfRequest(CompanyRequest):
@@ -41,6 +42,7 @@ class MnaRequest(BaseModel):
     cost_synergies: float = Field(default=0, ge=0)
     integration_costs: float = Field(default=0, ge=0)
     tax_rate: float = Field(default=0.21, ge=0, le=1)
+    mode: str = Field(default="local")
 
 
 class LboRequest(CompanyRequest):
@@ -63,3 +65,10 @@ class AnalyticsRequest(DcfRequest):
 class ExportRequest(BaseModel):
     target_ticker: str = "AAPL"
     acquirer_ticker: str = "MSFT"
+    mode: str = Field(default="local")
+
+class CopilotRequest(BaseModel):
+    message: str = Field(min_length=1)
+    ticker: str = Field(min_length=1, max_length=12)
+    context_scope: str = Field(default="current_company")
+    page_context: str = Field(default="dashboard")
