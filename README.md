@@ -1,4 +1,4 @@
-# ValuEngine V2 🚀
+# ValuEngine 
 
 [![Status](https://img.shields.io/badge/Status-Active%20Production-brightgreen)](#)
 [![Frontend](https://img.shields.io/badge/Frontend-React%2018%20%7C%20TypeScript%20%7C%20Vite-646CFF)](#)
@@ -14,7 +14,7 @@ ValuEngine is a comprehensive financial intelligence workspace designed for inve
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
 - [Key Platform Features](#-key-platform-features)
   - [1. Context-Aware AI Financial Copilot](#1-context-aware-ai-financial-copilot)
@@ -39,15 +39,15 @@ ValuEngine is a comprehensive financial intelligence workspace designed for inve
 
 ---
 
-## ✨ Key Platform Features
+## Key Platform Features
 
-### 1. 🤖 Context-Aware AI Financial Copilot
+### 1. Context-Aware AI Financial Copilot
 - **Workspace Context Awareness:** The copilot continuously monitors the user's active company ticker, financial parameters, valuation metrics, and active module (DCF, M&A, LBO, Risk Lab).
 - **Intelligent Financial Advisory:** Explains complex valuation formulas, provides actionable deal structuring suggestions (e.g. debt capacity optimization, synergy break-even requirements), and interprets statistical risk metrics in plain English.
 - **Provider Architecture:** Powered by Google Gemini with streaming responses and an intelligent fallback engine to guarantee zero-downtime execution even without external API credentials.
 - **Interactive Sliding Panel:** Always accessible across all pages with quick-prompt shortcuts for instant sensitivity audits and valuation sanity checks.
 
-### 2. 🔬 R Analytics & Valuation Risk Lab
+### 2. R Analytics & Valuation Risk Lab
 ValuEngine embeds a suite of 8 quantitative engines written in native **R** with a seamless Python bridge and robust algorithmic fallback solvers:
 1. **Monte Carlo Simulation (`monte_carlo.R`):** Correlated multi-parameter stochastic cash flow generation across revenue growth, margin expansion, and cost of capital (1,000–100,000 iterations). Generates empirical value distributions, VaR/CVaR, and probability density functions.
 2. **Student-t & Gaussian Copulas (`copula.R`):** Models non-linear dependencies and extreme joint fat-tail risk across valuation assumptions.
@@ -58,7 +58,7 @@ ValuEngine embeds a suite of 8 quantitative engines written in native **R** with
 7. **Macro Factor Sensitivities (`factor_model.R`):** Multi-factor linear regressions assessing asset sensitivity against 10-year Treasury yields, CPI inflation, GDP growth rates, and credit spreads.
 8. **Assumption Impact / Tornado Engine (`assumption_impact.R`):** Elasticity matrices and tornado impact rankings identifying which single operational parameter exerts the highest sensitivity on Enterprise and Equity values.
 
-### 3. 💼 Core Valuation & Deal Modeling Engines
+### 3. Core Valuation & Deal Modeling Engines
 - **Discounted Cash Flow (DCF):**
   - Projects 5-year discrete Unlevered Free Cash Flows (UFCF) derived from Revenues, EBITDA Margins, D&A, CapEx, and $\Delta\text{NWC}$.
   - Supports dual discounting conventions: **Mid-Year** vs. **Year-End** discounting.
@@ -76,24 +76,24 @@ ValuEngine embeds a suite of 8 quantitative engines written in native **R** with
   - Standardized multiples extraction (EV/Revenue, EV/EBITDA, P/E, EV/EBIT).
   - Harmonic and arithmetic distributions (Min, 25th percentile, Median, Mean, 75th percentile, Max) with target equity value triangulation.
 
-### 4. ⚡ High-Performance Local Financial Store
+### 4. High-Performance Local Financial Store
 - **Instant Offline Data Access:** Built-in high-speed SQLite database engine (`data/financial_data.db`) operating in Write-Ahead Logging (WAL) mode for zero-latency lookups.
 - **Pre-Ingested 100+ Company Universe:** Contains detailed balance sheets, income statements, cash flow statements, historical trading multiples, and risk profiles across S&P 500 and global equities.
 - **Multi-Source Ingestion Pipeline:** Automated ingestion tools supporting Yahoo Finance (`yfinance`) and Alpha Vantage with intelligent fallback, schema normalization, and automated metric derivation.
 
-### 5. 🎨 Institutional Terminal UI & Experience
+### 5. Institutional Terminal UI & Experience
 - **Interactive Dark / Light Modes:** Bespoke dark financial terminal theme with custom glassmorphism, glowing telemetry cards, and rich color accents.
 - **Rich Recharts Visualizations:** Interactive tornado sensitivity charts, fan chart probability densities, debt paydown waterfalls, M&A synergy bars, and trading multiple ranges.
 - **Command Palette & Global Search:** Instant company lookup and active status telemetry across all pages.
 
-### 6. 📑 Audit Trail, Health Diagnostics & Excel Export
+### 6. Audit Trail, Health Diagnostics & Excel Export
 - **Dynamic Excel Export (`/api/reports/excel`):** Generates live `.xlsx` workbooks populated with native Excel formulas (`=SUM`, `=NPV`, `=IRR`, dynamic debt logic), ready for presentation to investment committees.
 - **Data Provenance & Audit Page:** Tracks every data field to its origin (`LIVE_API`, `LOCAL_STORE`, `DEMO_FALLBACK`), highlighting reconciliation checks and balance sheet equilibrium ($A = L + E$).
 - **Model Health Scanner:** Real-time cross-validation alerting users to insolvency hazards, negative entry equity, or unrealistic synergy assumptions.
 
 ---
 
-## 🏛 System Architecture
+## System Architecture
 
 ```mermaid
 flowchart TB
@@ -145,7 +145,7 @@ flowchart TB
 
 ---
 
-## 📐 Quantitative Methodology & Formulations
+## Quantitative Methodology & Formulations
 
 ### 1. DCF Mid-Year Convention Formula
 $$\text{PV}(\text{UFCF}_t) = \frac{\text{UFCF}_t}{(1 + \text{WACC})^{t - 0.5}}$$
@@ -168,7 +168,7 @@ $$\text{Pre-Tax Break-Even Synergy} = \frac{\text{Target Net Income} - \text{For
 
 ---
 
-## 📸 Screenshots & Visual Showcase
+## Screenshots & Visual Showcase
 
 | Risk Lab | Valuation & M&A Overview | LBO | DCF |
 | :---: | :---: | :---: | :---: |
@@ -178,7 +178,7 @@ $$\text{Pre-Tax Break-Even Synergy} = \frac{\text{Target Net Income} - \text{For
 
 ---
 
-## 🚀 Getting Started & Installation
+## Getting Started & Installation
 
 ### Prerequisites
 - **Python:** Version `3.10` or higher
@@ -252,7 +252,7 @@ python scripts/seed_company_universe.py
 
 ---
 
-## 🧪 Running Automated Tests
+## Running Automated Tests
 
 ValuEngine includes an exhaustive testing suite covering arithmetic reconciliation, financial identities, API endpoints, AI copilot responses, and risk simulations:
 
@@ -266,7 +266,7 @@ python brain_validation/run_all.py
 
 ---
 
-## 🌐 API Endpoints Reference
+## API Endpoints Reference
 
 | Route | Method | Description |
 | :--- | :--- | :--- |
@@ -284,7 +284,7 @@ python brain_validation/run_all.py
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 valuengine/
@@ -335,6 +335,6 @@ valuengine/
 
 ---
 
-## 📜 License & Contributing
+## License & Contributing
 
 Distributed under the MIT License. Contributions, feedback, and issue submissions are welcome. Please ensure all tests pass (`pytest tests/ -v`) prior to submitting pull requests.
