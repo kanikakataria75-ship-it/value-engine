@@ -170,9 +170,11 @@ $$\text{Pre-Tax Break-Even Synergy} = \frac{\text{Target Net Income} - \text{For
 
 ## 📸 Screenshots & Visual Showcase
 
-| Valuation & M&A Overview | Institutional LBO Waterfall |
-| :---: | :---: |
-| <img width="100%" alt="DCF & Comps Dashboard" src="https://github.com/user-attachments/assets/73d516a2-dc32-4352-b7d1-d6a159e4f545" /> | <img width="100%" alt="LBO & Risk Modeling" src="https://github.com/user-attachments/assets/7e0514b9-5e4c-4309-8a89-ea90a610dd34" /> |
+| Risk Lab | Valuation & M&A Overview | LBO | DCF |
+| :---: | :---: | :---: | :---: |
+| <img width="3384" height="1320" alt="Screenshot 2026-08-19 114648" src="https://github.com/user-attachments/assets/294f6154-52e5-4193-b62c-5a86d588b8c9" /> | <img width="3393" height="1278" alt="Screenshot 2026-08-19 114655" src="https://github.com/user-attachments/assets/37f33c05-014d-4ed3-bea5-cbfef7e6528f" /> | <img width="3387" height="1284" alt="Screenshot 2026-08-19 114703" src="https://github.com/user-attachments/assets/8e49a15e-7e17-467a-990f-1d91d5ad8769" /> | <img width="3364" height="1290" alt="Screenshot 2026-08-19 114710" src="https://github.com/user-attachments/assets/8568a5af-407f-485d-a3ab-441dcc1c41ea" /> | 
+
+
 
 ---
 
