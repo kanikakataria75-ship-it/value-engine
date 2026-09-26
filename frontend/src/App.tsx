@@ -1,57 +1,47 @@
-import { useState, useEffect } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { AppShell } from './components/AppShell'
-import { Dashboard } from './pages/Dashboard'
-import { DcfPage } from './pages/DcfPage'
-import { MnaPage } from './pages/MnaPage'
-import { LboPage } from './pages/LboPage'
-import { CompsPage } from './pages/CompsPage'
-import { AnalyticsPage } from './pages/AnalyticsPage'
-import { ReportsPage } from './pages/ReportsPage'
-import { CompanyPage } from './pages/CompanyPage'
-import { DataPage } from './pages/DataPage'
-import { AuditPage } from './pages/AuditPage'
-import { RiskLabPage } from './pages/RiskLabPage'
-import type { DataMode } from './types/api'
+import { lazy } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { CompanyLayout } from './components/CompanyLayout'
+import { Shell } from './components/Shell'
+import { Home } from './pages/Home'
 
-export function App() {
-  const [ticker, setTicker] = useState('RELIANCE.NSE')
-  const [dataMode, setDataModeState] = useState<DataMode>(() => {
-    const saved = localStorage.getItem('valuengine_data_mode')
-    return saved === 'live' ? 'live' : 'local'
-  })
+// Pages load on demand so the first paint only carries the shell and the Observatory.
+const named = <K extends string>(loader: () => Promise<Record<K, React.ComponentType>>, name: K) =>
+  lazy(() => loader().then((module) => ({ default: module[name] })))
 
-  const setDataMode = (mode: DataMode) => {
-    setDataModeState(mode)
-    localStorage.setItem('valuengine_data_mode', mode)
-  }
+const Radar = named(() => import('./pages/Radar'), 'Radar')
+const Methodology = named(() => import('./pages/Methodology'), 'Methodology')
+const NotFound = named(() => import('./pages/NotFound'), 'NotFound')
+const Overview = named(() => import('./pages/company/Overview'), 'Overview')
+const Valuation = named(() => import('./pages/company/Valuation'), 'Valuation')
+const Expectations = named(() => import('./pages/company/Expectations'), 'Expectations')
+const Comps = named(() => import('./pages/company/Comps'), 'Comps')
+const Mna = named(() => import('./pages/company/Mna'), 'Mna')
+const Lbo = named(() => import('./pages/company/Lbo'), 'Lbo')
+const Risk = named(() => import('./pages/company/Risk'), 'Risk')
+const Data = named(() => import('./pages/company/Data'), 'Data')
+const Report = named(() => import('./pages/company/Report'), 'Report')
 
-  useEffect(() => {
-    localStorage.setItem('valuengine_data_mode', dataMode)
-  }, [dataMode])
-
+export default function App() {
   return (
-    <BrowserRouter>
-      <AppShell
-        ticker={ticker}
-        setTicker={setTicker}
-        dataMode={dataMode}
-        setDataMode={setDataMode}
-      >
-        <Routes>
-          <Route path="/" element={<Dashboard ticker={ticker} dataMode={dataMode} />} />
-          <Route path="/dcf" element={<DcfPage ticker={ticker} dataMode={dataMode} />} />
-          <Route path="/mna" element={<MnaPage ticker={ticker} dataMode={dataMode} />} />
-          <Route path="/lbo" element={<LboPage ticker={ticker} dataMode={dataMode} />} />
-          <Route path="/comps" element={<CompsPage ticker={ticker} dataMode={dataMode} />} />
-          <Route path="/analytics" element={<AnalyticsPage ticker={ticker} dataMode={dataMode} />} />
-          <Route path="/risk-lab" element={<RiskLabPage ticker={ticker} dataMode={dataMode} />} />
-          <Route path="/reports" element={<ReportsPage ticker={ticker} dataMode={dataMode} />} />
-          <Route path="/company" element={<CompanyPage ticker={ticker} dataMode={dataMode} />} />
-          <Route path="/data" element={<DataPage ticker={ticker} dataMode={dataMode} />} />
-          <Route path="/audit" element={<AuditPage ticker={ticker} dataMode={dataMode} />} />
-        </Routes>
-      </AppShell>
-    </BrowserRouter>
+    <Routes>
+      <Route element={<Shell />}>
+        <Route index element={<Home />} />
+        <Route path="radar" element={<Radar />} />
+        <Route path="methodology" element={<Methodology />} />
+        <Route path="c/:ticker" element={<CompanyLayout />}>
+          <Route index element={<Overview />} />
+          <Route path="valuation" element={<Valuation />} />
+          <Route path="expectations" element={<Expectations />} />
+          <Route path="comps" element={<Comps />} />
+          <Route path="mna" element={<Mna />} />
+          <Route path="lbo" element={<Lbo />} />
+          <Route path="risk" element={<Risk />} />
+          <Route path="data" element={<Data />} />
+          <Route path="report" element={<Report />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   )
 }

@@ -1,0 +1,116 @@
+/* ValuEngine design tokens.
+   Two themes: "observatory" (dark, default) and "paper" (light editorial).
+   Every colour used by components and charts comes from here. */
+
+:root,
+[data-theme='observatory'] {
+  color-scheme: dark;
+
+  --bg-0: #04050a;
+  --bg-1: #080a11;
+  --bg-2: #0d1018;
+  --bg-3: #131723;
+  --bg-4: #1a1f2e;
+  --glass: rgba(255, 255, 255, 0.026);
+  --glass-2: rgba(255, 255, 255, 0.045);
+  --glass-3: rgba(255, 255, 255, 0.07);
+  --scrim: rgba(4, 5, 10, 0.72);
+
+  --line: rgba(236, 226, 205, 0.075);
+  --line-2: rgba(236, 226, 205, 0.13);
+  --line-3: rgba(236, 226, 205, 0.22);
+
+  --text-0: #f3eee4;
+  --text-1: #c3bdb1;
+  --text-2: #8f897e;
+  --text-3: #625d55;
+
+  --gold: #e6c27d;
+  --gold-hi: #f6dca6;
+  --gold-lo: #a17f41;
+  --gold-glow: rgba(230, 194, 125, 0.34);
+  --gold-wash: rgba(230, 194, 125, 0.08);
+
+  --aurora: #7ee6d8;
+  --aurora-lo: #2e9d90;
+  --aurora-wash: rgba(126, 230, 216, 0.09);
+  --ember: #ff7c5c;
+  --ember-lo: #c2492d;
+  --ember-wash: rgba(255, 124, 92, 0.09);
+  --violet: #aa9dff;
+  --sky: #8ec9ff;
+  --amber: #f2b45a;
+
+  --positive: var(--aurora);
+  --negative: var(--ember);
+  --warning: var(--amber);
+
+  --grain-opacity: 0.055;
+  --glow-strength: 1;
+  --panel-shadow: 0 1px 0 rgba(255, 255, 255, 0.035) inset, 0 30px 60px -40px rgba(0, 0, 0, 0.9);
+  --lift-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.85), 0 0 0 1px var(--line-2);
+}
+
+[data-theme='paper'] {
+  color-scheme: light;
+
+  --bg-0: #efe9dd;
+  --bg-1: #f6f2ea;
+  --bg-2: #fbf8f2;
+  --bg-3: #ece5d7;
+  --bg-4: #e2d9c7;
+  --glass: rgba(40, 32, 18, 0.028);
+  --glass-2: rgba(40, 32, 18, 0.05);
+  --glass-3: rgba(40, 32, 18, 0.08);
+  --scrim: rgba(239, 233, 221, 0.78);
+
+  --line: rgba(38, 30, 16, 0.1);
+  --line-2: rgba(38, 30, 16, 0.16);
+  --line-3: rgba(38, 30, 16, 0.26);
+
+  --text-0: #15130e;
+  --text-1: #454036;
+  --text-2: #6d665a;
+  --text-3: #9a9281;
+
+  --gold: #946b26;
+  --gold-hi: #7a5519;
+  --gold-lo: #b99254;
+  --gold-glow: rgba(148, 107, 38, 0.25);
+  --gold-wash: rgba(148, 107, 38, 0.08);
+
+  --aurora: #0d877b;
+  --aurora-lo: #0a6a60;
+  --aurora-wash: rgba(13, 135, 123, 0.08);
+  --ember: #c9472a;
+  --ember-lo: #a13820;
+  --ember-wash: rgba(201, 71, 42, 0.08);
+  --violet: #5a48cf;
+  --sky: #2f6fb3;
+  --amber: #b9771a;
+
+  --grain-opacity: 0.035;
+  --glow-strength: 0;
+  --panel-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 20px 40px -30px rgba(60, 40, 10, 0.35);
+  --lift-shadow: 0 24px 50px -28px rgba(60, 40, 10, 0.45), 0 0 0 1px var(--line-2);
+}
+
+:root {
+  --font-display: 'Instrument Serif', 'Iowan Old Style', 'Times New Roman', serif;
+  --font-sans: 'Geist Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --topbar-h: 64px;
+  --rail-w: 232px;
+  --content-max: 1480px;
+}

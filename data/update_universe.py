@@ -2,7 +2,7 @@ import csv
 import os
 from pathlib import Path
 
-PROJECT_ROOT = Path(r"c:\Users\kanik\Desktop\valuengine")
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CSV_PATH = PROJECT_ROOT / "data" / "company_universe.csv"
 
 us_companies = [
@@ -68,7 +68,7 @@ us_companies = [
     ("MET", "MetLife, Inc.", "NYSE", "USA", "USD", "Financials", "Life & Health Insurance", "Tier 1"),
     ("PRU", "Prudential Financial, Inc.", "NYSE", "USA", "USD", "Financials", "Life & Health Insurance", "Tier 1"),
     ("AFL", "AFLAC Incorporated", "NYSE", "USA", "USD", "Financials", "Life & Health Insurance", "Tier 1"),
-    ("MMC", "Marsh & McLennan Companies, Inc.", "NYSE", "USA", "USD", "Financials", "Insurance Brokers", "Tier 1"),
+    ("MRSH", "Marsh & McLennan Companies, Inc.", "NYSE", "USA", "USD", "Financials", "Insurance Brokers", "Tier 1"),
     ("AON", "Aon plc", "NYSE", "USA", "USD", "Financials", "Insurance Brokers", "Tier 1"),
     ("AJG", "Arthur J. Gallagher & Co.", "NYSE", "USA", "USD", "Financials", "Insurance Brokers", "Tier 2"),
     ("PNC", "The PNC Financial Services Group, Inc.", "NYSE", "USA", "USD", "Financials", "Regional Banks", "Tier 1"),
@@ -141,7 +141,6 @@ us_companies = [
     ("CL", "Colgate-Palmolive Company", "NYSE", "USA", "USD", "Consumer Staples", "Household Products", "Tier 1"),
     ("KMB", "Kimberly-Clark Corporation", "NYSE", "USA", "USD", "Consumer Staples", "Household Products", "Tier 1"),
     ("GIS", "General Mills, Inc.", "NYSE", "USA", "USD", "Consumer Staples", "Packaged Foods & Meats", "Tier 2"),
-    ("K", "Kellanova", "NYSE", "USA", "USD", "Consumer Staples", "Packaged Foods & Meats", "Tier 2"),
     ("KHC", "The Kraft Heinz Company", "NASDAQ", "USA", "USD", "Consumer Staples", "Packaged Foods & Meats", "Tier 1"),
     ("HSY", "The Hershey Company", "NYSE", "USA", "USD", "Consumer Staples", "Packaged Foods & Meats", "Tier 2"),
     ("STZ", "Constellation Brands, Inc.", "NYSE", "USA", "USD", "Consumer Staples", "Distillers & Vintners", "Tier 2"),
@@ -160,11 +159,9 @@ us_companies = [
     ("T", "AT&T Inc.", "NYSE", "USA", "USD", "Communication Services", "Integrated Telecommunication Services", "Tier 1"),
     ("TMUS", "T-Mobile US, Inc.", "NASDAQ", "USA", "USD", "Communication Services", "Wireless Telecommunication Services", "Tier 1"),
     ("CHTR", "Charter Communications, Inc.", "NASDAQ", "USA", "USD", "Communication Services", "Cable & Satellite", "Tier 2"),
-    ("EA", "Electronic Arts Inc.", "NASDAQ", "USA", "USD", "Communication Services", "Interactive Home Entertainment", "Tier 2"),
     ("TTWO", "Take-Two Interactive Software, Inc.", "NASDAQ", "USA", "USD", "Communication Services", "Interactive Home Entertainment", "Tier 2"),
     ("WBD", "Warner Bros. Discovery, Inc.", "NASDAQ", "USA", "USD", "Communication Services", "Movies & Entertainment", "Tier 2"),
     ("OMC", "Omnicom Group Inc.", "NYSE", "USA", "USD", "Communication Services", "Advertising", "Tier 2"),
-    ("IPG", "The Interpublic Group of Companies, Inc.", "NYSE", "USA", "USD", "Communication Services", "Advertising", "Tier 2"),
     ("SPOT", "Spotify Technology S.A.", "NYSE", "USA", "USD", "Communication Services", "Interactive Media & Services", "Tier 1"),
 
     # Industrials (22)
@@ -278,7 +275,6 @@ indian_companies = [
     ("INFY.NSE", "Infosys Limited", "NSE", "India", "INR", "Information Technology", "IT Consulting & Software", "Tier 1"),
     ("HCLTECH.NSE", "HCL Technologies Limited", "NSE", "India", "INR", "Information Technology", "IT Consulting & Software", "Tier 1"),
     ("WIPRO.NSE", "Wipro Limited", "NSE", "India", "INR", "Information Technology", "IT Consulting & Software", "Tier 1"),
-    ("LTIM.NSE", "LTIMindtree Limited", "NSE", "India", "INR", "Information Technology", "IT Consulting & Software", "Tier 1"),
     ("TECHM.NSE", "Tech Mahindra Limited", "NSE", "India", "INR", "Information Technology", "IT Consulting & Software", "Tier 1"),
     ("PERSISTENT.NSE", "Persistent Systems Limited", "NSE", "India", "INR", "Information Technology", "Software Product Engineering", "Tier 1"),
     ("COFORGE.NSE", "Coforge Limited", "NSE", "India", "INR", "Information Technology", "IT Solutions", "Tier 1"),
@@ -316,7 +312,7 @@ indian_companies = [
     ("JYOTHYLAB.NSE", "Jyothy Labs Limited", "NSE", "India", "INR", "Consumer Staples", "Fabric & Dish Care", "Tier 2"),
     ("RADICO.NSE", "Radico Khaitan Limited", "NSE", "India", "INR", "Consumer Staples", "Distilleries & Beverages", "Tier 2"),
     ("UBL.NSE", "United Breweries Limited", "NSE", "India", "INR", "Consumer Staples", "Brewing & Alcoholic Beverages", "Tier 2"),
-    ("MCDOWELL-N.NSE", "United Spirits Limited", "NSE", "India", "INR", "Consumer Staples", "Distilleries & Alcoholic Beverages", "Tier 1"),
+    ("UNITDSPR.NSE", "United Spirits Limited", "NSE", "India", "INR", "Consumer Staples", "Distilleries & Alcoholic Beverages", "Tier 1"),
     ("BIKAJI.NSE", "Bikaji Foods International Limited", "NSE", "India", "INR", "Consumer Staples", "Ethnic Snacks & Sweets", "Tier 2"),
     ("AWL.NSE", "Adani Wilmar Limited", "NSE", "India", "INR", "Consumer Staples", "Edible Oils & Food FMCG", "Tier 2"),
     ("PATANJALI.NSE", "Patanjali Foods Limited", "NSE", "India", "INR", "Consumer Staples", "Edible Oils & Food Products", "Tier 2"),
@@ -324,7 +320,8 @@ indian_companies = [
 
     # Consumer Discretionary (22)
     ("MARUTI.NSE", "Maruti Suzuki India Limited", "NSE", "India", "INR", "Consumer Discretionary", "Passenger Vehicles", "Tier 1"),
-    ("TATAMOTORS.NSE", "Tata Motors Limited", "NSE", "India", "INR", "Consumer Discretionary", "Commercial & Passenger Vehicles", "Tier 1"),
+    ("TMPV.NSE", "Tata Motors Passenger Vehicles Limited", "NSE", "India", "INR", "Consumer Discretionary", "Passenger & Electric Vehicles", "Tier 1"),
+    ("TMCV.NSE", "Tata Motors Limited (Commercial Vehicles)", "NSE", "India", "INR", "Industrials", "Commercial Vehicles", "Tier 1"),
     ("M&M.NSE", "Mahindra & Mahindra Limited", "NSE", "India", "INR", "Consumer Discretionary", "Automobiles & Farm Equipment", "Tier 1"),
     ("BAJAJ-AUTO.NSE", "Bajaj Auto Limited", "NSE", "India", "INR", "Consumer Discretionary", "Two & Three Wheelers", "Tier 1"),
     ("EICHERMOT.NSE", "Eicher Motors Limited", "NSE", "India", "INR", "Consumer Discretionary", "Motorcycles & Commercial Vehicles", "Tier 1"),
@@ -333,9 +330,8 @@ indian_companies = [
     ("TITAN.NSE", "Titan Company Limited", "NSE", "India", "INR", "Consumer Discretionary", "Jewellery & Watches", "Tier 1"),
     ("TRENT.NSE", "Trent Limited", "NSE", "India", "INR", "Consumer Discretionary", "Apparel & Lifestyle Retail", "Tier 1"),
     ("DMART.NSE", "Avenue Supermarts Limited", "NSE", "India", "INR", "Consumer Discretionary", "Hypermarkets & Supermarkets", "Tier 1"),
-    ("ZOMATO.NSE", "Zomato Limited", "NSE", "India", "INR", "Consumer Discretionary", "Online Food Delivery & Quick Commerce", "Tier 1"),
+    ("ETERNAL.NSE", "Eternal Limited (Zomato)", "NSE", "India", "INR", "Consumer Discretionary", "Online Food Delivery & Quick Commerce", "Tier 1"),
     ("PAGEIND.NSE", "Page Industries Limited", "NSE", "India", "INR", "Consumer Discretionary", "Apparel & Innerwear", "Tier 2"),
-    ("VEDANTFASH.NSE", "Vedant Fashions Limited", "NSE", "India", "INR", "Consumer Discretionary", "Ethnic Wear Retail", "Tier 2"),
     ("BATAINDIA.NSE", "Bata India Limited", "NSE", "India", "INR", "Consumer Discretionary", "Footwear", "Tier 2"),
     ("RELAXO.NSE", "Relaxo Footwears Limited", "NSE", "India", "INR", "Consumer Discretionary", "Footwear", "Tier 2"),
     ("JUBLFOOD.NSE", "Jubilant FoodWorks Limited", "NSE", "India", "INR", "Consumer Discretionary", "Quick Service Restaurants", "Tier 2"),
@@ -386,7 +382,7 @@ indian_companies = [
     ("ADANIPORTS.NSE", "Adani Ports and Special Economic Zone", "NSE", "India", "INR", "Industrials", "Port Operations & Marine Terminals", "Tier 1"),
     ("JSWINFRA.NSE", "JSW Infrastructure Limited", "NSE", "India", "INR", "Industrials", "Port Terminals & Logistics", "Tier 2"),
     ("BHARATFORG.NSE", "Bharat Forge Limited", "NSE", "India", "INR", "Industrials", "Industrial Forgings & Auto Components", "Tier 1"),
-    ("GMRINFRA.NSE", "GMR Airports Infrastructure Limited", "NSE", "India", "INR", "Industrials", "Airport Development & Management", "Tier 2"),
+    ("GMRAIRPORT.NSE", "GMR Airports Limited", "NSE", "India", "INR", "Industrials", "Airport Development & Management", "Tier 2"),
 
     # Materials (18)
     ("TATASTEEL.NSE", "Tata Steel Limited", "NSE", "India", "INR", "Materials", "Steel Manufacturing", "Tier 1"),
@@ -419,7 +415,6 @@ indian_companies = [
     ("OIL.NSE", "Oil India Limited", "NSE", "India", "INR", "Energy", "Crude Oil & Natural Gas Exploration", "Tier 2"),
     ("IGL.NSE", "Indraprastha Gas Limited", "NSE", "India", "INR", "Energy", "City Gas Distribution", "Tier 2"),
     ("MGL.NSE", "Mahanagar Gas Limited", "NSE", "India", "INR", "Energy", "City Gas Distribution", "Tier 2"),
-    ("GUJGASLTD.NSE", "Gujarat Gas Limited", "NSE", "India", "INR", "Energy", "City Gas Distribution", "Tier 2"),
     ("MRPL.NSE", "Mangalore Refinery and Petrochemicals", "NSE", "India", "INR", "Energy", "Petroleum Refining", "Tier 2"),
 
     # Utilities (12)
@@ -447,7 +442,7 @@ indian_companies = [
     # Real Estate (8)
     ("DLF.NSE", "DLF Limited", "NSE", "India", "INR", "Real Estate", "Real Estate Development", "Tier 1"),
     ("GODREJPROP.NSE", "Godrej Properties Limited", "NSE", "India", "INR", "Real Estate", "Residential Real Estate Development", "Tier 1"),
-    ("MACROTECH.NSE", "Macrotech Developers Limited (Lodha)", "NSE", "India", "INR", "Real Estate", "Residential & Commercial Development", "Tier 1"),
+    ("LODHA.NSE", "Lodha Developers Limited", "NSE", "India", "INR", "Real Estate", "Residential & Commercial Development", "Tier 1"),
     ("OBEROIRLTY.NSE", "Oberoi Realty Limited", "NSE", "India", "INR", "Real Estate", "Premium Real Estate Development", "Tier 2"),
     ("PHOENIXLTD.NSE", "The Phoenix Mills Limited", "NSE", "India", "INR", "Real Estate", "Retail Malls & Commercial Real Estate", "Tier 1"),
     ("PRESTIGE.NSE", "Prestige Estates Projects Limited", "NSE", "India", "INR", "Real Estate", "Diversified Real Estate Development", "Tier 2"),

@@ -1,74 +1,110 @@
+"""Request schemas.
+
+Every model endpoint accepts a Scenario: the analyst's assumptions for each model. Any field left
+as None falls back to the company-specific baseline, so the frontend can send only what the user
+changed and every downstream feature (Excel, health checks, Copilot, risk) sees the same inputs.
+"""
 from __future__ import annotations
 
-from typing import Any, Literal
-from pydantic import BaseModel, Field
+from typing import Literal
+
+from pydantic import BaseModel, ConfigDict, Field, field_validator
+
+DataMode = Literal["local", "live"]
+TICKER_PATTERN = r"^[A-Za-z0-9.\-&^]{1,20}$"
 
 
-Status = Literal["VALID", "REVIEW_REQUIRED", "INVALID", "UNAVAILABLE", "DEMO", "LIVE", "CACHED", "RATE_LIMITED", "LOCAL", "LOADING", "ERROR"]
+class StrictModel(BaseModel):
+    model_config = ConfigDict(extra="forbid")
 
 
-class ApiEnvelope(BaseModel):
-    status: Status
-    data: dict[str, Any] = Field(default_factory=dict)
-    warnings: list[str] = Field(default_factory=list)
-    errors: list[str] = Field(default_factory=list)
-    provenance: dict[str, Any] = Field(default_factory=dict)
+class DcfAssumptions(StrictModel):
+    revenue_growth: float | None = Field(None, gt=-0.5, lt=1.0)
+    ebitda_margin: float | None = Field(None, gt=-1.0, lt=1.0)
+    wacc: float | None = Field(None, gt=0.0, le=0.5)
+    terminal_growth: float | None = Field(None, gt=-0.1, lt=0.2)
+    tax_rate: float | None = Field(None, ge=0.0, lt=1.0)
+    capex_pct: float | None = Field(None, ge=0.0, lt=1.0)
+    da_pct: float | None = Field(None, ge=0.0, lt=1.0)
+    nwc_pct: float | None = Field(None, gt=-1.0, lt=1.0)
+    ronic: float | None = Field(None, gt=0.0, lt=2.0)
+    projection_years: int | None = Field(None, ge=1, le=15)
+    mid_year_convention: bool | None = None
+    terminal_method: Literal["perpetuity", "exit_multiple"] | None = None
+    exit_multiple: float | None = Field(None, gt=0.0, le=100.0)
 
 
-class CompanyRequest(BaseModel):
-    ticker: str = Field(min_length=1, max_length=12)
-    mode: str = Field(default="local")
+class ExcessReturnAssumptions(StrictModel):
+    roe: float | None = Field(None, gt=-0.5, lt=1.0)
+    terminal_roe: float | None = Field(None, gt=-0.5, lt=1.0)
+    cost_of_equity: float | None = Field(None, gt=0.0, le=0.5)
+    book_growth: float | None = Field(None, gt=-0.5, lt=0.5)
+    terminal_growth: float | None = Field(None, gt=-0.1, lt=0.2)
+    projection_years: int | None = Field(None, ge=1, le=15)
 
 
-class DcfRequest(CompanyRequest):
-    revenue_growth_rate: float = 0.07
-    ebitda_margin: float = 0.25
-    wacc: float = 0.085
-    terminal_growth_rate: float = 0.025
-    projection_years: int = Field(default=5, ge=1, le=10)
-    tax_rate: float = Field(default=0.21, ge=0, le=1)
-    mid_year_convention: bool = False
+class LboAssumptions(StrictModel):
+    entry_multiple: float | None = Field(None, gt=0.0, le=100.0)
+    exit_multiple: float | None = Field(None, gt=0.0, le=100.0)
+    senior_debt_turns: float | None = Field(None, ge=0.0, le=15.0)
+    sub_debt_turns: float | None = Field(None, ge=0.0, le=15.0)
+    senior_rate: float | None = Field(None, ge=0.0, lt=0.5)
+    sub_rate: float | None = Field(None, ge=0.0, lt=0.5)
+    revenue_growth: float | None = Field(None, gt=-0.5, lt=1.0)
+    target_ebitda_margin: float | None = Field(None, gt=0.0, lt=1.0)
+    fees_pct: float | None = Field(None, ge=0.0, lt=0.2)
+    projection_years: int | None = Field(None, ge=1, le=10)
+    tax_rate: float | None = Field(None, ge=0.0, lt=1.0)
 
 
-class MnaRequest(BaseModel):
-    target_ticker: str = "AAPL"
-    acquirer_ticker: str = "MSFT"
-    offer_premium_pct: float = 0.25
-    pct_cash: float = Field(default=0.5, ge=0, le=1)
-    pct_stock: float = Field(default=0.5, ge=0, le=1)
-    debt_interest_rate: float = Field(default=0.08, ge=0, le=1)
-    revenue_synergies: float = Field(default=0, ge=0)
-    incremental_margin: float = Field(default=0.20, ge=0, le=1)
-    cost_synergies: float = Field(default=0, ge=0)
-    integration_costs: float = Field(default=0, ge=0)
-    tax_rate: float = Field(default=0.21, ge=0, le=1)
-    mode: str = Field(default="local")
+class MnaAssumptions(StrictModel):
+    acquirer_ticker: str = Field(..., pattern=TICKER_PATTERN)
+    offer_premium_pct: float | None = Field(None, gt=-0.5, lt=3.0)
+    pct_stock: float = Field(0.5, ge=0.0, le=1.0)
+    pct_cash: float = Field(0.0, ge=0.0, le=1.0)
+    pct_debt: float = Field(0.5, ge=0.0, le=1.0)
+    debt_interest_rate: float | None = Field(None, ge=0.0, lt=0.5)
+    cash_yield: float | None = Field(None, ge=0.0, lt=0.5)
+    revenue_synergies: float = Field(0.0, ge=0.0)
+    incremental_margin: float = Field(0.20, ge=0.0, le=1.0)
+    cost_synergies: float = Field(0.0, ge=0.0)
+    integration_costs: float = Field(0.0, ge=0.0)
+    tax_rate: float | None = Field(None, ge=0.0, lt=1.0)
+
+    @field_validator("acquirer_ticker")
+    @classmethod
+    def upper(cls, value: str) -> str:
+        return value.strip().upper()
 
 
-class LboRequest(CompanyRequest):
-    entry_multiple: float = Field(default=10.0, gt=0)
-    senior_debt_pct: float = Field(default=0.4, ge=0, le=1)
-    sub_debt_pct: float = Field(default=0.2, ge=0, le=1)
-    senior_rate: float = Field(default=0.08, ge=0, le=1)
-    sub_rate: float = Field(default=0.10, ge=0, le=1)
-    exit_multiple: float = Field(default=11.0, gt=0)
-    revenue_growth: float = Field(default=0.07, ge=-0.5, le=1)
-    ebitda_margin: float = Field(default=0.25, gt=0, le=1)
-    projection_years: int = Field(default=5, ge=1, le=10)
-    tax_rate: float = Field(default=0.21, ge=0, le=1)
+class ScenarioRequest(StrictModel):
+    ticker: str = Field(..., pattern=TICKER_PATTERN)
+    mode: DataMode = "local"
+    dcf: DcfAssumptions = Field(default_factory=DcfAssumptions)
+    excess_return: ExcessReturnAssumptions = Field(default_factory=ExcessReturnAssumptions)
+    lbo: LboAssumptions = Field(default_factory=LboAssumptions)
+    mna: MnaAssumptions | None = None
+
+    @field_validator("ticker")
+    @classmethod
+    def upper(cls, value: str) -> str:
+        return value.strip().upper()
 
 
-class AnalyticsRequest(DcfRequest):
-    iterations: int = Field(default=300, ge=50, le=2000)
+class MonteCarloRequest(ScenarioRequest):
+    iterations: int = Field(5000, ge=500, le=20000)
+    seed: int = Field(2024, ge=0, le=2**31 - 1)
 
 
-class ExportRequest(BaseModel):
-    target_ticker: str = "AAPL"
-    acquirer_ticker: str = "MSFT"
-    mode: str = Field(default="local")
+class ChatMessage(StrictModel):
+    role: Literal["user", "assistant"]
+    content: str = Field(..., min_length=1, max_length=6000)
 
-class CopilotRequest(BaseModel):
-    message: str = Field(min_length=1)
-    ticker: str = Field(min_length=1, max_length=12)
-    context_scope: str = Field(default="current_company")
-    page_context: str = Field(default="dashboard")
+
+class CopilotRequest(StrictModel):
+    message: str = Field(..., min_length=1, max_length=2000)
+    ticker: str = Field(..., pattern=TICKER_PATTERN)
+    page: str = Field("dashboard", max_length=40)
+    mode: DataMode = "local"
+    history: list[ChatMessage] = Field(default_factory=list, max_length=12)
+    scenario: ScenarioRequest | None = None

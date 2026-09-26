@@ -1,103 +1,35 @@
-import { Fragment, useState, type ReactNode } from 'react'
-import type { Company, Status, DataMode } from '../types/api'
+import { useEffect, useRef, useState, type ButtonHTMLAttributes, type CSSProperties, type ReactNode } from 'react'
+import { motion } from 'framer-motion'
+import type { Flag, Status } from '../lib/api-types'
+import { cn } from '../lib/utils'
+import { IconAlert, IconCheck, IconInfo } from './icons'
 
-export const money = (value?: number, precise = false, currency: string = 'USD'): string => {
-  if (value === undefined || value === null || !Number.isFinite(value)) return 'UNAVAILABLE'
-  const isINR = currency?.toUpperCase() === 'INR'
-  const sym = isINR ? '₹' : '$'
-  const abs = Math.abs(value)
-
-  if (isINR) {
-    if (precise) {
-      return `${sym}${value.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-    }
-    if (abs >= 1e7) {
-      const cr = value / 1e7
-      return `${sym}${cr >= 1000 ? Math.round(cr).toLocaleString('en-IN') : cr.toFixed(1)} Cr`
-    }
-    if (abs >= 1e5) {
-      return `${sym}${(value / 1e5).toFixed(1)} L`
-    }
-    return `${sym}${value.toLocaleString('en-IN', { maximumFractionDigits: 1 })}`
-  }
-
-  if (precise) {
-    return `${sym}${value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-  }
-  if (abs >= 1e12) return `${sym}${(value / 1e12).toFixed(2)}T`
-  if (abs >= 1e9) return `${sym}${(value / 1e9).toFixed(1)}B`
-  if (abs >= 1e6) return `${sym}${(value / 1e6).toFixed(1)}M`
-  return `${sym}${value.toLocaleString('en-US', { maximumFractionDigits: 1 })}`
-}
-
-export const pct = (value?: number, digits = 1): string => {
-  if (value === undefined || value === null || !Number.isFinite(value)) return 'UNAVAILABLE'
-  return `${(value * 100).toFixed(digits)}%`
-}
-
-export const multiple = (value?: number, digits = 2): string => {
-  if (value === undefined || value === null || !Number.isFinite(value)) return 'UNAVAILABLE'
-  return `${value.toFixed(digits)}x`
-}
-
-export const num = (value?: number, compact = true): string => {
-  if (value === undefined || value === null || !Number.isFinite(value)) return 'UNAVAILABLE'
-  const abs = Math.abs(value)
-  if (compact) {
-    if (abs >= 1e9) return `${(value / 1e9).toFixed(1)}B`
-    if (abs >= 1e6) return `${(value / 1e6).toFixed(1)}M`
-  }
-  return value.toLocaleString('en-US', { maximumFractionDigits: 1 })
-}
-
-export function StatusBadge({ status }: { status: string }) {
-  const norm = (status || 'UNAVAILABLE').replace(/\s+/g, '_').toLowerCase()
-  const display = status === 'LOCAL' ? 'LOCAL DB' : status.replace(/_/g, ' ')
-  return <span className={`badge ${norm}`}>{display}</span>
-}
-
-export function MetricCard({
-  label,
-  value,
-  detail,
-  tone,
-}: {
-  label: string
-  value: string
-  detail?: string
-  tone?: 'positive' | 'negative' | 'neutral'
+/* ---------- Panel: glass surface with a cursor-following spotlight ---------- */
+export function Panel({ title, eyebrow, action, children, className, style, flush }: {
+  title?: ReactNode; eyebrow?: ReactNode; action?: ReactNode; children?: ReactNode; className?: string
+  style?: CSSProperties; flush?: boolean
 }) {
+  const ref = useRef<HTMLElement>(null)
   return (
-    <div className="metric-card">
-      <span className="metric-label">{label}</span>
-      <strong className={`metric-value ${tone || ''}`}>{value}</strong>
-      {detail && <small className="metric-detail">{detail}</small>}
-    </div>
-  )
-}
-
-export function Panel({
-  title,
-  eyebrow,
-  action,
-  children,
-  className = '',
-}: {
-  title?: string
-  eyebrow?: string
-  action?: ReactNode
-  children: ReactNode
-  className?: string
-}) {
-  return (
-    <section className={`panel ${className}`}>
+    <section
+      ref={ref}
+      className={cn('panel', flush && 'flush', className)}
+      style={style}
+      onPointerMove={(e) => {
+        const el = ref.current
+        if (!el) return
+        const rect = el.getBoundingClientRect()
+        el.style.setProperty('--mx', `${e.clientX - rect.left}px`)
+        el.style.setProperty('--my', `${e.clientY - rect.top}px`)
+      }}
+    >
       {(title || eyebrow || action) && (
         <header className="panel-head">
           <div>
-            {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-            {title && <h2>{title}</h2>}
+            {eyebrow && <div className="eyebrow">{eyebrow}</div>}
+            {title && <h3 className="panel-title">{title}</h3>}
           </div>
-          {action}
+          {action && <div className="panel-action">{action}</div>}
         </header>
       )}
       {children}
@@ -105,272 +37,189 @@ export function Panel({
   )
 }
 
-export function DataState({
-  status,
-  errors,
-  children,
-  dataMode = 'local',
-}: {
-  status: Status | string
-  errors?: string[]
-  children: ReactNode
-  dataMode?: DataMode
+/* ---------- Animated number: tweens between values ---------- */
+export function AnimatedNumber({ value, format, duration = 700 }: { value: number | null | undefined; format: (v: number) => string; duration?: number }) {
+  const [display, setDisplay] = useState<number | null>(value ?? null)
+  const from = useRef<number | null>(value ?? null)
+  useEffect(() => {
+    if (value === null || value === undefined || !Number.isFinite(value)) {
+      setDisplay(null)
+      return
+    }
+    const start = from.current ?? value
+    const begin = performance.now()
+    let frame = 0
+    const step = (now: number) => {
+      const t = Math.min(1, (now - begin) / duration)
+      const eased = 1 - Math.pow(1 - t, 3)
+      const current = start + (value - start) * eased
+      setDisplay(current)
+      if (t < 1) frame = requestAnimationFrame(step)
+      else from.current = value
+    }
+    frame = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(frame)
+  }, [value, duration])
+  return <>{display === null ? '—' : format(display)}</>
+}
+
+/* ---------- Stat ---------- */
+export function Stat({ label, value, sub, tone, size = 'md', hint }: {
+  label: ReactNode; value: ReactNode; sub?: ReactNode; tone?: 'pos' | 'neg' | 'gold' | ''; size?: 'sm' | 'md' | 'lg' | 'xl'; hint?: string
 }) {
-  if (status === 'INVALID' || status === 'UNAVAILABLE' || status === 'ERROR') {
-    const errorMsg = errors?.[0] || 'This model output is currently unavailable.'
-    return (
-      <div className="empty-state">
-        <StatusBadge status={status} />
-        <p className="empty-state-title">{errorMsg}</p>
-        {status === 'UNAVAILABLE' && dataMode === 'local' && (
-          <small className="empty-state-hint">
-            Tip: 389 companies are pre-loaded in the Local Dataset. Switch to Live API if looking for other global tickers.
-          </small>
-        )}
-      </div>
-    )
-  }
+  return (
+    <div className={cn('stat', `stat-${size}`)} title={hint}>
+      <div className="stat-label">{label}</div>
+      <div className={cn('stat-value num', tone)}>{value}</div>
+      {sub && <div className="stat-sub">{sub}</div>}
+    </div>
+  )
+}
+
+/* ---------- Status pill ---------- */
+const STATUS_TEXT: Partial<Record<Status | string, [string, string]>> = {
+  VALID: ['Valid', 'ok'],
+  REVIEW_REQUIRED: ['Review', 'warn'],
+  INVALID: ['Invalid', 'bad'],
+  UNAVAILABLE: ['Unavailable', 'off'],
+  LOCAL: ['Local data', 'info'],
+  LIVE: ['Live', 'live'],
+  CACHED: ['Cached', 'info'],
+  LOCAL_FALLBACK: ['Local fallback', 'warn'],
+  RATE_LIMITED: ['Rate limited', 'warn'],
+  ERROR: ['Error', 'bad'],
+}
+
+export function StatusPill({ status, label }: { status?: string | null; label?: string }) {
+  const [text, tone] = STATUS_TEXT[status ?? ''] ?? [status ?? '…', 'off']
+  return (
+    <span className={cn('pill', `pill-${tone}`)}>
+      <i className="pill-dot" />
+      {label ?? text}
+    </span>
+  )
+}
+
+export function Pill({ children, tone = 'off', className }: { children: ReactNode; tone?: 'ok' | 'warn' | 'bad' | 'info' | 'gold' | 'off'; className?: string }) {
+  return <span className={cn('pill', `pill-${tone}`, className)}>{children}</span>
+}
+
+/* ---------- Buttons ---------- */
+export function Button({ variant = 'ghost', icon, children, className, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: 'primary' | 'ghost' | 'quiet'; icon?: ReactNode
+}) {
+  return (
+    <button type="button" className={cn('btn', `btn-${variant}`, className)} {...props}>
+      {icon}
+      {children && <span>{children}</span>}
+    </button>
+  )
+}
+
+/* ---------- Segmented control with a sliding indicator ---------- */
+export function Segmented<V extends string>({ options, value, onChange, id, size = 'md' }: {
+  options: { value: V; label: ReactNode }[]; value: V; onChange: (value: V) => void; id: string; size?: 'sm' | 'md'
+}) {
+  return (
+    <div className={cn('segmented', `segmented-${size}`)} role="tablist">
+      {options.map((option) => (
+        <button key={option.value} type="button" role="tab" aria-selected={option.value === value}
+                className={cn('segmented-item', option.value === value && 'on')} onClick={() => onChange(option.value)}>
+          {option.value === value && <motion.span layoutId={`seg-${id}`} className="segmented-indicator" transition={{ type: 'spring', stiffness: 480, damping: 38 }} />}
+          <span className="segmented-label">{option.label}</span>
+        </button>
+      ))}
+    </div>
+  )
+}
+
+/* ---------- Loading / empty ---------- */
+export function Skeleton({ height = 18, width = '100%', radius = 8, className }: { height?: number | string; width?: number | string; radius?: number; className?: string }) {
+  return <div className={cn('skeleton', className)} style={{ height, width, borderRadius: radius }} />
+}
+
+export function Orbit({ label }: { label?: string }) {
+  return (
+    <div className="orbit-loader" role="status">
+      <span className="orbit-ring a" />
+      <span className="orbit-ring b" />
+      <span className="orbit-core" />
+      {label && <span className="orbit-label">{label}</span>}
+    </div>
+  )
+}
+
+export function Empty({ title, message, action }: { title: string; message?: ReactNode; action?: ReactNode }) {
+  return (
+    <div className="empty">
+      <div className="empty-mark" aria-hidden="true"><span /><span /><span /></div>
+      <h4>{title}</h4>
+      {message && <p>{message}</p>}
+      {action}
+    </div>
+  )
+}
+
+/** Loading / error / empty handling for an envelope-backed block. */
+export function Gate({ loading, error, children, minHeight = 160, label }: {
+  loading: boolean; error?: string | null; children: ReactNode; minHeight?: number; label?: string
+}) {
+  if (loading) return <div className="gate" style={{ minHeight }}><Orbit label={label ?? 'Computing'} /></div>
+  if (error) return <div className="gate" style={{ minHeight }}><Empty title="Not available" message={error} /></div>
   return <>{children}</>
 }
 
-export function CompanyHeader({
-  company,
-  modelStatus = 'VALID',
-  dataMode = 'local',
-}: {
-  company?: Partial<Company> | null
-  modelStatus?: string
-  dataMode?: DataMode
-}) {
-  if (!company || !company.ticker) {
-    return (
-      <div className="company-header skeleton">
-        <div className="company-identity">
-          <div className="company-mark">VE</div>
-          <div>
-            <p className="eyebrow">COMPANY CONTEXT</p>
-            <h1>LOADING ASSET...</h1>
-          </div>
-        </div>
-      </div>
-    )
+/* ---------- Flags ---------- */
+export function Flags({ flags, empty = 'Nothing to review.' }: { flags: Flag[]; empty?: string }) {
+  if (!flags.length) {
+    return <div className="flags-empty"><IconCheck size={15} /> {empty}</div>
   }
-
-  const isIndia = Boolean(company.ticker?.endsWith('.NSE') || company.ticker?.endsWith('.BSE') || company.currency === 'INR')
-  const countryFlag = isIndia ? '🇮🇳 India' : '🇺🇸 United States'
-  const curr = company.currency || (isIndia ? 'INR' : 'USD')
-
   return (
-    <div className="company-header">
-      <div className="company-identity">
-        <div className="company-mark" aria-hidden="true">
-          {company.ticker.replace(/\..*$/, '').slice(0, 2)}
+    <ul className="flags">
+      {flags.map((flag, i) => (
+        <li key={`${flag.code}-${i}`} className={cn('flag', `flag-${flag.severity.toLowerCase()}`)}>
+          <span className="flag-icon">{flag.severity === 'INFO' ? <IconInfo size={14} /> : <IconAlert size={14} />}</span>
+          <span className="flag-body">
+            <b>{flag.module}</b>
+            {flag.message}
+          </span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+/* ---------- Key/value list ---------- */
+export function KeyValues({ rows }: { rows: [ReactNode, ReactNode, string?][] }) {
+  return (
+    <dl className="kv">
+      {rows.map(([k, v, tone], i) => (
+        <div key={i} className="kv-row">
+          <dt>{k}</dt>
+          <dd className={cn('num', tone)}>{v}</dd>
         </div>
-        <div>
-          <div className="company-tagline">
-            <p className="eyebrow">ACTIVE CONTEXT</p>
-            <span className="source-tag">{dataMode === 'local' ? '🏛 LOCAL DATASET (389)' : '⚡ LIVE API'}</span>
-          </div>
-          <h1>{company.company_name}</h1>
-          <p className="company-sub">
-            <span className="ticker-badge">{company.ticker}</span>
-            <span>·</span>
-            <span>{company.exchange}</span>
-            <span>·</span>
-            <span>{countryFlag}</span>
-            <span>·</span>
-            <span>{company.sector}</span>
-            {company.industry && (
-              <>
-                <span>·</span>
-                <span className="industry-text">{company.industry}</span>
-              </>
-            )}
-          </p>
-        </div>
-      </div>
-      <div className="company-values">
-        <div>
-          <span>Current Price</span>
-          <strong>{money(company.current_price, true, curr)}</strong>
-        </div>
-        <div>
-          <span>Market Cap</span>
-          <strong>{money(company.market_cap, false, curr)}</strong>
-        </div>
-        {typeof company.beta === 'number' && Number.isFinite(company.beta) && (
-          <div>
-            <span>Beta</span>
-            <strong>{company.beta.toFixed(2)}</strong>
-          </div>
-        )}
-        <StatusBadge status={modelStatus} />
-      </div>
+      ))}
+    </dl>
+  )
+}
+
+export function Meter({ value, tone = 'gold', label }: { value: number; tone?: 'gold' | 'pos' | 'neg'; label?: string }) {
+  return (
+    <div className="meter" aria-label={label}>
+      <div className={cn('meter-fill', tone)} style={{ width: `${Math.max(0, Math.min(1, value)) * 100}%` }} />
     </div>
   )
 }
 
-export function FinancialTable({
-  rows,
-  currency = 'USD',
-}: {
-  rows: Record<string, unknown>[]
-  currency?: string
-}) {
-  if (!rows || !rows.length) {
-    return (
-      <div className="empty-state compact">
-        <p>NO RECORDS AVAILABLE</p>
-      </div>
-    )
-  }
-
-  const columns = Object.keys(rows[0])
-
-  const formatCell = (colName: string, val: unknown) => {
-    if (val === null || val === undefined) return '—'
-    if (typeof val === 'number') {
-      const lower = colName.toLowerCase()
-      if (lower.includes('pct') || lower.includes('margin') || lower.includes('growth') || lower.includes('irr') || lower.includes('rate') || lower.includes('p_value')) {
-        return pct(val)
-      }
-      if (lower.includes('multiple') || lower.includes('moic') || lower.includes('ev /') || lower.includes('p / e')) {
-        return `${val.toFixed(2)}x`
-      }
-      if (lower === 'year' || lower === 'horizon' || lower === 'observations' || lower === 'count') {
-        return String(val)
-      }
-      if (lower.includes('price') || lower.includes('revenue') || lower.includes('ebit') || lower.includes('income') || lower.includes('debt') || lower.includes('cash') || lower.includes('capex') || lower.includes('ufcf') || lower.includes('taxes') || lower.includes('equity') || lower.includes('value')) {
-        return money(val, lower.includes('price'), currency)
-      }
-      return num(val)
-    }
-    return String(val)
-  }
-
+export function PageTitle({ eyebrow, title, lede, actions }: { eyebrow: string; title: ReactNode; lede?: ReactNode; actions?: ReactNode }) {
   return (
-    <div className="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            {columns.map((c) => (
-              <th key={c}>{c.replace(/_/g, ' ').toUpperCase()}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, index) => (
-            <tr key={index}>
-              {columns.map((c) => {
-                const val = row[c]
-                const isNum = typeof val === 'number'
-                return (
-                  <td className={isNum ? 'numeric' : ''} key={c}>
-                    {formatCell(c, val)}
-                  </td>
-                )
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
-}
-
-export function Heatmap({
-  rows,
-  cols,
-  values,
-  format = 'price',
-  rowLabel = 'Terminal Growth',
-  colLabel = 'WACC',
-  currency = 'USD',
-  baseRowIdx = 2,
-  baseColIdx = 2,
-}: {
-  rows: number[]
-  cols: number[]
-  values: (number | null)[][]
-  format?: 'pct' | 'price'
-  rowLabel?: string
-  colLabel?: string
-  currency?: string
-  baseRowIdx?: number
-  baseColIdx?: number
-}) {
-  const [hovered, setHovered] = useState<{ r: number; c: number; val: number | null } | null>(null)
-
-  const valid = values.flat().filter((v): v is number => v !== null && Number.isFinite(v))
-  if (!valid.length) {
-    return (
-      <div className="empty-state compact">
-        <p>SENSITIVITY MATRIX UNAVAILABLE</p>
+    <div className="page-title reveal">
+      <div>
+        <div className="eyebrow">{eyebrow}</div>
+        <h1 className="display page-h1">{title}</h1>
+        {lede && <p className="page-lede">{lede}</p>}
       </div>
-    )
-  }
-
-  const low = Math.min(...valid)
-  const high = Math.max(...valid)
-
-  return (
-    <div className="heatmap-container">
-      <div className="heatmap-header-labels">
-        <span className="axis-title-col">{colLabel} →</span>
-      </div>
-      <div className="heatmap-with-axes">
-        <div className="heatmap-row-axis-title">
-          <span>{rowLabel}</span>
-        </div>
-        <div className="heatmap" style={{ gridTemplateColumns: `80px repeat(${cols.length}, 1fr)` }}>
-          <div className="heat-corner-label">Growth \ WACC</div>
-          {cols.map((c, i) => (
-            <span className={`heat-label col-header ${i === baseColIdx ? 'base-axis' : ''}`} key={`col-${i}`}>
-              {pct(c)}
-            </span>
-          ))}
-          {rows.map((rowVal, r) => (
-            <Fragment key={`row-${r}`}>
-              <span className={`heat-label row-header ${r === baseRowIdx ? 'base-axis' : ''}`}>{pct(rowVal)}</span>
-              {values[r]?.map((value, c) => {
-                const isBase = r === baseRowIdx && c === baseColIdx
-                const intensity = value === null || high === low ? 0.35 : 0.15 + 0.75 * ((value - low) / (high - low))
-                const formattedVal = value === null ? '—' : format === 'price' ? money(value, true, currency) : pct(value)
-
-                return (
-                  <span
-                    key={`${r}-${c}`}
-                    className={`heat-cell ${isBase ? 'base-case' : ''}`}
-                    style={{
-                      backgroundColor: value === null ? '#131e33' : `rgba(79, 70, 229, ${intensity})`,
-                    }}
-                    onMouseEnter={() => setHovered({ r, c, val: value })}
-                    onMouseLeave={() => setHovered(null)}
-                  >
-                    {isBase && <span className="base-tag">BASE</span>}
-                    {formattedVal}
-                  </span>
-                )
-              })}
-            </Fragment>
-          ))}
-        </div>
-      </div>
-      {hovered && (
-        <div className="heatmap-tooltip">
-          <span>
-            {rowLabel}: <strong>{pct(rows[hovered.r])}</strong>
-          </span>
-          <span>·</span>
-          <span>
-            {colLabel}: <strong>{pct(cols[hovered.c])}</strong>
-          </span>
-          <span>·</span>
-          <span>
-            Implied Value: <strong>{hovered.val !== null ? (format === 'price' ? money(hovered.val, true, currency) : pct(hovered.val)) : '—'}</strong>
-          </span>
-        </div>
-      )}
+      {actions && <div className="page-actions">{actions}</div>}
     </div>
   )
 }

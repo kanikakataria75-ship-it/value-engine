@@ -1,0 +1,5 @@
+-r requirements.txt
+pytest==9.1.1
+httpx==0.28.1        # FastAPI TestClient
+formulas==1.3.4      # evaluates exported workbooks in the Python-vs-Excel reconciliation test
+statsmodels==0.14.6  # reference implementation for the Newey-West regression test

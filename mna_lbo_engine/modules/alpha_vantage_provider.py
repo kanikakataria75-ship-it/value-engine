@@ -191,15 +191,11 @@ class AlphaVantageProvider:
 
     @staticmethod
     def _is_rate_limit_message(message: Any) -> bool:
+        """Throttling notices trip the circuit breaker; other notices (e.g. an invalid key) do not."""
         text = str(message).lower()
-        return (
-            "request" in text
-            or "frequency" in text
-            or "rate" in text
-            or "spread" in text
-            or "standard api" in text
-            or "api key" in text
-        )
+        if "invalid api key" in text or "apikey is invalid" in text:
+            return False
+        return any(marker in text for marker in ("frequency", "rate limit", "requests per", "standard api", "spread out", "premium"))
 
     def fetch_company_financials(self, ticker: str) -> dict[str, Any]:
         symbol = ticker.strip().upper()
@@ -215,10 +211,8 @@ class AlphaVantageProvider:
                 if age < CACHE_TTL_SECONDS:
                     logger.info("Serving company financials for %s from active memory cache (age=%.1fs)", symbol, age)
                     res = cached_data.copy()
-                    res["_provenance"] = "CACHED"
                     res["provenance"] = cached_data["provenance"].copy()
                     res["provenance"]["source"] = "Alpha Vantage (Cached)"
-                    res["provenance"]["provenance"] = "CACHED"
                     res["provenance"]["source_type"] = "CACHED"
                     res["provenance"]["notice"] = "Served from local provider memory cache."
                     return res
@@ -226,10 +220,8 @@ class AlphaVantageProvider:
                     # Reuse stale cache if circuit breaker is open
                     logger.info("Serving company financials for %s from stale memory cache during circuit breaker active state", symbol)
                     res = cached_data.copy()
-                    res["_provenance"] = "CACHED"
                     res["provenance"] = cached_data["provenance"].copy()
                     res["provenance"]["source"] = "Alpha Vantage (Cached Stale)"
-                    res["provenance"]["provenance"] = "CACHED"
                     res["provenance"]["source_type"] = "CACHED"
                     res["provenance"]["notice"] = "Rate-limit circuit breaker active. Serving cached provider data."
                     return res
@@ -381,20 +373,21 @@ def normalize_alpha_vantage(
         "total_assets": _number(balance_report.get("totalAssets")),
         "total_liabilities": _number(balance_report.get("totalLiabilities")),
         "beta": _number(overview.get("Beta")),
+        "period": None if period == "UNAVAILABLE" else period,
+        "retrieved_at": retrieved_at,
         "historical_prices": [],
         "provenance": {
             "source": "Alpha Vantage",
-            "provenance": "LIVE",
             "source_type": "LIVE",
             "source_name": "Alpha Vantage",
             "provider": "Alpha Vantage",
             "ticker": ticker,
-            "period": period,
+            "period_end": None if period == "UNAVAILABLE" else period,
+            "period_type": "FY",
             "currency": overview.get("Currency") or None,
             "retrieved_at": retrieved_at,
             "functions": functions,
             "derived_fields": derived_fields,
         },
-        "_provenance": "LIVE",
     }
     return result

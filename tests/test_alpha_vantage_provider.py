@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import pytest
 
-from backend.services import valuation_service as service
 from mna_lbo_engine.modules.alpha_vantage_provider import (
     AlphaVantageInvalidTicker,
     AlphaVantageProvider,
@@ -102,8 +101,8 @@ def test_provider_normalizes_successful_company_response_with_live_provenance(ti
     assert result["capex"] == 20000.0
     assert result["total_debt"] == 50000.0
     assert result["provenance"]["source"] == "Alpha Vantage"
-    assert result["provenance"]["provenance"] == "LIVE"
-    assert result["_provenance"] == "LIVE"
+    assert result["provenance"]["source_type"] == "LIVE"
+    assert result["period"] == "2025-12-31"
     assert result["historical_prices"] == [{"date": "2025-12-31", "close": 100.5, "volume": 12345.0}]
     assert len(session.calls) == 6
 
@@ -131,11 +130,10 @@ def test_provider_caching_and_subsequent_request_provenance():
     provider = AlphaVantageProvider(api_key="TEST_ALPHA_VANTAGE_KEY", session=session)
     
     first = provider.fetch_company_financials("AAPL")
-    assert first["_provenance"] == "LIVE"
+    assert first["provenance"]["source_type"] == "LIVE"
     assert len(session.calls) == 6
 
     second = provider.fetch_company_financials("AAPL")
-    assert second["_provenance"] == "CACHED"
     assert second["provenance"]["source_type"] == "CACHED"
     # No additional HTTP calls made
     assert len(session.calls) == 6
@@ -158,16 +156,9 @@ def test_rate_limit_trips_circuit_breaker_and_activates_cooldown():
     assert len(rate_limited.calls) == initial_calls
 
 
-def test_api_company_handles_rate_limited_status_gracefully(monkeypatch):
-    from fastapi.testclient import TestClient
-    from backend.main import app
-
-    class RateLimitedLoader:
-        def fetch_company_financials(self, _ticker):
-            raise AlphaVantageRateLimited("Alpha Vantage rate-limit circuit breaker active.")
-
-    monkeypatch.setattr(service, "_data_loader", RateLimitedLoader())
-    response = TestClient(app).get("/api/company/AAPL").json()
-    assert response["status"] == "RATE_LIMITED"
-    assert response["provenance"]["source"] == "RATE_LIMITED"
-    assert "rate limited" in response["warnings"][0]
+def test_invalid_key_notice_does_not_trip_the_circuit_breaker():
+    session = MockSession({"OVERVIEW": {"Information": "Invalid API key. Please claim your free API key."}})
+    provider = AlphaVantageProvider(api_key="BAD", session=session)
+    with pytest.raises(AlphaVantageUnavailable):
+        provider.fetch_company_financials("AAPL")
+    assert provider.is_circuit_breaker_active() is False

@@ -1,141 +1,77 @@
+"""Model health and scenario scorecard.
+
+Aggregates the structured flags that every engine emits plus the data-quality findings into one
+status:
+  INVALID          an engine could not produce a result, or the data has hard errors
+  REVIEW_REQUIRED  results exist but an assumption or data point needs a second look
+  VALID            nothing to review
+A dilutive deal or a low IRR is an outcome, not a model error, so those are INFO flags.
 """
-Model Health Center & Deal Quality Engine.
-Computes Model Health (VALID, REVIEW REQUIRED, INVALID),
-Assumption Risk mapping, and a Deal Quality Score.
-"""
+from __future__ import annotations
 
-from typing import Dict, Any
+from typing import Any
 
-def evaluate_model_health(
-    dcf_res: Dict[str, Any], 
-    ma_res: Dict[str, Any], 
-    lbo_res: Dict[str, Any],
-    data_quality_issues: list
-) -> Dict[str, Any]:
-    """
-    Check critical errors across all modules.
-    Returns: status (🟢 VALID, 🟡 REVIEW REQUIRED, 🔴 INVALID) and a list of flags.
-    """
-    flags = []
-    is_invalid = False
-    is_warning = False
+from .common import flag
 
-    # Engine Status Checks
-    if dcf_res.get("status") == "INVALID":
-        flags.append(f"🔴 DCF Engine: {dcf_res.get('message', 'INVALID')}")
-        is_invalid = True
-    if ma_res.get("status") == "INVALID":
-        flags.append(f"🔴 M&A Engine: {ma_res.get('message', 'INVALID')}")
-        is_invalid = True
-    if lbo_res.get("status") == "INVALID":
-        flags.append(f"🔴 LBO Engine: {lbo_res.get('message', 'INVALID')}")
-        is_invalid = True
 
-    # DCF Checks
-    if not is_invalid and dcf_res.get("terminal_value", 0) < 0:
-        flags.append("🔴 DCF Terminal Value is negative.")
-        is_invalid = True
-    
-    spread = dcf_res.get("value_creation_spread", 0)
-    if spread < 0:
-        flags.append(f"🟡 DCF ROIC < WACC (Negative Spread: {spread*100:.1f}%).")
-        is_warning = True
-
-    # M&A Checks
-    if not is_invalid and ma_res.get("is_accretive") is False:
-        flags.append("🟡 M&A Deal is Dilutive to EPS.")
-        is_warning = True
-    
-    if not is_invalid and ma_res.get("break_even_pre_tax_synergy", 0) > (ma_res.get("pre_tax_synergies", 0) * 5):
-        flags.append("🔴 M&A Break-Even synergy required is highly unrealistic (>5x entered).")
-        is_invalid = True
-
-    # LBO Checks
-    if not is_invalid and lbo_res.get("sponsor_initial_equity", 0) <= 0:
-        flags.append("🔴 LBO Sponsor Initial Equity is zero or negative.")
-        is_invalid = True
-        
-    # Data Quality Checks
-    for issue in data_quality_issues:
-        if issue["severity"] == "HARD ERROR":
-            flags.append(f"🔴 Data: {issue['message']}")
-            is_invalid = True
+def evaluate_model_health(results: dict[str, dict[str, Any] | None], data_issues: list[dict[str, Any]]) -> dict[str, Any]:
+    flags: list[dict[str, str]] = []
+    for module, result in results.items():
+        if result is None:
+            continue
+        status = result.get("status")
+        if status == "INVALID":
+            flags.append(flag("INVALID", module, "ENGINE_INVALID", result.get("message") or f"{module} inputs are invalid."))
+        elif status == "UNAVAILABLE":
+            flags.append(flag("INFO", module, "ENGINE_UNAVAILABLE", result.get("message") or f"{module} is unavailable."))
+        flags.extend(result.get("flags") or [])
+    for issue in data_issues:
+        if issue["severity"] == "ERROR":
+            flags.append(flag("INVALID", "DATA", issue["rule"], issue["message"]))
         elif issue["severity"] == "WARNING":
-            flags.append(f"🟡 Data: {issue['message']}")
-            is_warning = True
+            flags.append(flag("REVIEW", "DATA", issue["rule"], issue["message"]))
 
-    status = "🟢 VALID"
-    if is_warning:
-        status = "🟡 REVIEW REQUIRED"
-    if is_invalid:
-        status = "🔴 INVALID"
-
-    return {
-        "status": status,
-        "flags": flags
-    }
-
-def calculate_deal_quality(
-    dcf_res: Dict[str, Any], 
-    ma_res: Dict[str, Any], 
-    lbo_res: Dict[str, Any],
-    comps_res: Dict[str, Any]
-) -> Dict[str, Any]:
-    """
-    Computes a transparent Deal Quality breakdown.
-    Refuses to score if any engine is invalid.
-    """
-    if any(res.get("status") == "INVALID" for res in [dcf_res, ma_res, lbo_res]):
-        return {"score": "UNAVAILABLE", "components": ["Model is INVALID."]}
-        
-    score = 0
-    components = []
-
-    # 1. Valuation Attractiveness (Spot vs DCF)
-    spot = dcf_res.get("current_price", 0)
-    intrinsic = dcf_res.get("implied_share_price", 0)
-    if intrinsic > spot * 1.2:
-        score += 20
-        components.append(f"✅ High Valuation Upside (Intrinsic {intrinsic:.2f} > Spot {spot:.2f}) [+20 pts]")
-    elif intrinsic > spot:
-        score += 10
-        components.append(f"✅ Moderate Valuation Upside [+10 pts]")
+    order = {"INVALID": 0, "REVIEW": 1, "INFO": 2}
+    flags.sort(key=lambda f: order.get(f["severity"], 3))
+    if any(f["severity"] == "INVALID" for f in flags):
+        status = "INVALID"
+    elif any(f["severity"] == "REVIEW" for f in flags):
+        status = "REVIEW_REQUIRED"
     else:
-        components.append(f"❌ Valuation Downside (Intrinsic {intrinsic:.2f} < Spot {spot:.2f}) [0 pts]")
+        status = "VALID"
+    counts = {level: sum(1 for f in flags if f["severity"] == level) for level in ("INVALID", "REVIEW", "INFO")}
+    return {"status": status, "flags": flags, "counts": counts}
 
-    # 2. EPS Accretion
-    if ma_res.get("is_accretive", False):
-        score += 20
-        components.append("✅ Deal is EPS Accretive [+20 pts]")
-    else:
-        components.append("❌ Deal is EPS Dilutive [0 pts]")
 
-    # 3. LBO Returns
-    irr = lbo_res.get("irr", 0)
-    if irr >= 0.20:
-        score += 20
-        components.append(f"✅ Strong LBO Returns (IRR {irr*100:.1f}%) [+20 pts]")
-    elif irr >= 0.15:
-        score += 10
-        components.append(f"✅ Acceptable LBO Returns (IRR {irr*100:.1f}%) [+10 pts]")
-    else:
-        components.append(f"❌ Poor LBO Returns (IRR {irr*100:.1f}%) [0 pts]")
-        
-    # 4. Synergy Dependency
-    req_syn = ma_res.get("break_even_pre_tax_synergy", 0)
-    act_syn = ma_res.get("pre_tax_synergies", 0)
-    if req_syn <= 0:
-        score += 20
-        components.append("✅ Accretive before synergies [+20 pts]")
-    elif act_syn >= req_syn:
-        score += 10
-        components.append("✅ Synergies cover accretion shortfall [+10 pts]")
-    else:
-        components.append("❌ Heavy synergy dependence for accretion [0 pts]")
+def scenario_scorecard(intrinsic: dict[str, Any] | None, mna: dict[str, Any] | None, lbo: dict[str, Any] | None) -> dict[str, Any]:
+    """Transparent 0-100 scorecard. Components that are not applicable are skipped, not scored as zero."""
+    components: list[dict[str, Any]] = []
 
-    final_score = (score / 80.0) * 100.0
+    def usable(result: dict[str, Any] | None) -> bool:
+        return bool(result) and result.get("status") in {"VALID", "REVIEW_REQUIRED"}
 
-    return {
-        "score": final_score,
-        "components": components
-    }
+    if usable(intrinsic) and intrinsic.get("upside") is not None:
+        upside = intrinsic["upside"]
+        points = 25 if upside > 0.2 else 15 if upside > 0 else 5 if upside > -0.2 else 0
+        components.append({"label": "Intrinsic value vs. market", "points": points, "max": 25,
+                           "detail": f"Intrinsic value is {upside:+.0%} vs. the market price."})
+    if usable(mna):
+        pct = mna.get("eps_change_pct_run_rate")
+        if pct is not None:
+            points = 25 if pct > 0.02 else 15 if pct >= 0 else 5 if pct > -0.05 else 0
+            components.append({"label": "Run-rate EPS accretion", "points": points, "max": 25,
+                               "detail": f"Run-rate EPS change {pct:+.1%}."})
+        needed, entered = mna.get("break_even_pre_tax_synergy") or 0.0, mna.get("pre_tax_synergies") or 0.0
+        points = 25 if needed <= 0 else 15 if entered >= needed else 0
+        components.append({"label": "Synergy dependence", "points": points, "max": 25,
+                           "detail": "Accretive before synergies." if needed <= 0 else
+                           f"Needs {needed:,.0f} of pre-tax synergies; {entered:,.0f} entered."})
+    if usable(lbo):
+        irr = lbo.get("irr")
+        points = 25 if irr >= 0.20 else 15 if irr >= 0.15 else 5 if irr >= 0.10 else 0
+        components.append({"label": "Sponsor returns", "points": points, "max": 25, "detail": f"LBO IRR {irr:.1%}."})
+
+    total_max = sum(c["max"] for c in components)
+    score = 100.0 * sum(c["points"] for c in components) / total_max if total_max else None
+    return {"score": score, "components": components,
+            "note": "Scores only the analyses that apply to this company and scenario."}

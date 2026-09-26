@@ -1,1 +1,22 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="theme-color" content="#09111f" /><title>ValuEngine | Financial Terminal</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
+<!doctype html>
+<html lang="en" data-theme="observatory">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#04050a" />
+    <meta name="description" content="ValuEngine: an institutional valuation workstation for US and Indian equities: DCF, the Expectations Lab, comparables, M&A, LBO and a quantitative risk lab." />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2304050a'/%3E%3Cg fill='none' stroke='%23e6c27d' stroke-width='2.4'%3E%3Cellipse cx='32' cy='32' rx='21' ry='8' transform='rotate(-24 32 32)'/%3E%3Cellipse cx='32' cy='32' rx='21' ry='8' transform='rotate(36 32 32)' opacity='.7'/%3E%3Cellipse cx='32' cy='32' rx='8' ry='21' opacity='.45'/%3E%3C/g%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%23f6dca6'/%3E%3C/svg%3E" />
+    <title>ValuEngine</title>
+    <script>
+      try {
+        var theme = JSON.parse(localStorage.getItem('ve.theme') || '"observatory"')
+        document.documentElement.dataset.theme = theme === 'paper' ? 'paper' : 'observatory'
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>ValuEngine needs JavaScript to run.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

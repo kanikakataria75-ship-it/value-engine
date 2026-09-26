@@ -18,6 +18,7 @@ ENV/
 frontend/node_modules/
 frontend/dist/
 frontend/.vite/
+frontend/node_modules/.tmp/
 npm-debug.log*
 
 # Excel & Temporary Output Reports
@@ -30,10 +31,12 @@ valuengine_*.xlsx
 .DS_Store
 Thumbs.db
 
-# Databases & Cache
+# Databases, backups & caches
+data/backups/
 *.db
 *.db-shm
 *.db-wal
 *.tsbuildinfo
 scratch/
-
+# Local tool config
+.claude/

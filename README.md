@@ -1,343 +1,297 @@
-# ValuEngine 
+<div align="center">
 
-[![Status](https://img.shields.io/badge/Status-Active%20Production-brightgreen)](#)
-[![Frontend](https://img.shields.io/badge/Frontend-React%2018%20%7C%20TypeScript%20%7C%20Vite-646CFF)](#)
-[![Backend](https://img.shields.io/badge/Backend-FastAPI%20%7C%20Python%203.11-009688)](#)
-[![Analytics](https://img.shields.io/badge/Quantitative%20Analytics-R%20%7C%20Rscript-276DC3)](#)
-[![AI Engine](https://img.shields.io/badge/AI%20Copilot-Google%20Gemini%20%7C%20Streaming-8E75B2)](#)
-[![Database](https://img.shields.io/badge/Local%20Store-SQLite%20%7C%20WAL%20Mode-003B57)](#)
-[![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen)](#)
+<img src="docs/screenshots/observatory.jpg" alt="ValuEngine — the Observatory" width="100%" />
 
-> **Institutional-grade financial valuation, M&A transaction modeling, and quantitative risk engineering platform.**
+<br/>
 
-ValuEngine is a comprehensive financial intelligence workspace designed for investment bankers, corporate finance teams, and quantitative analysts. It unifies deterministic deal modeling (DCF, M&A Accretion/Dilution, LBO, Multiples) with probabilistic risk engineering (R-powered Monte Carlo, Copulas, Merton default probability, Tail Risk) and a context-aware AI Financial Copilot.
+# ValuEngine
 
----
+**An equity valuation workstation for 397 US and Indian companies.**
 
-## Table of Contents
+Prices a company with a DCF or excess-return model, then answers the question most models skip:
+***what future is today's share price already assuming?***
 
-- [Key Platform Features](#-key-platform-features)
-  - [1. Context-Aware AI Financial Copilot](#1-context-aware-ai-financial-copilot)
-  - [2. R Analytics & Valuation Risk Lab](#2-r-analytics--valuation-risk-lab)
-  - [3. Core Valuation & Deal Modeling Engines](#3-core-valuation--deal-modeling-engines)
-  - [4. High-Performance Local Financial Store](#4-high-performance-local-financial-store)
-  - [5. Institutional Terminal UI & Experience](#5-institutional-terminal-ui--experience)
-  - [6. Audit Trail, Health Diagnostics & Excel Export](#6-audit-trail-health-diagnostics--excel-export)
-- [System Architecture](#-system-architecture)
-- [Quantitative Methodology & Formulations](#-quantitative-methodology--formulations)
-- [Screenshots & Visual Showcase](#-screenshots--visual-showcase)
-- [Getting Started & Installation](#-getting-started--installation)
-  - [Prerequisites](#prerequisites)
-  - [1. Backend Setup](#1-backend-setup)
-  - [2. R Analytics Environment Setup](#2-r-analytics-environment-setup)
-  - [3. Frontend Terminal Setup](#3-frontend-terminal-setup)
-  - [4. Seeding & Ingesting Market Data](#4-seeding--ingesting-market-data)
-- [Running Automated Tests](#-running-automated-tests)
-- [API Endpoints Reference](#-api-endpoints-reference)
-- [Project Structure](#-project-structure)
-- [License & Contributing](#-license--contributing)
+[![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](#quick-start)
+[![FastAPI](https://img.shields.io/badge/API-FastAPI-009688?logo=fastapi&logoColor=white)](#api)
+[![React](https://img.shields.io/badge/UI-React%2018%20%C2%B7%20TypeScript-61DAFB?logo=react&logoColor=white)](#quick-start)
+[![three.js](https://img.shields.io/badge/3D-three.js%20%C2%B7%20react--three--fiber-000000?logo=threedotjs&logoColor=white)](#the-rest-of-the-workstation)
+[![Vite](https://img.shields.io/badge/Build-Vite-646CFF?logo=vite&logoColor=white)](frontend/vite.config.ts)
+[![Tests](https://img.shields.io/badge/tests-pytest%20%C2%B7%20vitest-brightgreen)](#tests)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
+397 companies · 110K+ daily prices · US + India · offline-first · not investment advice
+
+</div>
 
 ---
 
-## Key Platform Features
+It also includes:
 
-### 1. Context-Aware AI Financial Copilot
-- **Workspace Context Awareness:** The copilot continuously monitors the user's active company ticker, financial parameters, valuation metrics, and active module (DCF, M&A, LBO, Risk Lab).
-- **Intelligent Financial Advisory:** Explains complex valuation formulas, provides actionable deal structuring suggestions (e.g. debt capacity optimization, synergy break-even requirements), and interprets statistical risk metrics in plain English.
-- **Provider Architecture:** Powered by Google Gemini with streaming responses and an intelligent fallback engine to guarantee zero-downtime execution even without external API credentials.
-- **Interactive Sliding Panel:** Always accessible across all pages with quick-prompt shortcuts for instant sensitivity audits and valuation sanity checks.
+- comparables, a merger model and an LBO
+- a six-lens quantitative risk lab
+- an Excel export built from live formulas
+- a streaming AI copilot, all driven by one shared scenario
 
-### 2. R Analytics & Valuation Risk Lab
-ValuEngine embeds a suite of 8 quantitative engines written in native **R** with a seamless Python bridge and robust algorithmic fallback solvers:
-1. **Monte Carlo Simulation (`monte_carlo.R`):** Correlated multi-parameter stochastic cash flow generation across revenue growth, margin expansion, and cost of capital (1,000–100,000 iterations). Generates empirical value distributions, VaR/CVaR, and probability density functions.
-2. **Student-t & Gaussian Copulas (`copula.R`):** Models non-linear dependencies and extreme joint fat-tail risk across valuation assumptions.
-3. **Merton Structural Credit Model (`merton.R`):** Black-Scholes-Merton option-theoretic default risk solver estimating unobserved asset value ($V_A$), structural volatility ($\sigma_A$), Distance-to-Default ($DD$), and 1-year Default Probability ($PD$).
-4. **Value at Risk & Expected Shortfall (`var_cvar.R`):** Parametric, historical, and Cornish-Fisher non-Gaussian skewness/kurtosis-adjusted tail risk estimations at 95% and 99% confidence intervals.
-5. **Extreme Value Theory / Tail Risk (`tail_risk.R`):** Generalized Pareto Distribution (GPD) and Peaks-Over-Threshold (POT) modeling to stress-test 1-in-100-year market dislocation shocks.
-6. **Regime-Switching Volatility (`regime.R`):** Markov-switching state models classifying market regimes between low-volatility expansionary states and high-volatility crisis periods.
-7. **Macro Factor Sensitivities (`factor_model.R`):** Multi-factor linear regressions assessing asset sensitivity against 10-year Treasury yields, CPI inflation, GDP growth rates, and credit spreads.
-8. **Assumption Impact / Tornado Engine (`assumption_impact.R`):** Elasticity matrices and tornado impact rankings identifying which single operational parameter exerts the highest sensitivity on Enterprise and Equity values.
-
-### 3. Core Valuation & Deal Modeling Engines
-- **Discounted Cash Flow (DCF):**
-  - Projects 5-year discrete Unlevered Free Cash Flows (UFCF) derived from Revenues, EBITDA Margins, D&A, CapEx, and $\Delta\text{NWC}$.
-  - Supports dual discounting conventions: **Mid-Year** vs. **Year-End** discounting.
-  - Dual Terminal Value methodology: **Gordon Growth Model** vs. **Exit EBITDA Multiple**.
-  - Strict mathematical guardrails ($WACC > g$) preventing asymptotic model explosions, with real-time economic spread evaluation ($\text{ROIC} - \text{WACC}$).
-- **M&A Accretion / Dilution Engine:**
-  - Multi-tranche financing mix modeling: Cash consideration, Stock issuance, and Acquirer Debt issuance.
-  - Comprehensive synergy modeling: Explicit pre-tax Cost Synergies, Revenue Synergies, and one-off Integration costs.
-  - Generates Pro-Forma Net Income, Shares Outstanding, EPS Accretion/Dilution ($ and %), and an analytical **Break-Even Synergy** solver.
-- **Leveraged Buyout (LBO) Engine:**
-  - Sources & Uses structuring spanning Senior Debt, Subordinated Debt, Mezzanine, and Sponsor Equity.
-  - Dynamic 5-year Cash Available for Debt Service (CADS) debt sweep waterfall with mandatory amortization and interest schedules.
-  - Calculates exit Enterprise Value, Sponsor IRR, MoIC, and a 4-pillar **Returns Attribution Bridge** (EBITDA Growth, Multiple Expansion, Debt Paydown, Cash Generation).
-- **Trading & Transaction Comparable Multiples:**
-  - Standardized multiples extraction (EV/Revenue, EV/EBITDA, P/E, EV/EBIT).
-  - Harmonic and arithmetic distributions (Min, 25th percentile, Median, Mean, 75th percentile, Max) with target equity value triangulation.
-
-### 4. High-Performance Local Financial Store
-- **Instant Offline Data Access:** Built-in high-speed SQLite database engine (`data/financial_data.db`) operating in Write-Ahead Logging (WAL) mode for zero-latency lookups.
-- **Pre-Ingested 100+ Company Universe:** Contains detailed balance sheets, income statements, cash flow statements, historical trading multiples, and risk profiles across S&P 500 and global equities.
-- **Multi-Source Ingestion Pipeline:** Automated ingestion tools supporting Yahoo Finance (`yfinance`) and Alpha Vantage with intelligent fallback, schema normalization, and automated metric derivation.
-
-### 5. Institutional Terminal UI & Experience
-- **Interactive Dark / Light Modes:** Bespoke dark financial terminal theme with custom glassmorphism, glowing telemetry cards, and rich color accents.
-- **Rich Recharts Visualizations:** Interactive tornado sensitivity charts, fan chart probability densities, debt paydown waterfalls, M&A synergy bars, and trading multiple ranges.
-- **Command Palette & Global Search:** Instant company lookup and active status telemetry across all pages.
-
-### 6. Audit Trail, Health Diagnostics & Excel Export
-- **Dynamic Excel Export (`/api/reports/excel`):** Generates live `.xlsx` workbooks populated with native Excel formulas (`=SUM`, `=NPV`, `=IRR`, dynamic debt logic), ready for presentation to investment committees.
-- **Data Provenance & Audit Page:** Tracks every data field to its origin (`LIVE_API`, `LOCAL_STORE`, `DEMO_FALLBACK`), highlighting reconciliation checks and balance sheet equilibrium ($A = L + E$).
-- **Model Health Scanner:** Real-time cross-validation alerting users to insolvency hazards, negative entry equity, or unrealistic synergy assumptions.
+Everything runs **offline** from a local database. API keys only unlock live data and LLM answers — there is nothing to configure to get the full experience on day one.
 
 ---
 
-## System Architecture
+## Highlights
 
-```mermaid
-flowchart TB
+### The Expectations Lab
 
-    subgraph Frontend["Frontend — React 18 + TypeScript + Vite"]
-        UI["App Shell and Navigation"]
-        Pages["DCF / M&A / LBO / Trading Comps / Risk Lab / Audit / Reports"]
-        Copilot["ValuAI Financial Copilot"]
-        Theme["Theme Provider — Light / Dark / Yellow Dark / Purple"]
-        
-        UI --> Pages
-        UI --> Copilot
-        UI --> Theme
-    end
+A reverse DCF. Holding every other assumption at your scenario, the engine solves (grid scan + Brent's method) for the single value of each driver that makes intrinsic value equal the market price:
 
-    subgraph Backend["Backend — FastAPI"]
-        API["REST API Layer"]
-        Services["Valuation Services"]
-        Risk["Risk Analytics"]
-        AI["AI Copilot Orchestrator"]
-    end
+- **Implied revenue growth, EBITDA margin, terminal growth and expected return:** each is compared with your scenario and with the company's own history.
+- **Value landscape (3D):** a 33 × 33 surface of value per share over growth and margin, cut by a glass plane at the market price. The glowing curve where they meet is every future that justifies today's price exactly. The company's actual fiscal years are plotted on it.
+- **Plausibility odds:** thousands of (growth, margin) futures are drawn with the company's own historical volatility, and the share that is worth more than the price is reported.
+- **Banks and insurers:** the equivalent question is answered through price-to-book, giving the ROE the market is pricing in.
+- **Expectations Radar:** the same reverse DCF runs across the whole universe, showing the widest gaps between price and history, sector medians, and a sortable ranking.
 
-    subgraph Data["Data Layer"]
-        Local["389-Stock Local Dataset"]
-        Live["Live Market API"]
-        Cache["Application Cache"]
-    end
+<div align="center">
+<img src="docs/screenshots/expectations.jpg" alt="Expectations Lab — 3D value landscape" width="100%" />
+</div>
 
-    subgraph AIProviders["AI Providers"]
-        Gemini["Gemini API"]
-        Groq["Groq API"]
-    end
+### The rest of the workstation
 
-    Pages --> API
-    Copilot --> AI
-    API --> Services
-    API --> Risk
+| Area | What it does |
+|---|---|
+| **Observatory** | A 3D galaxy of every company. Arms are sectors, and height is the gap between the growth priced in and the growth delivered. Hover, focus or double-click to open. |
+| **Overview** | A 3D "valuation horizon": the 52-week range, comparables range and Monte Carlo intrinsic range as glass bars under a light curtain at the market price. It also shows a verdict, a computed confidence score, model-health flags, fundamentals, and prices with a volatility-regime strip. |
+| **Valuation** | A DCF console with drag-to-scrub inputs, each with a baseline tick. It uses a value-driver terminal value (`NOPAT × (1 − g/RONIC) / (WACC − g)`), an exit-multiple option, the mid-year convention and a margin ramp. It also shows the EV bridge, the projection table and two sensitivity grids. Banks use a residual-income model instead. |
+| **Comparables** | Up to 12 peers scored on industry, country and log-size distance. Each multiple is shown as a box strip with the company placed within it, and implied values as a football field. |
+| **M&A deal room** | Pick any acquirer, including a cross-border one restated at a dated FX rate. Set the premium and the stock / cash / new-debt mix (a draggable bar), plus synergies. You get year-1 and run-rate accretion, an earnings bridge, break-even synergies, ownership and leverage. |
+| **LBO** | Debt sized in turns of EBITDA, a revolver and a cash sweep. Shows IRR and MOIC, an exact value-creation attribution (EBITDA growth + multiple + debt paydown − fees), the debt schedule and a five-scenario stress test. |
+| **Risk lab** | Six lenses:<br>• correlated Monte Carlo with a tornado chart and variance attribution<br>• VaR / ES (historical, normal and Cornish-Fisher)<br>• EVT (a POT/GPD fit)<br>• 2-state HMM volatility regimes<br>• Fama-French-style factors built from the universe, with Newey-West errors<br>• Merton distance to default, and copula tail dependence (Gaussian, Student t, Clayton and Gumbel, selected by AIC) |
+| **Data room** | Provenance for every field, derived-field flags, a rule-based quality score, and four years of statements. |
+| **IC memo** | A committee memo written from the live model outputs, drafted by the LLM when a key is set and by a deterministic analyst template otherwise. It can be printed or exported. |
+| **Excel** | A workbook of live formulas (assumptions, DCF or residual income, sensitivities, accretion, LBO, comps and checks). The tests recalculate it and reconcile it against the Python engines. |
+| **ValuAI** | A streaming copilot (SSE) grounded in the same numbers and your scenario. It uses Gemini, then Groq, then a rule-based offline analyst, so it never goes silent. |
 
-    Services --> Local
-    Services --> Live
-    Services --> Cache
-    Risk --> Local
-    Risk --> Live
+**Design:**
 
-    AI --> Services
-    AI --> Risk
-    AI --> Gemini
-    AI --> Groq
-
-    Gemini -. fallback .-> Groq
-```
+- The **Observatory** (dark) and **Paper** (light editorial) themes, switched with a view-transition "eclipse".
+- A particle-armillary 3D intro.
+- Instrument Serif, Geist and Geist Mono typography.
+- A ⌘K command palette.
+- Reduced-motion and no-WebGL fallbacks: every 3D view has a 2D equivalent.
 
 ---
 
-## Quantitative Methodology & Formulations
+## Visual tour
 
-### 1. DCF Mid-Year Convention Formula
-$$\text{PV}(\text{UFCF}_t) = \frac{\text{UFCF}_t}{(1 + \text{WACC})^{t - 0.5}}$$
+<table>
+<tr>
+<td width="50%">
+<img src="docs/screenshots/overview.jpg" alt="Company Overview — 3D valuation horizon" width="100%" />
+<p align="center"><b>Overview</b> — 52-week range, comps range and Monte Carlo range as a 3D valuation horizon</p>
+</td>
+<td width="50%">
+<img src="docs/screenshots/comparables.jpg" alt="Trading comparables" width="100%" />
+<p align="center"><b>Comparables</b> — peer scoring, box strips and an implied-value football field</p>
+</td>
+</tr>
+<tr>
+<td width="50%">
+<img src="docs/screenshots/mna.jpg" alt="M&A deal room" width="100%" />
+<p align="center"><b>M&A deal room</b> — cross-border accretion / dilution with a live earnings bridge</p>
+</td>
+<td width="50%">
+<img src="docs/screenshots/lbo.jpg" alt="LBO model" width="100%" />
+<p align="center"><b>LBO</b> — sources & uses, an exact value-creation waterfall and a stress test</p>
+</td>
+</tr>
+<tr>
+<td width="50%">
+<img src="docs/screenshots/risk.jpg" alt="Risk lab — Monte Carlo" width="100%" />
+<p align="center"><b>Risk lab</b> — correlated Monte Carlo, a tornado chart and variance attribution</p>
+</td>
+<td width="50%">
+<img src="docs/screenshots/radar.jpg" alt="Expectations Radar across the universe" width="100%" />
+<p align="center"><b>Expectations Radar</b> — the reverse DCF run across all 397 companies</p>
+</td>
+</tr>
+</table>
 
-$$\text{Terminal Value}_{\text{Gordon}} = \frac{\text{UFCF}_5 \times (1 + g)}{\text{WACC} - g}$$
-
-### 2. Merton Structural Default Model
-Under the Merton framework, firm equity is treated as a European call option on total assets $V_A$ with strike price equal to debt face value $D$:
-
-$$E = V_A \mathcal{N}(d_1) - D e^{-rT} \mathcal{N}(d_2)$$
-
-$$\sigma_E E = \mathcal{N}(d_1) \sigma_A V_A$$
-
-Where Distance-to-Default ($DD$) and Default Probability ($PD$) are derived as:
-
-$$DD = \frac{\ln(V_A / D) + (\mu - 0.5 \sigma_A^2)T}{\sigma_A \sqrt{T}}, \quad PD = \mathcal{N}(-DD)$$
-
-### 3. M&A EPS Accretion / Dilution Break-Even
-$$\text{Pre-Tax Break-Even Synergy} = \frac{\text{Target Net Income} - \text{Foregone Interest} - \text{New Debt Interest}}{\text{Acquirer Target Multiple}} \times \frac{1}{1 - t_c}$$
+<div align="center">
+<img src="docs/screenshots/data.jpg" alt="Data room — provenance and quality" width="70%" />
+<p><b>Data room</b> — provenance for every field, and a rule-based data-quality score</p>
+</div>
 
 ---
 
-## Screenshots & Visual Showcase
+## Quick start
 
-| Risk Lab | Valuation & M&A Overview | LBO | DCF |
-| :---: | :---: | :---: | :---: |
-| <img width="3384" height="1320" alt="Screenshot 2026-08-19 114648" src="https://github.com/user-attachments/assets/294f6154-52e5-4193-b62c-5a86d588b8c9" /> | <img width="3393" height="1278" alt="Screenshot 2026-08-19 114655" src="https://github.com/user-attachments/assets/37f33c05-014d-4ed3-bea5-cbfef7e6528f" /> | <img width="3387" height="1284" alt="Screenshot 2026-08-19 114703" src="https://github.com/user-attachments/assets/8e49a15e-7e17-467a-990f-1d91d5ad8769" /> | <img width="3364" height="1290" alt="Screenshot 2026-08-19 114710" src="https://github.com/user-attachments/assets/8568a5af-407f-485d-a3ab-441dcc1c41ea" /> | 
+**Requirements:** Python 3.11+ and Node 18+.
 
-
-
----
-
-## Getting Started & Installation
-
-### Prerequisites
-- **Python:** Version `3.10` or higher
-- **Node.js:** Version `18.x` or higher (`npm` included)
-- **R (Optional, for full R Risk Lab execution):** Version `4.0+` with packages: `copula`, `fGarch`, `depmixS4`, `evir`, `jsonlite`
-
----
-
-### 1. Backend Setup
-
-Clone the repository and install the Python dependencies:
+### 1. API
 
 ```bash
-# Clone repository
-git clone https://github.com/kanikakataria75-ship-it/value-engine.git
-cd value-engine
-
-# Create & activate a virtual environment (recommended)
-python -m venv venv
-# On Windows:
-venv\Scripts\activate
-# On Linux/macOS:
-source venv/bin/activate
-
-# Install dependencies
+python -m venv .venv
+.venv\Scripts\activate          # Windows  (macOS/Linux: source .venv/bin/activate)
 pip install -r requirements.txt
-```
-
-Start the FastAPI application server:
-
-```bash
 uvicorn backend.main:app --reload --port 8000
 ```
-*Backend runs on `http://127.0.0.1:8000`. Interactive OpenAPI documentation available at `http://127.0.0.1:8000/docs`.*
 
----
+On first start with no database, the API builds `data/financial_data.db` from the committed snapshot in `data/snapshot/`. This takes a few seconds and needs no network. You can also run it explicitly with `python scripts/bootstrap_data.py`.
 
-### 2. R Analytics Environment Setup (Optional)
-
-To enable the native R analytics engine for the Valuation Risk Lab:
-
-```bash
-# Automatically detects R and installs required CRAN packages
-python setup_r.py
-```
-*(Note: If R is not installed on the system, ValuEngine automatically engages its high-performance **vectorized Python math fallback**, ensuring all Risk Lab simulations remain 100% functional).*
-
----
-
-### 3. Frontend Terminal Setup
-
-In a new terminal window, initialize the React client:
+### 2. UI
 
 ```bash
 cd frontend
 npm install
-npm run dev
+npm run dev                      # http://localhost:5173 — proxies /api to 127.0.0.1:8000
 ```
-*Frontend terminal launches at `http://localhost:5173`.*
+
+Point the dev proxy elsewhere with `VALUENGINE_API_URL=http://host:port npm run dev`.
+
+### 3. Optional configuration
+
+Copy `.env.example` to `.env`. Every setting is optional:
+
+| Variable | Effect |
+|---|---|
+| `GEMINI_API_KEY`, `GROQ_API_KEY` | LLM answers and memos (tried in order; any failure falls through to the offline analyst) |
+| `ALPHA_VANTAGE_API_KEY` | "Live" data mode; without it live mode serves the local store, labelled `LOCAL_FALLBACK` |
+| `VALUENGINE_API_TOKEN` / `VITE_API_TOKEN` | Bearer-token auth for every `/api` route except `/api/health` |
+| `VALUENGINE_CORS_ORIGINS` | Allowed browser origins |
+| `VALUENGINE_WARMUP` | Build the factor model and universe radar in the background at start-up (`1`, the default) |
 
 ---
 
-### 4. Seeding & Ingesting Market Data
+## Refreshing the data
 
-To populate the local SQLite financial store with 100+ tickers:
+The committed snapshot covers 397 companies (US and NSE-listed India):
+
+- fiscal-year fundamentals
+- four years of statement history
+- daily prices from August 2025
+- dated USD/INR rates
+
+| Task | Command |
+|---|---|
+| Re-ingest fundamentals and prices | `python scripts/ingest_company_universe.py [--tickers AAPL,RELIANCE.NSE] [--overwrite]` |
+| Fetch statement history | `python scripts/ingest_history.py [--tickers …] [--overwrite]` |
+| Update FX rates | `python scripts/update_fx.py [--currencies INR] [--period 2y]` |
+| Preview or apply idempotent repairs | `python scripts/repair_local_store.py [--dry-run]` |
+| Write the snapshot back to `data/snapshot/` | `python scripts/export_snapshot.py` |
+| Check the universe definition | `python scripts/validate_universe.py` |
+
+Ingestion never fabricates values:
+
+- Statements reported in another currency are restated.
+- EBITDA below EBIT is rebuilt as EBIT + D&A.
+- Missing capex is estimated from the company's own history and flagged as derived.
+- Records that fail the quality engine are rejected.
+
+---
+
+## Tests
 
 ```bash
-# Ingest the company universe
-python scripts/seed_company_universe.py
+pip install -r requirements-dev.txt
+pytest                           # engines, data layer, API contract, copilot, Excel reconciliation
+cd frontend
+npm test                         # formatters, SSE parser, scenario logic
+npm run build                    # strict TypeScript + production bundle
+```
+
+The frontend's API types are generated from the Pydantic response models (`python scripts/generate_ts_types.py`). A test fails if they drift.
+
+Continuous integration runs the same two suites on every push — see [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
+
+---
+
+## API
+
+All responses share one envelope: `{ status, data, warnings, errors, provenance }`.
+
+- `status` is one of `VALID`, `REVIEW_REQUIRED`, `INVALID`, `UNAVAILABLE`, `LOCAL`, `LIVE`, `LOCAL_FALLBACK`, `RATE_LIMITED` or `ERROR`.
+- Scenario endpoints take `{ ticker, mode, dcf?, excess_return?, lbo?, mna? }`, where each section holds only the overrides; anything omitted uses the company baseline.
+- Interactive OpenAPI docs are served at `/docs`.
+
+| Method | Route | Purpose |
+|---|---|---|
+| GET | `/api/health`, `/api/meta` | Liveness; dataset coverage, FX, providers |
+| GET | `/api/companies/search?q=` | Search by name or ticker |
+| GET | `/api/company/{t}` · `/baseline` · `/history` | Company record; baseline assumptions with notes; statement history |
+| GET | `/api/data-quality/{t}` | Quality findings and score |
+| POST | `/api/valuation/intrinsic` · `/api/valuation/sensitivity` | DCF or residual income; sensitivity grids |
+| POST | `/api/expectations` | Expectations Lab (reverse DCF, frontier, surface, odds) |
+| GET | `/api/expectations/universe` | Expectations Radar across the universe |
+| GET | `/api/comps/{t}` · `/transactions` | Trading comparables; precedent transactions (`UNAVAILABLE`) |
+| POST | `/api/mna/run` · `/api/lbo/run` · `/api/lbo/stress` | Merger model; LBO; LBO stress test |
+| POST | `/api/model-health` · `/api/risk/confidence` | Diagnostics and opportunity score; valuation confidence |
+| POST | `/api/risk/monte-carlo` | Monte Carlo, tornado and attribution |
+| GET | `/api/risk/{var,evt,regime,factors,merton}/{t}` · `/api/risk/copula/{a}/{b}` | Risk-lab models |
+| POST | `/api/reports/excel` | Live-formula workbook |
+| POST | `/api/ai/copilot` · `/api/ai/copilot/stream` · `/api/ai/memo` | Copilot (JSON or SSE) and IC memo |
+
+---
+
+## Architecture
+
+```mermaid
+flowchart LR
+  subgraph UI["frontend/ · React 18 + TypeScript + Vite"]
+    Pages["Observatory · Radar · company workspace"]
+    Three["three.js scenes: intro, galaxy, horizon, value surface"]
+    Scenario["Scenario store: overrides per ticker"]
+  end
+  subgraph API["backend/ · FastAPI"]
+    Routes["Typed routes: Envelope[T]"]
+    Service["valuation_service: resolves scenarios, caches by data signature"]
+    AI["Copilot orchestrator: Gemini, Groq, offline analyst"]
+  end
+  subgraph Engines["mna_lbo_engine/"]
+    Val["DCF · residual income · Expectations Lab"]
+    Deals["Comps · M&A · LBO · Excel"]
+    Risk["risk/: Monte Carlo · VaR/EVT · HMM · factors · Merton · copulas"]
+    Store["SQLite store: fundamentals, prices, history, FX"]
+  end
+  Pages --> Routes
+  Scenario --> Routes
+  Routes --> Service --> Val & Deals & Risk
+  Service --> AI
+  Val & Deals & Risk --> Store
+```
+
+```
+backend/            FastAPI app, typed response schemas, services (valuation, copilot, offline analyst), security
+mna_lbo_engine/     config (market parameters), modules/ (engines, data layer, providers), modules/risk/
+frontend/src/       lib/ (API client, generated types, queries, scenario, formatting), components/, pages/, three/, styles/
+scripts/            data ingestion, snapshot export/bootstrap, FX, repairs, TypeScript type generation
+data/               universe definition, committed snapshot (the SQLite database itself is generated)
+docs/               METHODOLOGY.md (every formula, default and limitation) and screenshots/
+tests/              pytest suite
 ```
 
 ---
 
-## Running Automated Tests
+## Methodology and limitations
 
-ValuEngine includes an exhaustive testing suite covering arithmetic reconciliation, financial identities, API endpoints, AI copilot responses, and risk simulations:
+[`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) documents every formula, default and threshold. In summary:
 
-```bash
-# Run all unit and integration tests
-pytest tests/ -v
+- Baselines come from each company's own statements and history, and its own country's market parameters.
+- Indian companies use a local-market regression beta.
+- Models return `INVALID` / `UNAVAILABLE` with a reason instead of an unreliable number.
 
-# Run brain validation financial verification suite
-python brain_validation/run_all.py
-```
+**Limitations:**
 
----
+- Data is annual only, with about a year of daily prices.
+- Yahoo Finance data can contain errors.
+- Share counts are basic rather than fully diluted.
+- There is no precedent-transaction database.
+- Rates are static per currency.
 
-## API Endpoints Reference
-
-| Route | Method | Description |
-| :--- | :--- | :--- |
-| `/api/company/{ticker}` | `GET` | Fetches historical financials, balance sheet, and market data |
-| `/api/company/universe/all` | `GET` | Lists all 100+ tickers in the local store universe |
-| `/api/dcf` | `POST` | Executes DCF valuation with mid-year convention and sensitivity |
-| `/api/mna` | `POST` | Calculates M&A accretion/dilution, synergies, and break-even |
-| `/api/lbo` | `POST` | Solves 5-year LBO debt schedule, returns, and attribution |
-| `/api/comps` | `POST` | Computes statistical peer trading & transaction multiples |
-| `/api/risk-lab/all` | `POST` | Runs full suite of 8 quantitative risk models (Monte Carlo, Merton, etc.) |
-| `/api/copilot/chat` | `POST` | Streaming AI copilot financial advisory endpoint |
-| `/api/data-quality` | `GET` | Executes balance sheet and accounting identity audits |
-| `/api/model-health` | `POST` | Real-time cross-engine transaction sanity check |
-| `/api/reports/excel` | `POST` | Exports an audit-ready dynamic `.xlsx` valuation workbook |
+ValuEngine is an analytical tool, **not investment advice**.
 
 ---
 
-## Project Structure
+<div align="center">
 
-```
-valuengine/
-├── backend/
-│   ├── main.py                     # FastAPI application & router endpoints
-│   ├── schemas/models.py           # Pydantic data schemas & request validation
-│   └── services/
-│       ├── ai_provider.py          # AI Copilot streaming engine & context manager
-│       └── valuation_service.py    # Service dispatching calculations to engines
-├── frontend/
-│   ├── src/
-│   │   ├── components/             # AppShell, CopilotPanel, UI design system
-│   │   ├── context/ThemeContext.tsx# Dark / Light theme provider
-│   │   ├── pages/                  # DCF, M&A, LBO, RiskLab, Comps, Audit, Reports
-│   │   ├── services/api.ts         # Type-safe Axios client
-│   │   └── types/api.ts            # TypeScript interfaces
-│   ├── package.json
-│   └── vite.config.ts
-├── mna_lbo_engine/
-│   └── modules/
-│       ├── bulk_data_ingestor.py   # High-throughput market data pipeline
-│       ├── comps_engine.py         # Multiples and peer statistics
-│       ├── data_loader.py          # Provenance-tagged data ingestion
-│       ├── dcf_engine.py           # 5-Year UFCF & Terminal Value models
-│       ├── excel_generator.py      # Native formula Excel builder
-│       ├── lbo_engine.py           # Sources/Uses & CADS debt schedules
-│       ├── local_financial_store.py# SQLite persistence layer (WAL mode)
-│       ├── ma_engine.py            # Accretion/dilution & synergies
-│       ├── model_health.py         # Financial sanity & identity verification
-│       ├── r_integration.py        # Rscript subprocess connector
-│       └── r_risk_engine.py        # Risk dispatcher & Python fallback solver
-├── r_analytics/valuation_risk/
-│   ├── assumption_impact.R         # Tornado & sensitivity rankings
-│   ├── copula.R                    # Student-t & Gaussian copula dependencies
-│   ├── factor_model.R              # Macro factor regression sensitivities
-│   ├── merton.R                    # Structural credit default model
-│   ├── monte_carlo.R               # High-iteration correlated simulation
-│   ├── regime.R                    # Markov regime-switching volatility
-│   ├── risk_metrics.R              # Distribution summary statistics
-│   ├── tail_risk.R                 # Extreme Value Theory (EVT/GPD)
-│   └── var_cvar.R                  # Cornish-Fisher VaR & Expected Shortfall
-├── data/                           # Universe CSVs & ingestion manifests
-├── scripts/                        # Database seeding & ingestion utilities
-├── tests/                          # Comprehensive pytest test suite
-├── setup_r.py                      # Automatic R environment configuration
-└── requirements.txt                # Python dependencies
-```
+## License
 
----
+MIT — see [LICENSE](LICENSE).
 
-## License & Contributing
-
-Distributed under the MIT License. Contributions, feedback, and issue submissions are welcome. Please ensure all tests pass (`pytest tests/ -v`) prior to submitting pull requests.
+</div>

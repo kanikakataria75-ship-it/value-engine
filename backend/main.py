@@ -1,221 +1,252 @@
+"""ValuEngine HTTP API.
+
+Every JSON route returns the envelope {status, data, warnings, errors, provenance}; `data` is typed
+by the response models in backend/schemas/responses.py (the source of the frontend's TS types).
+"""
 from __future__ import annotations
 
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from contextlib import asynccontextmanager
+import logging
+from typing import Annotated
+import os
+from pathlib import Path
+import threading
 
-from backend.schemas.models import AnalyticsRequest, CompanyRequest, CopilotRequest, DcfRequest, ExportRequest, LboRequest, MnaRequest
-from backend.services import valuation_service as service
-from backend.services.ai_provider import copilot_orchestrator
+from dotenv import load_dotenv
+from fastapi import Depends, FastAPI, Path as PathParam, Query, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse, Response, StreamingResponse
+from starlette.exceptions import HTTPException as StarletteHTTPException
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+load_dotenv(PROJECT_ROOT / ".env")
+
+from backend.schemas import responses as r  # noqa: E402
+from backend.schemas.models import CopilotRequest, DataMode, MonteCarloRequest, ScenarioRequest  # noqa: E402
+from backend.security import is_authorized, rate_limit  # noqa: E402
+from backend.services import valuation_service as service  # noqa: E402
+from backend.services.ai_provider import copilot_orchestrator  # noqa: E402
+from mna_lbo_engine.modules.snapshot import import_snapshot, snapshot_available  # noqa: E402
+
+logging.basicConfig(level=os.environ.get("VALUENGINE_LOG_LEVEL", "INFO"),
+                    format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+logging.getLogger("httpx").setLevel(logging.WARNING)
+logger = logging.getLogger("valuengine.api")
+TICKER = r"^[A-Za-z0-9.\-&^]{1,20}$"
+Ticker = Annotated[str, PathParam(pattern=TICKER)]
+
+
+def bootstrap_data() -> None:
+    store = service.store()
+    if store.get_company_count() == 0 and snapshot_available():
+        counts = import_snapshot(store)
+        logger.info("Local store was empty; imported the bundled snapshot: %s", counts)
+
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    bootstrap_data()
+    if os.environ.get("VALUENGINE_WARMUP", "1") == "1":
+        threading.Thread(target=service.warm_up, name="valuengine-warmup", daemon=True).start()
+    yield
+
 
 app = FastAPI(
     title="ValuEngine API",
-    version="1.0.0",
-    description="Transport layer for locked ValuEngine financial engines.",
+    version=service.VERSION,
+    description="Valuation, deal modelling and risk analytics over a local US + India equity dataset.",
+    lifespan=lifespan,
 )
-
-# Allow requests from Vite dev servers on ports 5173, 5174, etc.
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+origins = [o.strip() for o in os.environ.get(
+    "VALUENGINE_CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",") if o.strip()]
+app.add_middleware(CORSMiddleware, allow_origins=origins, allow_credentials=False, allow_methods=["GET", "POST"],
+                   allow_headers=["Content-Type", "Authorization", "X-API-Key"])
 
 
+@app.middleware("http")
+async def authenticate(request: Request, call_next):
+    if request.url.path.startswith("/api/") and request.url.path != "/api/health" and request.method != "OPTIONS":
+        if not is_authorized(request):
+            return JSONResponse(status_code=401, content=service.envelope("ERROR", errors=["Missing or invalid API token."]))
+    return await call_next(request)
+
+
+@app.exception_handler(service.NotFound)
+async def not_found(_: Request, exc: service.NotFound) -> JSONResponse:
+    return JSONResponse(status_code=404, content=exc.as_envelope())
+
+
+@app.exception_handler(RequestValidationError)
+async def invalid_request(_: Request, exc: RequestValidationError) -> JSONResponse:
+    messages = [f"{'.'.join(str(p) for p in e['loc'][1:]) or 'request'}: {e['msg']}" for e in exc.errors()]
+    return JSONResponse(status_code=422, content=service.envelope("INVALID", errors=messages))
+
+
+@app.exception_handler(StarletteHTTPException)
+async def http_error(_: Request, exc: StarletteHTTPException) -> JSONResponse:
+    return JSONResponse(status_code=exc.status_code, content=service.envelope("ERROR", errors=[str(exc.detail)]))
+
+
+@app.exception_handler(Exception)
+async def unexpected(_: Request, exc: Exception) -> JSONResponse:
+    logger.exception("Unhandled error")
+    return JSONResponse(status_code=500, content=service.envelope("ERROR", errors=["Internal error; see server logs."]))
+
+
+ModeParam = Query("local", description="local = SQLite store; live = Alpha Vantage with local fallback")
+
+
+# ----------------------------------------------------------------------------- platform
 @app.get("/api/health")
-def api_health():
-    return {
-        "status": "VALID",
-        "data": {"service": "ValuEngine API"},
-        "warnings": [],
-        "errors": [],
-        "provenance": {"notice": "Financial engines are local"},
-    }
+def api_health() -> dict:
+    return service.envelope("VALID", {"service": "ValuEngine API", "version": service.VERSION})
 
 
-@app.get("/api/companies/search")
-def search_companies(q: str = "", mode: str = "local", limit: int = 15):
-    results = service.search_companies(q, mode=mode, limit=limit)
-    return {
-        "status": "VALID",
-        "data": {"results": results, "count": len(results)},
-        "warnings": [],
-        "errors": [],
-        "provenance": {"mode": mode},
-    }
+@app.get("/api/meta", response_model=r.Envelope[r.Meta])
+def api_meta():
+    return service.meta(copilot_orchestrator.configured())
 
 
-@app.get("/api/company/available")
-def available_companies(mode: str = "local"):
-    if mode == "local":
-        count = service._data_loader.store.get_company_count()
-        sample = [c["ticker"] for c in service._data_loader.store.search_companies("", limit=10)]
-        return {
-            "status": "LOCAL",
-            "data": {"tickers": sample, "total_count": count},
-            "warnings": [],
-            "errors": [],
-            "provenance": {"source": "LOCAL_DB", "notice": f"Local database contains {count} companies"},
-        }
-    provider = service._data_loader.provider
-    has_key = bool(provider.api_key)
-    cb_active = provider.is_circuit_breaker_active()
-    status = "RATE_LIMITED" if cb_active else ("LIVE" if has_key else "DEMO")
-    return {
-        "status": status,
-        "data": {"tickers": ["AAPL", "MSFT", "NVDA"]},
-        "warnings": ["Circuit breaker active. Rate limit cooldown in progress."] if cb_active else ([] if has_key else ["Live API not configured."]),
-        "errors": [],
-        "provenance": {"source": status},
-    }
+@app.get("/api/companies/search", response_model=r.Envelope[r.SearchData])
+def search_companies(q: str = Query("", max_length=60), limit: int = Query(15, ge=1, le=50)):
+    return service.search(q, limit)
 
 
-@app.get("/api/company/{ticker}")
-def get_company(ticker: str, mode: str = "local"):
-    data = service.company(ticker, mode=mode)
-    if not data:
-        return service.unavailable(ticker, mode=mode)
-    prov_type = data.get("_provenance") or data.get("provenance", {}).get("source_type") or ("LOCAL" if mode == "local" else "DEMO")
-    if prov_type not in {"LIVE", "LOCAL", "CACHED", "RATE_LIMITED", "DEMO"}:
-        prov_type = "LOCAL" if mode == "local" else "DEMO"
-    return {
-        "status": prov_type,
-        "data": service.json_safe(data),
-        "warnings": [] if prov_type in {"LIVE", "LOCAL", "CACHED"} else [data.get("provenance", {}).get("notice", "Alpha Vantage unavailable.")],
-        "errors": [],
-        "provenance": data.get("provenance", {}),
-    }
+@app.get("/api/company/{ticker}", response_model=r.Envelope[r.Company])
+def get_company(ticker: Ticker, mode: DataMode = ModeParam):
+    return service.company_view(ticker, mode)
 
 
-@app.post("/api/dcf/run")
-def run_dcf(payload: DcfRequest):
-    return service.dcf(payload)
+@app.get("/api/company/{ticker}/baseline", response_model=r.Envelope[r.Baseline])
+def get_baseline(ticker: Ticker, mode: DataMode = ModeParam):
+    return service.baseline_view(ticker, mode)
 
 
-@app.post("/api/dcf/sensitivity")
-def run_dcf_sensitivity(payload: DcfRequest):
-    return service.dcf_sensitivity(payload)
+@app.get("/api/company/{ticker}/history", response_model=r.Envelope[r.HistoryResult])
+def get_history(ticker: Ticker):
+    return service.history_view(ticker)
 
 
-@app.post("/api/mna/run")
-def run_mna(payload: MnaRequest):
-    return service.mna(payload)
+@app.get("/api/data-quality/{ticker}", response_model=r.Envelope[r.DataQualityResult])
+def data_quality(ticker: Ticker, mode: DataMode = ModeParam):
+    return service.data_quality(ticker, mode)
 
 
-@app.post("/api/lbo/run")
-def run_lbo(payload: LboRequest):
-    return service.lbo(payload)
+# ----------------------------------------------------------------------------- valuation & deals
+@app.post("/api/valuation/intrinsic", response_model=r.Envelope[r.IntrinsicResult])
+def intrinsic(req: ScenarioRequest):
+    return service.intrinsic(req)
 
 
-@app.get("/api/comps/trading/{ticker}")
-def get_trading_comps(ticker: str, mode: str = "local"):
-    return service.trading_comps(ticker, mode=mode)
+@app.post("/api/valuation/sensitivity", response_model=r.Envelope[r.SensitivityResult])
+def sensitivity(req: ScenarioRequest):
+    return service.sensitivity(req)
 
 
-@app.get("/api/comps/transactions/{ticker}")
-def get_transaction_comps(ticker: str, mode: str = "local"):
-    return service.transaction_comps(ticker, mode=mode)
+@app.post("/api/mna/run", response_model=r.Envelope[r.MnaResult])
+def run_mna(req: ScenarioRequest):
+    return service.mna(req)
 
 
-@app.post("/api/analytics/monte-carlo")
-def monte_carlo(payload: AnalyticsRequest):
-    return service.analytics(payload)
+@app.post("/api/lbo/run", response_model=r.Envelope[r.LboResult])
+def run_lbo(req: ScenarioRequest):
+    return service.lbo(req)
 
 
-@app.post("/api/analytics/risk")
-def risk(payload: DcfRequest):
-    return service.risk(payload)
+@app.post("/api/lbo/stress", response_model=r.Envelope[r.StressResult])
+def lbo_stress(req: ScenarioRequest):
+    return service.lbo_stress(req)
 
 
-@app.get("/api/risk/var/{ticker}")
-def risk_var(ticker: str, mode: str = "local"):
-    return service.risk_var(ticker, mode=mode)
+@app.get("/api/comps/{ticker}", response_model=r.Envelope[r.CompsResult])
+def trading_comps(ticker: Ticker, mode: DataMode = ModeParam):
+    return service.comps(ticker, mode)
 
 
-@app.get("/api/risk/cvar/{ticker}")
-def risk_cvar(ticker: str, mode: str = "local"):
-    return service.risk_var(ticker, mode=mode)
+@app.get("/api/comps/{ticker}/transactions", response_model=r.Envelope[dict])
+def transaction_comps(ticker: Ticker, mode: DataMode = ModeParam):
+    return service.transaction_comps(ticker, mode)
 
 
-@app.get("/api/risk/merton/{ticker}")
-def risk_merton(ticker: str, mode: str = "local"):
-    return service.risk_merton(ticker, mode=mode)
+@app.post("/api/model-health", response_model=r.Envelope[r.HealthResult])
+def model_health(req: ScenarioRequest):
+    return service.health(req)
 
 
-@app.get("/api/risk/regime/{ticker}")
-def risk_regime(ticker: str, mode: str = "local"):
-    return service.risk_regime(ticker, mode=mode)
+# ----------------------------------------------------------------------------- expectations lab
+@app.post("/api/expectations", response_model=r.Envelope[r.ExpectationsResult])
+def expectations(req: ScenarioRequest):
+    return service.expectations(req)
 
 
-@app.get("/api/risk/fama-french/{ticker}")
-def risk_fama_french(ticker: str, mode: str = "local"):
-    return service.risk_factor_model(ticker, mode=mode)
+@app.get("/api/expectations/universe", response_model=r.Envelope[r.RadarResult])
+def expectations_universe():
+    return service.radar()
 
 
-@app.get("/api/risk/evt/{ticker}")
-def risk_evt(ticker: str, mode: str = "local"):
-    return service.risk_evt(ticker, mode=mode)
+# ----------------------------------------------------------------------------- risk lab
+@app.post("/api/risk/monte-carlo", response_model=r.Envelope[r.MonteCarloResult],
+          dependencies=[Depends(rate_limit("simulation", 60))])
+def monte_carlo(req: MonteCarloRequest):
+    return service.monte_carlo(req)
 
 
-@app.get("/api/risk/copula/{acquirer}/{target}")
-def risk_copula(acquirer: str, target: str, mode: str = "local"):
-    return service.risk_copula(acquirer, target, mode=mode)
+@app.get("/api/risk/var/{ticker}", response_model=r.Envelope[r.VarResult])
+def risk_var(ticker: Ticker, mode: DataMode = ModeParam):
+    return service.value_at_risk(ticker, mode)
 
 
-@app.get("/api/risk/valuation-confidence/{ticker}")
-def valuation_confidence(ticker: str, mode: str = "local"):
-    return service.valuation_confidence(ticker, mode=mode)
+@app.get("/api/risk/evt/{ticker}", response_model=r.Envelope[r.EvtResult])
+def risk_evt(ticker: Ticker, mode: DataMode = ModeParam):
+    return service.tail_risk(ticker, mode)
 
 
-@app.post("/api/risk/monte-carlo/{ticker}")
-def risk_monte_carlo_post(ticker: str, payload: AnalyticsRequest):
-    payload.ticker = ticker
-    return service.analytics(payload)
+@app.get("/api/risk/regime/{ticker}", response_model=r.Envelope[r.RegimeResult])
+def risk_regime(ticker: Ticker, mode: DataMode = ModeParam):
+    return service.regime_view(ticker, mode)
 
 
-@app.post("/api/risk/sensitivity/{ticker}")
-def risk_sensitivity_post(ticker: str, payload: DcfRequest):
-    payload.ticker = ticker
-    return service.dcf_sensitivity(payload)
+@app.get("/api/risk/factors/{ticker}", response_model=r.Envelope[r.FactorResult])
+def risk_factors(ticker: Ticker, mode: DataMode = ModeParam):
+    return service.factors(ticker, mode)
 
 
-@app.get("/api/risk/monte-carlo/{ticker}")
-def risk_monte_carlo_get(ticker: str, mode: str = "local"):
-    payload = AnalyticsRequest(ticker=ticker, mode=mode)
-    return service.analytics(payload)
+@app.get("/api/risk/merton/{ticker}", response_model=r.Envelope[r.MertonResult])
+def risk_merton(ticker: Ticker, mode: DataMode = ModeParam):
+    return service.merton(ticker, mode)
 
 
-@app.get("/api/risk/sensitivity/{ticker}")
-def risk_sensitivity_get(ticker: str, mode: str = "local"):
-    payload = DcfRequest(ticker=ticker, mode=mode)
-    return service.dcf_sensitivity(payload)
+@app.get("/api/risk/copula/{acquirer}/{target}", response_model=r.Envelope[r.CopulaResult])
+def risk_copula(acquirer: Ticker, target: Ticker, mode: DataMode = ModeParam):
+    return service.copula(acquirer, target, mode)
 
 
-@app.get("/api/model-health/{ticker}")
-def model_health(ticker: str, acquirer_ticker: str = "MSFT", mode: str = "local"):
-    return service.health(ticker, acquirer_ticker, mode=mode)
+@app.post("/api/risk/confidence", response_model=r.Envelope[r.ConfidenceResult])
+def risk_confidence(req: ScenarioRequest):
+    return service.valuation_confidence(req)
 
 
-@app.get("/api/data-quality/{ticker}")
-def data_quality(ticker: str, mode: str = "local"):
-    return service.data_quality(ticker, mode=mode)
+# ----------------------------------------------------------------------------- outputs
+@app.post("/api/reports/excel", dependencies=[Depends(rate_limit("export", 30))])
+def export_excel(req: ScenarioRequest) -> Response:
+    content, filename = service.excel(req)
+    return Response(content, media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    headers={"Content-Disposition": f'attachment; filename="{filename}"'})
 
 
-@app.post("/api/reports/excel")
-def export_excel(payload: ExportRequest):
-    path = service.export_excel(payload.target_ticker, payload.acquirer_ticker, mode=payload.mode)
-    if path is None:
-        raise HTTPException(status_code=404, detail="Company data unavailable; Excel export was not generated.")
-    return FileResponse(
-        path,
-        filename=f"ValuEngine_{payload.target_ticker.upper()}_Report.xlsx",
-        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    )
+@app.post("/api/ai/copilot", response_model=r.Envelope[r.CopilotResult], dependencies=[Depends(rate_limit("copilot", 20))])
+def copilot(req: CopilotRequest):
+    result = copilot_orchestrator.answer(req)
+    return service.envelope("VALID", result, warnings=result["errors"])
 
 
-@app.post("/api/ai/copilot")
-def run_copilot(payload: CopilotRequest):
-    print("COPILOT_ROUTE_HIT: POST /api/ai/copilot received request.")
-    return copilot_orchestrator.process_request(payload)
+@app.post("/api/ai/copilot/stream", dependencies=[Depends(rate_limit("copilot", 20))])
+def copilot_stream(req: CopilotRequest) -> StreamingResponse:
+    return StreamingResponse(copilot_orchestrator.stream(req), media_type="text/event-stream",
+                             headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+
+@app.post("/api/ai/memo", response_model=r.Envelope[r.MemoResult], dependencies=[Depends(rate_limit("copilot", 20))])
+def investment_memo(req: ScenarioRequest):
+    return service.envelope("VALID", copilot_orchestrator.memo(req))

@@ -1,132 +1,85 @@
+"""Global configuration for the ValuEngine financial engines.
+
+Every market-level default lives here, keyed by trading currency, so that US and
+Indian companies are never valued with each other's rates, taxes or growth anchors.
+All values are editable assumptions, not facts; the UI shows where each one comes from.
 """
-Global Configuration & Default Parameters for M&A Accretion/Dilution & LBO Valuation Engine.
-Institutional Wall Street Corporate Finance Defaults.
-"""
+from __future__ import annotations
 
-import math
-import numpy as np
+from dataclasses import asdict, dataclass
 
 
-def sanitize_val(val, fallback=0.0) -> float:
-    """
-    Sanitize mathematical values to prevent NaN/Inf React frontend canvas crashes.
+@dataclass(frozen=True)
+class MarketParameters:
+    currency: str
+    country: str
+    risk_free_rate: float           # 10-year government bond yield
+    equity_risk_premium: float      # mature-market ERP plus country risk premium
+    credit_spread: float            # default pre-tax spread over the risk-free rate for corporate debt
+    tax_rate: float                 # statutory corporate tax rate
+    terminal_growth: float          # default perpetual growth for DCF terminal values
+    growth_anchor: float            # long-run nominal growth used to shrink historical growth rates
+    source_note: str
 
-    Parameters
-    ----------
-    val : Any
-        Numerical value or object to sanitize.
-    fallback : float
-        Fallback return if value is None, NaN, or Inf.
-
-    Returns
-    -------
-    float
-        Sanitized float number.
-    """
-    if val is None:
-        return float(fallback)
-    try:
-        fval = float(val)
-        if math.isnan(fval) or math.isinf(fval) or np.isnan(fval) or np.isinf(fval):
-            return float(fallback)
-        return fval
-    except (ValueError, TypeError):
-        return float(fallback)
+    def as_dict(self) -> dict:
+        return asdict(self)
 
 
-# Corporate & Market Tax / Rate Assumptions
-CORPORATE_TAX_RATE: float = 0.21        # 21% US Federal Corporate Tax Rate
-RISK_FREE_RATE: float = 0.042           # 4.2% 10-Year US Treasury Benchmark
-MARKET_RISK_PREMIUM: float = 0.055      # 5.5% Equity Risk Premium (ERP)
-DEFAULT_WACC: float = 0.085             # 8.5% Baseline Discount Rate
-TERMINAL_GROWTH_RATE: float = 0.025     # 2.5% Perpetual Growth Rate
-
-# Debt Capital Structure & Interest Rate Defaults
-SENIOR_DEBT_INTEREST: float = 0.065     # 6.5% Senior Debt Annual Coupon
-SUBORDINATED_DEBT_INTEREST: float = 0.090 # 9.0% Subordinated Debt Coupon
-DEFAULT_COST_OF_DEBT: float = 0.055     # 5.5% Pre-tax Cost of Debt for WACC
-
-# Valuation & Forecasting Assumptions
-DEFAULT_PROJECTION_YEARS: int = 5
-DEFAULT_REV_GROWTH: float = 0.07        # 7% Annual Revenue Growth
-DEFAULT_EBITDA_MARGIN: float = 0.25     # 25% EBITDA Margin
-DEFAULT_CAPEX_PCT_REV: float = 0.04     # 4% CapEx as % of Revenue
-DEFAULT_NWC_PCT_REV: float = 0.02       # 2% Delta NWC as % of Revenue
-DEFAULT_DA_PCT_REV: float = 0.04        # 4% D&A as % of Revenue
-
-# LBO Default Parameters
-DEFAULT_LBO_ENTRY_MULTIPLE: float = 10.0 # 10.0x Entry EV/EBITDA
-DEFAULT_LBO_EXIT_MULTIPLE: float = 11.0  # 11.0x Exit EV/EBITDA
-DEFAULT_SENIOR_DEBT_PCT: float = 0.40    # 40% Senior Debt / Entry EV
-DEFAULT_SUB_DEBT_PCT: float = 0.20       # 20% Subordinated Debt / Entry EV
-
-# M&A Default Parameters
-DEFAULT_OFFER_PREMIUM: float = 0.25      # 25% Premium over Target Spot Price
-DEFAULT_PCT_CASH: float = 0.50          # 50% Cash / Debt
-DEFAULT_PCT_STOCK: float = 0.50         # 50% Stock Equity
-DEFAULT_COST_SYNERGIES: float = 50_000_000 # $50M Cost Synergies
-
-# Presets / Fallback Data for Popular Tickers (in case yfinance API is rate limited)
-PRESET_FINANCIALS = {
-    "AAPL": {
-        "ticker": "AAPL",
-        "company_name": "Apple Inc.",
-        "current_price": 225.00,
-        "shares_outstanding": 15_200_000_000,
-        "market_cap": 3_420_000_000_000,
-        "revenue": 385_600_000_000,
-        "ebitda": 130_000_000_000,
-        "ebit": 115_000_000_000,
-        "net_income": 100_000_000_000,
-        "operating_cash_flow": 118_000_000_000,
-        "capex": 11_500_000_000,
-        "total_debt": 105_000_000_000,
-        "cash_and_equivalents": 62_000_000_000,
-        "book_equity": 74_000_000_000,
-        "beta": 1.08,
-        "d_and_a": 11_500_000_000
-    },
-    "MSFT": {
-        "ticker": "MSFT",
-        "company_name": "Microsoft Corporation",
-        "current_price": 415.00,
-        "shares_outstanding": 7_430_000_000,
-        "market_cap": 3_083_000_000_000,
-        "revenue": 245_000_000_000,
-        "ebitda": 125_000_000_000,
-        "ebit": 109_000_000_000,
-        "net_income": 88_000_000_000,
-        "operating_cash_flow": 118_500_000_000,
-        "capex": 44_000_000_000,
-        "total_debt": 75_000_000_000,
-        "cash_and_equivalents": 78_000_000_000,
-        "book_equity": 238_000_000_000,
-        "beta": 0.90,
-        "d_and_a": 16_000_000_000
-    },
-    "NVDA": {
-        "ticker": "NVDA",
-        "company_name": "NVIDIA Corporation",
-        "current_price": 125.00,
-        "shares_outstanding": 24_600_000_000,
-        "market_cap": 3_075_000_000_000,
-        "revenue": 96_000_000_000,
-        "ebitda": 60_000_000_000,
-        "ebit": 56_000_000_000,
-        "net_income": 53_000_000_000,
-        "operating_cash_flow": 55_000_000_000,
-        "capex": 3_000_000_000,
-        "total_debt": 11_000_000_000,
-        "cash_and_equivalents": 31_000_000_000,
-        "book_equity": 43_000_000_000,
-        "beta": 1.68,
-        "d_and_a": 4_000_000_000
-    }
+MARKET_PARAMETERS: dict[str, MarketParameters] = {
+    "USD": MarketParameters(
+        currency="USD",
+        country="United States",
+        risk_free_rate=0.042,
+        equity_risk_premium=0.055,
+        credit_spread=0.015,
+        tax_rate=0.21,
+        terminal_growth=0.025,
+        growth_anchor=0.05,
+        source_note="US 10Y Treasury ~4.2%, mature-market ERP 5.5%, 21% federal corporate tax.",
+    ),
+    "INR": MarketParameters(
+        currency="INR",
+        country="India",
+        risk_free_rate=0.065,
+        equity_risk_premium=0.070,
+        credit_spread=0.020,
+        tax_rate=0.2517,
+        terminal_growth=0.050,
+        growth_anchor=0.10,
+        source_note="India 10Y G-Sec ~6.5%, ERP 7.0% incl. country risk, 25.17% corporate tax (new regime).",
+    ),
 }
 
-# UI / Report Styling Theme
+DEFAULT_CURRENCY = "USD"
+
+
+def market_parameters(currency: str | None) -> MarketParameters:
+    """Market defaults for a trading currency (falls back to USD for unknown currencies)."""
+    return MARKET_PARAMETERS.get((currency or DEFAULT_CURRENCY).upper(), MARKET_PARAMETERS[DEFAULT_CURRENCY])
+
+
+# --- Operating-model defaults (used only where company data cannot inform them) ---
+DEFAULT_PROJECTION_YEARS = 5
+DEFAULT_NWC_PCT_OF_INCREMENTAL_REVENUE = 0.05   # no working-capital lines exist in the dataset
+GROWTH_HISTORY_WEIGHT = 0.6                     # weight on historical CAGR vs. the market growth anchor
+BASELINE_GROWTH_BOUNDS = (-0.05, 0.25)
+BETA_BOUNDS = (0.3, 3.0)
+RONIC_CAP = 0.40                                # cap on return on new invested capital in terminal value
+
+# --- LBO defaults ---
+LBO_SENIOR_SPREAD = 0.0375
+LBO_SUB_SPREAD = 0.060
+LBO_DEFAULT_SENIOR_TURNS = 4.0
+LBO_DEFAULT_SUB_TURNS = 1.5
+LBO_MAX_DEBT_TO_EV = 0.75
+LBO_DEFAULT_FEES_PCT = 0.02
+LBO_TAKE_PRIVATE_PREMIUM = 0.25
+LBO_SENIOR_AMORTIZATION = 0.05                  # mandatory annual amortisation, % of original senior debt
+
+# --- M&A defaults ---
+MNA_DEFAULT_PREMIUM = 0.25
+
+# --- Excel report styling ---
 NAVY_HEADER_HEX = "1B365D"
-ACCENT_BLUE_HEX = "4A90E2"
-ACCENT_GREEN_HEX = "2ECC71"
-ACCENT_RED_HEX = "E74C3C"
-LIGHT_GRAY_HEX = "F8F9FA"
+INPUT_BLUE_HEX = "1F4E9C"
+LIGHT_GRAY_HEX = "F2F4F7"
